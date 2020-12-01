@@ -2,10 +2,13 @@ import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
+import { Redirect } from 'react-router-dom';
+import Calendar from './Calendar';
 
 export default function Home() {
   const [loginStatus, setLoginStatus] = useState();
   const dispatch = useDispatch();
+  const [redirect, setRedirect] = useState();
   let currentUser = useSelector(selectCurrentUser);
 
   const logout = () => {
@@ -38,10 +41,19 @@ export default function Home() {
     }
   }, [currentUser])
 
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     setRedirect(
+  //       <Redirect to='/login' />
+  //     )
+  //   }
+  // }, [currentUser])
 
   return(
     <>
+      {redirect}
       {loginStatus}
+      <Calendar />
     </>
   )
 }

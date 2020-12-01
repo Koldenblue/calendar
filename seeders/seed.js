@@ -10,7 +10,7 @@ mongoose.connect("mongodb://localhost/calendar", {
 let seeder = 
 {
   "username" : "1",
-  "password" : "$2b$10$x0RdS0bqA11R9w/iljOVFe5TJOy5GQVvjiRYCqK4fscNyQAdppheW",
+  "password" : "$2b$10$krPrXpq6wZZ5LF2hp6yjhewdJ.Uv9f5QtG5FIz97PzFQp2RViehxm",
 }
 
   db.User.deleteMany({})

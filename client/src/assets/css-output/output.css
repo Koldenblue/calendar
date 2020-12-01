@@ -14,4 +14,9 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+.event-column {
+  border: 1px black solid;
+  height: 5em;
+}
+
 /*# sourceMappingURL=output.css.map */
