@@ -1,0 +1,17 @@
+.loginSignupContainer {
+  margin-top: 2em;
+  position: relative;
+}
+
+.signupLoginBtns {
+  margin: 2px;
+}
+
+.home {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/*# sourceMappingURL=output.css.map */
