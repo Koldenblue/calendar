@@ -9,11 +9,13 @@ import Col from 'react-bootstrap/Col';
 import WatercolorBackground from "./WatercolorBackground";
 import { setCurrentUser, selectCurrentUser } from '../../redux/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [redirect, setRedirect] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
   let currentUser = useSelector(selectCurrentUser);
@@ -36,9 +38,12 @@ function Login() {
           if (data) {
             dispatch(setCurrentUser(data))
           }
+        }).then(() => {
+          console.log('logging in')
+          setRedirect(<Redirect to='/'></Redirect>)
         })
         // finally, go to '/'
-        history.push("/");
+        // history.push("/");
       }).catch((err) => {
         if (err.message === "Request failed with status code 401") {
           setMessage("Incorrect username or password.");
@@ -68,6 +73,7 @@ function Login() {
   // };
 
   return (<>
+    {redirect}
     <WatercolorBackground />
     <Container className='loginSignupContainer'>
       <Form>

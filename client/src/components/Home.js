@@ -1,45 +1,47 @@
-import Axios from 'axios';
+// import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import Calendar from './Calendar';
+import NavMenu from './NavMenu';
 
 export default function Home() {
-  const [loginStatus, setLoginStatus] = useState();
-  const dispatch = useDispatch();
-  const [redirect, setRedirect] = useState();
-  let currentUser = useSelector(selectCurrentUser);
+  // const [loginStatus, setLoginStatus] = useState();
+  // const dispatch = useDispatch();
+  // const [redirect, setRedirect] = useState();
+  // let currentUser = useSelector(selectCurrentUser);
 
-  const logout = () => {
-    Axios.get('api/logout').then(() => {
-      // reloading the page also works, since the logged in user is retrieved from the store upon page load
-      dispatch(setCurrentUser(null));
-      // window.location.reload();
-    })
-  }
+  // const logout = () => {
+  //   Axios.get('api/logout').then(() => {
+  //     // reloading the page also works, since the logged in user is retrieved from the store upon page load
+  //     dispatch(setCurrentUser(null));
+  //     // window.location.reload();
+  //   })
+  // }
 
-  // upon login status change, conditionally render home page
-  useEffect(() => {
-    if (currentUser) {
-      // console.log(userInfo);
-      setLoginStatus(
-      <div className='home'>
-        <p>
-          You are logged in as user "{currentUser.username}".
-        </p>
-        <button className='btn-primary btn' onClick={logout}>log out</button>
-      </div>)
-    } else {
-      setLoginStatus(
-      <div className='home'>
-        <p>
-          You are not logged in.
-        </p>
-        <a href='/login'>Go to login page</a>
-      </div>)
-    }
-  }, [currentUser])
+
+  // // upon login status change, conditionally render home page
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     // console.log(userInfo);
+  //     setLoginStatus(
+  //     <div className='home'>
+  //       <p>
+  //         You are logged in as user "{currentUser.username}".
+  //       </p>
+  //       <button className='btn-primary btn' onClick={logout}>log out</button>
+  //     </div>)
+  //   } else {
+  //     setLoginStatus(
+  //     <div className='home'>
+  //       <p>
+  //         You are not logged in.
+  //       </p>
+  //       <a href='/login'>Go to login page</a>
+  //     </div>)
+  //   }
+  // }, [currentUser])
 
   // useEffect(() => {
   //   if (!currentUser) {
@@ -51,8 +53,9 @@ export default function Home() {
 
   return(
     <>
-      {redirect}
-      {loginStatus}
+      <NavMenu />
+      {/* {redirect} */}
+      {/* {loginStatus} */}
       <Calendar />
     </>
   )
