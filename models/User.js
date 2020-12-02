@@ -14,6 +14,20 @@ const userSchema = new Schema({
         type: String,
         required: true,
         validate: [({ length }) => length >= 1, "Password must be at least 6 characters."]
+    },
+    events: {
+        date: {
+            type: Date
+        },
+        name: {
+            type: String
+        },
+        location: {
+            type: String
+        },
+        description: {
+            type: String
+        }
     }
 });
 
