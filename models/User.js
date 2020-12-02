@@ -19,6 +19,9 @@ const userSchema = new Schema({
         date: {
             type: Date
         },
+        time: {
+            type: String
+        },
         name: {
             type: String
         },

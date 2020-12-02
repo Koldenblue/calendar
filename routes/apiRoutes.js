@@ -48,9 +48,16 @@ router.get("/userdata", (req, res) => {
   }
 })
 
+// post a new event
 router.post('/events', (req, res) => {
   let user = req.user;
   console.log('The user is, api routes: ', user);
+  console.log(req.body);
+  db.User.findById(user._id).then(userData => {
+    console.log(userData);
+    userData['events'] = req.body;
+    userData.save();
+  })
   res.json();
 })
 
