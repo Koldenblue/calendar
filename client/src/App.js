@@ -43,6 +43,11 @@ function App() {
             <Signup />
           </Route>
 
+          <Route  path='/'>
+            {/* replace this route with a 404 */}
+            <Login />
+          </Route>
+
         </Switch>
       </Router>
     </div>

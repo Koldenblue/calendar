@@ -48,4 +48,23 @@ router.get("/userdata", (req, res) => {
   }
 })
 
+router.post('/events', (req, res) => {
+  let user = req.user;
+  console.log('The user is, api routes: ', user);
+  res.json();
+})
+
+router.get('/events', (req, res) => {
+  // get all data except username and password. this will be the events data.
+  let user = req.user;
+  if (user) {
+    db.User.findById(user._id).then(userData => {
+      const { username, password, ...data } = userData._doc;
+      return res.json(data).end();
+    }).catch(err=> console.error(err))
+  } else {
+    res.json(null)
+  }
+})
+
 module.exports = router;

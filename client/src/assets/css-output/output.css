@@ -19,4 +19,9 @@
   height: 5em;
 }
 
+.time-col {
+  justify-content: end;
+  display: flex;
+}
+
 /*# sourceMappingURL=output.css.map */

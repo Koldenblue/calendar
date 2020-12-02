@@ -35,18 +35,20 @@ export default function Calendar() {
     );
   },[]);
 
+  // if window size goes below certain amount, abbreviate the day names
+  
   return (
     <main>
       <Container fluid>
-        <Row>
+        <Row className='day-name-row'>
           <Col md={2} />
-          <Col>Sunday</Col>
-          <Col>Monday</Col>
-          <Col>Tuesday</Col>
-          <Col>Wednesday</Col>
-          <Col>Thursday</Col>
-          <Col>Friday</Col>
-          <Col>Saturday</Col>
+          <Col md={1}>Sunday</Col>
+          <Col md={1}>Monday</Col>
+          <Col md={1}>Tuesday</Col>
+          <Col md={1}>Wednesday</Col>
+          <Col md={1}>Thursday</Col>
+          <Col md={1}>Friday</Col>
+          <Col md={1}>Saturday</Col>
           <Col md={3}></Col>
         </Row>
 

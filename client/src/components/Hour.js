@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import EventModal from "./EventModal";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { set } from "mongoose";
 /** An hour consisting of 8 columns. First column is the time. 
  * The remaining 7 columns correspond to days of the week. */
 export default function Hour(props) {
   const [columns, setColumns] = useState();
+  const [eventModal, setEventModal] = useState();
+  const [show, setShow] = useState(false);
+  const [targetHour, setTargetHour] = useState();
   const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const recordEvent = (event) => {
     console.log("hello")
     console.log(event.target.id)
+    // show modal to get user input
+    setTargetHour(event.target.id)
+    handleShow();
   }
 
   // set 1 column per day. Each column has an id formatted like '12am-monday'
   useEffect(() => {
     setColumns(
       <Row>
-        <Col md={2}>{props.time}</Col>
+        <Col className='time-col' md={2}>{props.time}</Col>
         {days.map(day => {
           return(
             <Col 
@@ -35,6 +47,13 @@ export default function Hour(props) {
 
   return (
     <section>
+      <EventModal 
+        show={show}
+        handleClose={handleClose}
+        backdrop="static"
+        keyboard={false}
+        targetHour={targetHour}
+      />
       {columns}
     </section>
   )

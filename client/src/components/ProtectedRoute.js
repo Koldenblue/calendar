@@ -2,27 +2,40 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import ReactLoading from "react-loading";
 
+/** Protected Route that redirects to login if user is not logged in.
+ * Also displays loading bars while loading user */
 let styles = {
   loading: {
     backgroundColor: 'blue',
-    height: '250px',
-    width: '500px',
+    height: '50px',
+    width: '100px',
     marginTop: '75px',
     position: 'absolute',
-    boxShadow: '1px 1px 5px'
+    boxShadow: '1px 1px 5px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+
   },
   loadingBottom: {
     position: 'relative',
     backgroundColor: 'white',
-    height: '125px',
-    width: '500px',
-    top: '0'
+    height: '25px',
+    width: '100px',
+    top: '0',
+    left: '50%',
+    transform: 'translateX(-50%)',
   },
   loadingBars: {
     position: 'relative',
-    top: '-125px',
+    top: '-100%',
+    left: '50%',
+    transform: 'translateX(-50%)',
   }
 }
+
+/** returns loading animation if loading is true (from App.js).
+ * returns child route (in App.js) if loading is done and user is logged in.
+ * Else redirects to /login. */
 const ProtectedRoute = ({
   onFailureRedirectToPath = "/login",
   isLoading,
@@ -35,7 +48,7 @@ const ProtectedRoute = ({
       <div style={styles.loading}>
         <div style={styles.loadingBottom}>
           <div style={styles.loadingBars}>
-            <ReactLoading color="red" height={500} width={500} type="bars" />
+            <ReactLoading color="red" height={100} width={100} type="bars" />
           </div>
         </div>
       </div>
