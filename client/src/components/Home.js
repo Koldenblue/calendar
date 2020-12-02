@@ -16,15 +16,24 @@ export default function Home() {
     hour: hour
   });
 
-  console.log(currentDate);
+  // console.log(currentDate);
+
+  const back = () => {
+
+  }
+  const forward = () => {
+
+  }
 
   // TODO:
   // put buttons to go back or forward a week by changing currentDate.
   // render Calendar with useEffect, every time currentDate changes
-  return(
+  return (
     <>
+      <button onClick={back}>Back</button>
+      <button onClick={forward}>Forward</button>
       <NavMenu />
-      <Calendar currentDate={currentDate}/>
+      <Calendar currentDate={currentDate} />
     </>
   )
 }

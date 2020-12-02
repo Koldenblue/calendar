@@ -19,9 +19,17 @@
   height: 5em;
 }
 
+.event-column:hover {
+  box-shadow: 0px 4px 4px #4d9c4d, 4px 0px 4px #4d9c4d, 0px -4px 4px #4d9c4d, -4px 0px 4px #4d9c4d;
+}
+
 .time-col {
   justify-content: end;
   display: flex;
+}
+
+.current-hour {
+  background-color: #b1ffb1;
 }
 
 /*# sourceMappingURL=output.css.map */

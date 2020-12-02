@@ -39,11 +39,9 @@ function Login() {
             dispatch(setCurrentUser(data))
           }
         }).then(() => {
-          console.log('logging in')
+          // finally, go to '/'. Can also use: history.push("/");
           setRedirect(<Redirect to='/'></Redirect>)
         })
-        // finally, go to '/'
-        // history.push("/");
       }).catch((err) => {
         if (err.message === "Request failed with status code 401") {
           setMessage("Incorrect username or password.");
@@ -66,11 +64,26 @@ function Login() {
     }
   }, [username, password])
 
-  // const devLogin = () => {
-  //   axios
-  //     .post(`/api/login`, { username: "test", password: "test" })
-  //     .then(() => window.location.replace("/"));
-  // };
+  // button to log in with preset username and pass
+  const devLogin = () => {
+    axios.post(`/api/login`, { username: "1", password: "1" }).then(data => {
+      axios.get("/api/userdata").then(({data}) => {
+        // set the user data in the redux store
+        if (data) {
+          dispatch(setCurrentUser(data))
+        }
+      }).then(() => {
+        console.log('logging in')
+        setRedirect(<Redirect to='/'></Redirect>)
+      })
+    }).catch((err) => {
+      if (err.message === "Request failed with status code 401") {
+        setMessage("Incorrect username or password.");
+      } else {
+        console.log(err);
+      }
+    })
+  };
 
   return (<>
     {redirect}
@@ -140,9 +153,9 @@ function Login() {
 
         </Form.Row>
 
-        {/* <Button onClick={devLogin}>
+        <Button onClick={devLogin}>
           DEV LOGIN
-          </Button> */}
+          </Button>
       </Form>
     </Container>
   </>)

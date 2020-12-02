@@ -1,3 +1,5 @@
+$main-color: rgb(77, 156, 77); 
+
 .loginSignupContainer {
   margin-top: 2em;
   position: relative;
@@ -19,8 +21,15 @@
   // width: 50em;
   height: 5em;
 }
+.event-column:hover {
+  box-shadow: 0px 4px 4px $main-color, 4px 0px 4px $main-color, 0px -4px 4px $main-color, -4px 0px 4px $main-color;
+}
 
 .time-col {
   justify-content: end;
   display: flex;
+}
+
+.current-hour {
+  background-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 }

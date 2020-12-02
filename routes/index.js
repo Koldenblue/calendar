@@ -7,7 +7,7 @@ const htmlRoutes = require("./htmlRoutes");
 router.use("/api", apiRoutes);
 router.use("/html", htmlRoutes);
 
-// send the basic index.html template if route doesn't match either of the above
+// send the react index.html template if route doesn't match either of the above
 router.get("*", (req,res)=> {
     res.sendFile(path.join(__dirname, "../client/build/index.html"))
 })

@@ -25,6 +25,8 @@ export default function Hour(props) {
     handleShow();
   }
 
+  // console.log(props.currentHour)
+  
   // set 1 column per day. Each column has an id formatted like '12am-monday'.
   // Each column also has dataset.value formatted as '12 AM Monday'
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Hour(props) {
         {days.map(day => {
           return(
             <Col 
-              className='event-column' 
+              className={`event-column ${props.currentHour ? 'current-hour' : ''}`} 
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
@@ -46,6 +48,8 @@ export default function Hour(props) {
       </Row>
     )
   }, [])
+
+  // if props.currentHour, change background color
 
   return (
     <section>
