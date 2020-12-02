@@ -11,9 +11,8 @@ export default function NavMenu() {
 
   const logout = () => {
     Axios.get('api/logout').then(() => {
-      // reloading the page also works, since the logged in user is retrieved from the store upon page load
       dispatch(setCurrentUser(null));
-      // window.location.reload();
+      // the ProtectedRoute component redirects to /login when user is set to null
     })
   }
 

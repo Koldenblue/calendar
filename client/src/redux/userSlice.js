@@ -7,7 +7,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     setCurrentUser: (state, action) => {
-      console.log(action.payload)
+      // set by the login and logout functions. currentUser is the username.
       state.currentUser = action.payload;
     }
   }

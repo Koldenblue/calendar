@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 import Home from './components/Home';
 import ProtectedRoute from './components/ProtectedRoute';
+import FourOhFour from './components/FourOhFour';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+
+        {/* Home component only reachable if user is logged in. */}
         <ProtectedRoute exact path="/" user={currentUser} isLoading={loading} onFailureRedirectToPath="/login">
           <Home />
         </ProtectedRoute>
@@ -43,9 +46,9 @@ function App() {
             <Signup />
           </Route>
 
-          <Route  path='/'>
-            {/* replace this route with a 404 */}
-            <Login />
+          {/* Any path not listed above returns 404 */}
+          <Route path='/'>
+            <FourOhFour />
           </Route>
 
         </Switch>

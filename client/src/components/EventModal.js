@@ -28,10 +28,14 @@ export default function EventModal(props) {
     
     Axios.post('/api/events', calendarEvent).then(data => {
       console.log(data);
+      // TODO: re-render calendar with new event
     })
-    // props.handleClose();
+    props.handleClose();
   }
 
+  //TODO:
+  // Also add update option if event is already filled
+  // add delete option
   return (
     <>
       <Modal

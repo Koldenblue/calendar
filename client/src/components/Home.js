@@ -1,62 +1,30 @@
 // import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
-// import { Redirect } from 'react-router-dom';
 import Calendar from './Calendar';
 import NavMenu from './NavMenu';
+import Moment from 'react-moment';
+const dayjs = require('dayjs');
 
 export default function Home() {
-  // const [loginStatus, setLoginStatus] = useState();
-  // const dispatch = useDispatch();
-  // const [redirect, setRedirect] = useState();
-  // let currentUser = useSelector(selectCurrentUser);
+  let now = new Date();                 // format ex. Tue Dec 01 2020 23:00:18 GMT-0800 (Pacific Standard Time)
+  let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
+  let date = dayjs().format('MMMM D');  // format ex. 'Dec 1'
+  let hour = dayjs().format('h A');     // format ex. '11 PM'
+  const [currentDate, setCurrentDate] = useState({
+    day: day,
+    date: date,
+    hour: hour
+  });
 
-  // const logout = () => {
-  //   Axios.get('api/logout').then(() => {
-  //     // reloading the page also works, since the logged in user is retrieved from the store upon page load
-  //     dispatch(setCurrentUser(null));
-  //     // window.location.reload();
-  //   })
-  // }
+  console.log(currentDate);
 
-
-  // // upon login status change, conditionally render home page
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     // console.log(userInfo);
-  //     setLoginStatus(
-  //     <div className='home'>
-  //       <p>
-  //         You are logged in as user "{currentUser.username}".
-  //       </p>
-  //       <button className='btn-primary btn' onClick={logout}>log out</button>
-  //     </div>)
-  //   } else {
-  //     setLoginStatus(
-  //     <div className='home'>
-  //       <p>
-  //         You are not logged in.
-  //       </p>
-  //       <a href='/login'>Go to login page</a>
-  //     </div>)
-  //   }
-  // }, [currentUser])
-
-  // useEffect(() => {
-  //   if (!currentUser) {
-  //     setRedirect(
-  //       <Redirect to='/login' />
-  //     )
-  //   }
-  // }, [currentUser])
-
+  // TODO:
+  // put buttons to go back or forward a week by changing currentDate.
+  // render Calendar with useEffect, every time currentDate changes
   return(
     <>
       <NavMenu />
-      {/* {redirect} */}
-      {/* {loginStatus} */}
-      <Calendar />
+      <Calendar currentDate={currentDate}/>
     </>
   )
 }
