@@ -18,7 +18,7 @@ export default function EventModal(props) {
     let eventLocation = event.target[2].value;
     let eventDescription = event.target[3].value;
     let calendarEvent = {
-      date: currentDate,
+      date: props.targetDate,
       time: props.targetHour,
       name: eventName,
       location: eventLocation,
