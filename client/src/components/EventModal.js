@@ -3,8 +3,12 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Axios from "axios";
+import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function EventModal(props) {
+  const dispatch = useDispatch();
+  let currentDate = useSelector(selectCurrentDate);
 
   /** gets values from the event modal form. Then adds to database. */
   const addEvent = (event) => {
@@ -13,8 +17,8 @@ export default function EventModal(props) {
     let eventName = event.target[1].value;
     let eventLocation = event.target[2].value;
     let eventDescription = event.target[3].value;
-
     let calendarEvent = {
+      date: currentDate,
       time: props.targetHour,
       name: eventName,
       location: eventLocation,

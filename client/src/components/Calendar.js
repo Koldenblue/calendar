@@ -22,6 +22,7 @@ export default function Calendar(props) {
     let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + currentDate.weekCounter)))
     calendarDays.push(calendarDay)
   })
+  console.log(calendarDays)
 
   // Set the top row labels, Sunday thru Sat. Add in dates as well, ex. Dec. 1
   // Today's day (ex. "Wednesday") will have the class .today-label (if on the current week)
@@ -44,7 +45,7 @@ export default function Calendar(props) {
   }, [currentDate.weekCounter])
 
 
-    // Map out hours, starting from 12 AM, and create a row of 7 days for each hour.
+    // Map out hours, starting from 12 AM. Each hour is a row of 8 columns, handled with Hour.js.
     useEffect(() => {
       // first create a size 24 array containing strings '12 AM' thru '11 PM'
       let timeArr = [];
@@ -69,10 +70,10 @@ export default function Calendar(props) {
             // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
             // the currentHour has a highlighted background.
             if (time === currentDate.hour ) {
-              return (<Hour time={time} key={time} currentHour={true}></Hour>)
+              return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={true}></Hour>)
             }
             else {
-              return(<Hour time={time} key={time} currentHour={false}></Hour>)
+              return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
             }
           })
         );
@@ -81,11 +82,11 @@ export default function Calendar(props) {
       else {
         setHours(
           timeArr.map((time) => {
-            return(<Hour time={time} key={time} currentHour={false}></Hour>)
+            return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
           })
         );
       }
-    }, []);
+    }, [currentDate.weekCounter]);
 
 
   // TODO: media queries. if window size goes below certain amount, abbreviate the day names
