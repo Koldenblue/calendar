@@ -25,8 +25,8 @@ export default function Hour(props) {
 
   const openModal = (event) => {
     // show modal to get user input
-    console.log(props.calendarDays)
-    console.log(event.target.dataset.date)
+    // console.log(props.calendarDays)/
+    // console.log(event.target.dataset.date)
     setTargetDate(event.target.dataset.date);
     setTargetHour(event.target.dataset.value);
     handleShow();
@@ -39,8 +39,8 @@ export default function Hour(props) {
   // finally, each column has dataset.date formatted as 'December 1'
   useEffect(() => {
     let calendarDateIndex = 0;
-    console.log('a', props.calendarDays)
-    console.log(currentDate.weekCounter)
+    // console.log('a', props.calendarDays)
+    // console.log(currentDate.weekCounter)
     setColumns(
       <Row>
         <Col className='time-col' md={2}>{props.time}</Col>
@@ -62,8 +62,8 @@ export default function Hour(props) {
         <Col md={3} />
       </Row>
     )
-    // need to rerender this every time props change... because if re-rendered when 
-    // currentDate.weekCounter changes, this rerenders first before the useEffect of Calendar takes place
+    // if re-rendered when currentDate.weekCounter changes, this rerenders first before the useEffect of Calendar takes place
+    // so redux state changeHours is dispatch to trigger this useEffect and the re-render
   }, [changeHours])
 
   // if props.currentHour, change background color

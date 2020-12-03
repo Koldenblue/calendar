@@ -36,8 +36,8 @@ export default function Calendar(props) {
   useEffect(() => {
 
     makeDaysArray().then(calendarDays => {
-      console.log(calendarDays)
-      console.log('next')
+      // console.log(calendarDays)
+      // console.log('next')
       let calendarIndex = 0;
       setDayLabels(<>
         <Col md={2} ></Col>
@@ -72,8 +72,8 @@ export default function Calendar(props) {
       // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
       // if current week:
       if (currentDate.date === currentDay) {
-        console.log('hours changing')
-        console.log('setting', calendarDays)
+        // console.log('hours changing')
+        // console.log('setting', calendarDays)
         setHours(
           // create an Hour.js component for each string in the array. Each hour is a row in the day.
           timeArr.map((time) => {
@@ -92,7 +92,7 @@ export default function Calendar(props) {
       }
       // else, if week is not current, return Hour.js components, and currentHour is always false.
       else {
-        console.log('hours changing 2', calendarDays)
+        // console.log('hours changing 2', calendarDays)
         setHours(
           timeArr.map((time) => {
             console.log('returning')

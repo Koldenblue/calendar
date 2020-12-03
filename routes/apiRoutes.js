@@ -55,7 +55,7 @@ router.post('/events', (req, res) => {
   console.log(req.body);
   db.User.findById(user._id).then(userData => {
     console.log(userData);
-    userData['events'] = req.body;
+    userData['events'].push(req.body);
     userData.save();
   })
   res.json();

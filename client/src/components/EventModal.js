@@ -50,7 +50,11 @@ export default function EventModal(props) {
         <Form onSubmit={(event) => addEvent(event)}>
 
           <Modal.Header closeButton>
-            <Modal.Title>Set event for: {props.targetHour}</Modal.Title>
+            <Modal.Title>
+              Set event for: {props.targetHour}, 
+              <br />
+              {props.targetDate}
+            </Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
