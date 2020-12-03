@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Calendar from './Calendar';
 import NavMenu from './NavMenu';
 import Moment from 'react-moment';
+import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
+import { useSelector, useDispatch } from 'react-redux';
 const dayjs = require('dayjs');
 
 export default function Home() {
@@ -10,17 +12,18 @@ export default function Home() {
   let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
   let date = dayjs().format('MMMM D');  // format ex. 'Dec 1'
   let hour = dayjs().format('h A');     // format ex. '11 PM'
-  const [currentDate, setCurrentDate] = useState({});
   const [calendar, setCalendar] = useState();
   const [weekCounter, setWeekCounter] = useState(0); // keeps track of the days of the week, in increments of 7
+  const dispatch = useDispatch();
+  let currentDate = useSelector(selectCurrentDate);
 
   useEffect(() => {
-    setCurrentDate({
+    dispatch(setCurrentDate({
       day: day,
       date: date,
       hour: hour,
       weekCounter: weekCounter
-    })
+    }))
   }, [])
 
   /** Back button. Sets calendar back 7 days, then re-renders calendar days. */
@@ -28,12 +31,12 @@ export default function Home() {
     let week = weekCounter - 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
     setWeekCounter(week);
-    setCurrentDate({
+    dispatch(setCurrentDate({
       day: day,
       date: date,
       hour: hour,
       weekCounter: week
-    })
+    }))
     console.log(date)
     console.log(currentDate)
   }
@@ -43,19 +46,19 @@ export default function Home() {
     let week = weekCounter + 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
     setWeekCounter(week);
-    setCurrentDate({
+    dispatch(setCurrentDate({
       day: day,
       date: date,
       hour: hour,
       weekCounter: week
-    })
+    }))
   }
 
     // upon getting the date (changeable by forward and back buttons) re-render the calendar
     useEffect(() => {
       console.log('current date changing')
       if (currentDate.day) {
-        setCalendar(<Calendar currentDate={currentDate} />)
+        setCalendar(<Calendar />)
       }
       return () => {
         setCalendar()

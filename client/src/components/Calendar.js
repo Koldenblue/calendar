@@ -4,19 +4,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Hour from './Hour';
 import dayjs from 'dayjs';
-
+import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Calendar(props) {
   const [hours, setHours] = useState();
   const [dayLabels, setDayLabels] = useState();
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  let currentDayIndex =  days.indexOf(props.currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
-  let currentDate = dayjs().format('MMMM D') // ex. 'December 1'
+  let currentDate = useSelector(selectCurrentDate);
+  let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
+  let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
+  const dispatch = useDispatch();
 
   // map out calendar days. This array consists of the days of the week, ex. 'November 29' thru 'Dec 5'
   let calendarDays = [];
   days.forEach(day => {
-    let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + props.currentDate.weekCounter)))
+    let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + currentDate.weekCounter)))
     calendarDays.push(calendarDay)
   })
 
@@ -30,7 +33,7 @@ export default function Calendar(props) {
         let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
         // let dateLabel = dayjs(calendarDays[calendarIndex++])
         return (
-          <Col md={1} key={day} className={`${day === props.currentDate.day && props.currentDate.date === currentDate ? 'today-label' : ''}`}>
+          <Col md={1} key={day} className={`${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>
             <p>{day}</p>
             <p>{dateLabel}</p>
           </Col>
@@ -38,7 +41,7 @@ export default function Calendar(props) {
       })}
       <Col md={3} ></Col>
     </>)
-  }, [props.currentDate.weekCounter])
+  }, [currentDate.weekCounter])
 
 
     // Map out hours, starting from 12 AM, and create a row of 7 days for each hour.
@@ -59,13 +62,13 @@ export default function Calendar(props) {
       }
       // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
       // if current week:
-      if (props.currentDate.date === currentDate) {
+      if (currentDate.date === currentDate) {
         setHours(
           // create an Hour.js component for each string in the array. Each hour is a row in the day.
           timeArr.map((time) => {
             // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
             // the currentHour has a highlighted background.
-            if (time === props.currentDate.hour ) {
+            if (time === currentDate.hour ) {
               return (<Hour time={time} key={time} currentHour={true}></Hour>)
             }
             else {
