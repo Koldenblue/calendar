@@ -6,13 +6,14 @@ mongoose.connect("mongodb://localhost/calendar", {
   useFindAndModify: false
 });
 
-// username 1, password 1
+// username 1, password 1.
 let seeder = 
 {
   "username" : "1",
   "password" : "$2b$10$krPrXpq6wZZ5LF2hp6yjhewdJ.Uv9f5QtG5FIz97PzFQp2RViehxm",
 }
 
+// delete all user data then insert username and password above.
   db.User.deleteMany({})
   .then(() => db.User.insertMany(seeder))
   .then(data => {

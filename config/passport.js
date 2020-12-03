@@ -37,8 +37,8 @@ passport.use(
 );
 
 // In order to help keep authentication state across HTTP requests,
-// Sequelize needs to serialize and deserialize the user
-// Just consider this part boilerplate needed to make it all work
+// serialize and deserialize the user
+// boilerplate
 
 // passport sends back user info every time that passport is run
 // passport runs on a session - the cookie expires upon session close

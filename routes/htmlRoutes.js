@@ -1,13 +1,11 @@
 const router = require("express").Router();
 const path = require("path")
 // Routes starting with '/html/'
+// This file may be used to send standard html pages
 
 // router.use("/*", (req, res) => {
-//     res.json("hi")
+//     res.json("hi this is a catchall for /html/*")
 // })
 
-// router.get("*", (req,res) => {
-//     res.sendFile(path.join(__dirname, "../client/build/index.html"))
-// })
 
 module.exports = router;

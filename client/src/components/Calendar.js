@@ -6,6 +6,7 @@ import Hour from './Hour';
 import dayjs from 'dayjs';
 import { setCurrentDate, selectCurrentDate, setChangeHours, selectChangeHours } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Axios from "axios";
 
 export default function Calendar(props) {
   const [hours, setHours] = useState();
@@ -69,45 +70,66 @@ export default function Calendar(props) {
           period = 'PM';
         }
       }
-      // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
-      // if current week:
-      if (currentDate.date === currentDay) {
-        // console.log('hours changing')
-        // console.log('setting', calendarDays)
-        setHours(
-          // create an Hour.js component for each string in the array. Each hour is a row in the day.
-          timeArr.map((time) => {
-            // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
-            // the currentHour has a highlighted background.
-            if (time === currentDate.hour) {
-              return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={true}></Hour>)
-            }
-            else {
-              return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
-            }
-          })
-        );
-        // changeHours is used by the useEffect function of Hours.js to signal a change
-        dispatch(setChangeHours())
-      }
-      // else, if week is not current, return Hour.js components, and currentHour is always false.
-      else {
-        // console.log('hours changing 2', calendarDays)
-        setHours(
-          timeArr.map((time) => {
-            console.log('returning')
-            return (<Hour calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
-          })
-        );
-        dispatch(setChangeHours())
-      }
+      // Get saved event info from the database next.
+      Axios.get('/api/events').then(eventData => {
+        let eventArr = eventData.data.events;
+        // Create an array that will contain only the current week's events, so it may be passed as a prop to each Hour.js
+        let currentWeekEvents = [];
+        // first create a new array consisting of days in the current week, formatted as ex. 'December 1 2020'
+        let formattedCalendarDays = calendarDays.map(day => {
+          return dayjs(day).format('MMMM D YYYY')
+        })
+        console.log(formattedCalendarDays)
+        // Next go through the events from the database, and match them to the current week.
+        eventArr.forEach(event => {
+          let eventDay = dayjs(event.date).format('MMMM D YYYY');
+          if (formattedCalendarDays.includes(eventDay)) {
+            currentWeekEvents.push(event);
+          }
+        })
+        console.log(currentWeekEvents)
 
+        // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
+        // if current week:
+        if (currentDate.date === currentDay) {
+          // console.log('hours changing')
+          // console.log('setting', calendarDays)
+          setHours(
+            // create an Hour.js component for each string in the array. Each hour is a row in the day.
+            timeArr.map((time) => {
+              // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
+              // the currentHour has a highlighted background.
+              if (time === currentDate.hour) {
+                return (<Hour currentWeekEvents={currentWeekEvents} calendarDays={calendarDays} time={time} key={time} currentHour={true}></Hour>)
+              }
+              else {
+                return (<Hour currentWeekEvents={currentWeekEvents} calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
+              }
+            })
+          );
+          // changeHours is used by the useEffect function of Hours.js to signal a change
+          dispatch(setChangeHours())
+        }
+        // else, if week is not current, return Hour.js components, and currentHour is always false.
+        else {
+          // console.log('hours changing 2', calendarDays)
+          setHours(
+            timeArr.map((time) => {
+              console.log('returning')
+              return (<Hour currentWeekEvents={currentWeekEvents} calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
+            })
+          );
+          dispatch(setChangeHours())
+        }
+      })
+
+      // on dismount. probably unnecessary.
       return () => {
         setDayLabels();
         setHours();
       }
     })
-  
+
   }, [currentDate.weekCounter])
 
 

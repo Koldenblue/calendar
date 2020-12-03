@@ -7,7 +7,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     setCurrentUser: (state, action) => {
-      // set by the login and logout functions. currentUser is the username.
+      // This is set by the login and logout functions. currentUser is the username.
       state.currentUser = action.payload;
     }
   }
@@ -15,6 +15,6 @@ export const userSlice = createSlice({
 
 export const selectCurrentUser = state => state.user.currentUser;
 
-export const { setCurrentUser } = userSlice.actions
+export const { setCurrentUser } = userSlice.actions;
 
 export default userSlice.reducer;

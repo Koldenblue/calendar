@@ -19,9 +19,9 @@ function App() {
     // get user login info. loading is true until login info is retrieved
     axios.get("/api/userdata").then(({ data }) => {
       if (data) {
-        dispatch(setCurrentUser(data))
+        dispatch(setCurrentUser(data));
       }
-      setLoading(false)
+      setLoading(false);
     }).catch(err => {
       console.error(err);
     })

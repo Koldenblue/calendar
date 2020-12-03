@@ -32,36 +32,33 @@ export default function Hour(props) {
     handleShow();
   }
 
-  // console.log(props.currentHour)
   
   // set 1 column per day. Each column has an id formatted like '12am-monday'.
   // Each column also has dataset.value formatted as '12 AM Monday'
   // finally, each column has dataset.date formatted as 'December 1'
   useEffect(() => {
-    let calendarDateIndex = 0;
-    // console.log('a', props.calendarDays)
-    // console.log(currentDate.weekCounter)
-    setColumns(
-      <Row>
-        <Col className='time-col' md={2}>{props.time}</Col>
-        {days.map(day => {
-          if (calendarDateIndex > 7) {
-            calendarDateIndex = 0;
-          }
-          return(
-            <Col 
-              className={`event-column ${props.currentHour ? 'current-hour' : ''}`} 
-              id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
-              key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
-              data-value={`${props.time} ${day}`}
-              data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
-              onClick={(event) => openModal(event)}
-            ></Col>
-          )
-        })}
-        <Col md={3} />
-      </Row>
-    )
+      let calendarDateIndex = 0;
+      setColumns(
+        <Row>
+          <Col className='time-col' md={2}>{props.time}</Col>
+          {days.map(day => {
+            if (calendarDateIndex > 7) {
+              calendarDateIndex = 0;
+            }
+            return(
+              <Col 
+                className={`event-column ${props.currentHour ? 'current-hour' : ''}`} 
+                id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
+                key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
+                data-value={`${props.time} ${day}`}
+                data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+                onClick={(event) => openModal(event)}
+              ></Col>
+            )
+          })}
+          <Col md={3} />
+        </Row>
+      )
     // if re-rendered when currentDate.weekCounter changes, this rerenders first before the useEffect of Calendar takes place
     // so redux state changeHours is dispatch to trigger this useEffect and the re-render
   }, [changeHours])

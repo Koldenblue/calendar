@@ -13,7 +13,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        validate: [({ length }) => length >= 1, "Password must be at least 6 characters."]
+        // could possibly have other password requirements here using regexes.
+        validate: [({ length }) => length >= 6, "Password must be at least 6 characters."]
     },
     events: [{
         date: {

@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Axios from "axios";
 import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
+const dayjs = require('dayjs');
 
 export default function EventModal(props) {
   const dispatch = useDispatch();

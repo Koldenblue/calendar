@@ -66,7 +66,7 @@ router.get('/events', (req, res) => {
   let user = req.user;
   if (user) {
     db.User.findById(user._id).then(userData => {
-      const { username, password, ...data } = userData._doc;
+      const { _id, username, password, __v, ...data } = userData._doc;
       return res.json(data).end();
     }).catch(err=> console.error(err))
   } else {
