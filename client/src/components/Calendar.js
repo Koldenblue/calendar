@@ -15,58 +15,12 @@ export default function Calendar(props) {
 
   // map out calendar days. This array consists of the days of the week, ex. 'November 29' thru 'Dec 5'
   const calendarDays = [];
+  console.log(props.currentDate.weekCounter)
   days.forEach(day => {
-    let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex)))
+    let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + props.currentDate.weekCounter)))
     calendarDays.push(calendarDay)
   })
   console.log(calendarDays)
-  
-  // new Date(new Date().setDate(new Date().getDate() - 4))
-
-  // Map out hours, starting from 12 AM, and create a row of 7 days for each hour.
-  useEffect(() => {
-    // first create a size 24 array containing strings '12 AM' thru '11 PM'
-    let timeArr = [];
-    let initialTime = 12;
-    let period = 'AM';
-    for (let i = 0; i < 24; i++) {
-      if (initialTime > 12) {
-        initialTime = 1;
-      }
-      timeArr.push(initialTime + ' ' + period);
-      initialTime++;
-      if (initialTime === 12) {
-        period = 'PM';
-      }
-    }
-    console.log(props.currentDate)
-    // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
-    // if current week:
-    if (props.currentDate.date === currentDate) {
-      setHours(
-        // create an Hour.js component for each string in the array. Each hour is a row in the day.
-        timeArr.map((time) => {
-          // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
-          // the currentHour has a highlighted background.
-          if (time === props.currentDate.hour ) {
-            return (<Hour time={time} key={time} currentHour={true}></Hour>)
-          }
-          else {
-            return(<Hour time={time} key={time} currentHour={false}></Hour>)
-          }
-        })
-      );
-    }
-    // else, if week is not current, return Hour.js components, and currentHour is always false.
-    else {
-      setHours(
-        timeArr.map((time) => {
-          return(<Hour time={time} key={time} currentHour={false}></Hour>)
-        })
-      );
-    }
-  }, []);
-
 
   // Set the top row labels, Sunday thru Sat. Add in dates as well, ex. Dec. 1
   // Today's day (ex. "Wednesday") will have the class .today-label (if on the current week)
@@ -87,7 +41,53 @@ export default function Calendar(props) {
       })}
       <Col md={3} ></Col>
     </>)
-  }, [])
+  }, [props.currentDate.weekCounter])
+
+
+    // Map out hours, starting from 12 AM, and create a row of 7 days for each hour.
+    useEffect(() => {
+      // first create a size 24 array containing strings '12 AM' thru '11 PM'
+      let timeArr = [];
+      let initialTime = 12;
+      let period = 'AM';
+      for (let i = 0; i < 24; i++) {
+        if (initialTime > 12) {
+          initialTime = 1;
+        }
+        timeArr.push(initialTime + ' ' + period);
+        initialTime++;
+        if (initialTime === 12) {
+          period = 'PM';
+        }
+      }
+      console.log(props.currentDate)
+      // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
+      // if current week:
+      if (props.currentDate.date === currentDate) {
+        setHours(
+          // create an Hour.js component for each string in the array. Each hour is a row in the day.
+          timeArr.map((time) => {
+            // if the time matches the current time (e.g. '11 AM') and the week is the current week, then currentHour is true.
+            // the currentHour has a highlighted background.
+            if (time === props.currentDate.hour ) {
+              return (<Hour time={time} key={time} currentHour={true}></Hour>)
+            }
+            else {
+              return(<Hour time={time} key={time} currentHour={false}></Hour>)
+            }
+          })
+        );
+      }
+      // else, if week is not current, return Hour.js components, and currentHour is always false.
+      else {
+        setHours(
+          timeArr.map((time) => {
+            return(<Hour time={time} key={time} currentHour={false}></Hour>)
+          })
+        );
+      }
+    }, []);
+
 
   // TODO: media queries. if window size goes below certain amount, abbreviate the day names
 
