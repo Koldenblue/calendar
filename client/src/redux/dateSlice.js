@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const dateSlice = createSlice({
   name: 'date',
   initialState: {
-    currentDate: {},      // currentDate is set in Home.js
-    changeHours: true     // changeHours triggers a re-render of Hour.js columns
+    currentDate: {},        // currentDate is set in Home.js
+    changeHours: true,      // changeHours triggers a re-render of Hour.js columns
+    handlePost: 0           // triggers a re-render after an event is posted to calendar
   },
   reducers: {
     setCurrentDate: (state, action) => {
@@ -12,13 +13,18 @@ export const dateSlice = createSlice({
     },
     setChangeHours: (state) => {
       state.changeHours = !state.changeHours;
+    },
+    setHandlePost: (state) => {
+      console.log('handling post', state.handlePost)
+      state.handlePost = ++state.handlePost;
     }
   }
 });
 
 export const selectCurrentDate = state => state.date.currentDate;
 export const selectChangeHours = state => state.date.changeHours;
+export const selectHandlePost = state => state.date.handlePost;
 
-export const { setCurrentDate, setChangeHours } = dateSlice.actions;
+export const { setCurrentDate, setChangeHours, setHandlePost } = dateSlice.actions;
 
 export default dateSlice.reducer;

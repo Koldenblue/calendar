@@ -32,7 +32,7 @@ export default function Hour(props) {
     handleShow();
   }
 
-  console.log(props.currentWeekEvents);
+  // console.log(props.currentWeekEvents);
 
   // set 1 column per day. Each column has an id formatted like '12am-monday'.
   // Each column also has dataset.value formatted as '12 AM Monday'
@@ -51,8 +51,8 @@ export default function Hour(props) {
           let formattedTime = `${props.time} ${day}`;
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
-              console.log('true')
-              console.log(formattedToday)
+              // console.log('true')
+              // console.log(formattedToday)
               return (
                 <Col
                   className={`event-column ${props.currentHour ? 'current-hour' : ''}`}

@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Axios from "axios";
-import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
+import { setCurrentDate, selectCurrentDate, setHandlePost } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 const dayjs = require('dayjs');
 
@@ -32,7 +32,8 @@ export default function EventModal(props) {
     
     Axios.post('/api/events', calendarEvent).then(data => {
       console.log(data);
-      // TODO: re-render calendar with new event
+      // re-render calendar with new event after posting to database
+      dispatch(setHandlePost())
     })
     props.handleClose();
   }

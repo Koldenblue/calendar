@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Hour from './Hour';
 import dayjs from 'dayjs';
-import { setCurrentDate, selectCurrentDate, setChangeHours, selectChangeHours } from '../redux/dateSlice';
+import { setCurrentDate, selectCurrentDate, setChangeHours, selectChangeHours, selectHandlePost } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 
@@ -14,6 +14,7 @@ export default function Calendar(props) {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let currentDate = useSelector(selectCurrentDate);
   let changeHours = useSelector(selectChangeHours);
+  let handlePost = useSelector(selectHandlePost);
   let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
   let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
   const dispatch = useDispatch();
@@ -129,8 +130,8 @@ export default function Calendar(props) {
         setHours();
       }
     })
-
-  }, [currentDate.weekCounter])
+    console.log('handling post')
+  }, [currentDate.weekCounter, handlePost])
 
 
   // TODO: media queries. if window size goes below certain amount, abbreviate the day names
