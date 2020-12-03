@@ -22,11 +22,8 @@ export default function Home() {
       weekCounter: weekCounter
     })
   }, [])
-  
 
-
-  // console.log(currentDate);
-
+  /** Back button. Sets calendar back 7 days, then re-renders calendar days. */
   const back = () => {
     let week = weekCounter - 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
@@ -41,6 +38,7 @@ export default function Home() {
     console.log(currentDate)
   }
 
+  /** Forward button. Sets calendar forward 7 days, then re-renders calendar days. */
   const forward = () => {
     let week = weekCounter + 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
@@ -66,8 +64,7 @@ export default function Home() {
 
 
   // TODO:
-  // put buttons to go back or forward a week by changing currentDate.
-  // render Calendar with useEffect, every time currentDate changes
+    // make sure events are re-rendered.
   return (
     <>
       <NavMenu />

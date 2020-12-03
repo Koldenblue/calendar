@@ -9,7 +9,6 @@ export default function EventModal(props) {
   /** gets values from the event modal form. Then adds to database. */
   const addEvent = (event) => {
     event.preventDefault();
-    console.log('submitting')
     // get values from form.
     let eventName = event.target[1].value;
     let eventLocation = event.target[2].value;

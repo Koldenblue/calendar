@@ -15,7 +15,7 @@ const userSchema = new Schema({
         required: true,
         validate: [({ length }) => length >= 1, "Password must be at least 6 characters."]
     },
-    events: {
+    events: [{
         date: {
             type: Date
         },
@@ -31,7 +31,7 @@ const userSchema = new Schema({
         description: {
             type: String
         }
-    }
+    }]
 });
 
 // hash password, but only if creating a new user
