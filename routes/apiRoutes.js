@@ -2,6 +2,7 @@ const router = require("express").Router();
 const axios = require("axios");
 const db = require("../models")
 const passport = require("../config/passport");
+const mongoose = require("mongoose");
 require("dotenv").config();
 // Routes starting with '/api/'
 
@@ -51,10 +52,10 @@ router.get("/userdata", (req, res) => {
 // post a new event
 router.post('/events', (req, res) => {
   let user = req.user;
-  console.log('The user is, api routes: ', user);
-  console.log(req.body);
+  // console.log('The user is, api routes: ', user);
+  // console.log(req.body);
   db.User.findById(user._id).then(userData => {
-    console.log(userData);
+    // console.log(userData);
     userData['events'].push(req.body);
     userData.save();
   })
@@ -72,6 +73,25 @@ router.get('/events', (req, res) => {
   } else {
     res.json(null)
   }
+})
+
+// gets data for one event in order to fill out modal fields
+router.get('/fillmodal/:targetid', (req, res) => {
+  let targetId = new mongoose.Types.ObjectId(req.params.targetid);
+  let userId = req.user._id;
+
+  db.User.findOne({ 'events._id': targetId }).then(doc => {
+    console.log('found', doc.events[0])
+    console.log(doc.events.isMongooseArray)
+    const eventDoc = doc.events.id(targetId)
+    console.log(eventDoc)
+    // doc.events.findById(targetId).then(eventDoc => {
+    //   console.log(eventDoc)
+    // })
+  }).catch(err => {
+    console.error(err)
+  })
+  res.json('hi')
 })
 
 module.exports = router;

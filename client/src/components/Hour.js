@@ -16,6 +16,7 @@ export default function Hour(props) {
   const [show, setShow] = useState(false);
   const [targetHour, setTargetHour] = useState();
   const [targetDate, setTargetDate] = useState();
+  const [targetId, setTargetId] = useState();
   let changeHours = useSelector(selectChangeHours);
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let currentDate = useSelector(selectCurrentDate);
@@ -23,12 +24,13 @@ export default function Hour(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  /** When an Hour.js box is clicked, show the modal. 
+   * The modal will be passed info to identify which box was clicked. */
   const openModal = (event) => {
     // show modal to get user input
-    // console.log(props.calendarDays)/
-    // console.log(event.target.dataset.date)
     setTargetDate(event.target.dataset.date);
     setTargetHour(event.target.dataset.value);
+    setTargetId(event.target.dataset.id)
     handleShow();
   }
 
@@ -51,21 +53,20 @@ export default function Hour(props) {
           let formattedTime = `${props.time} ${day}`;
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
-              // console.log('true')
-              // console.log(formattedToday)
+              // console.log(props.currentWeekEvents[i])
               return (
                 <Col
-                  className={`event-column ${props.currentHour ? 'current-hour' : ''}`}
+                  className={`event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
                   data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+                  data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
                   <p>{props.currentWeekEvents[i].name}</p>
                   <p>{props.currentWeekEvents[i].location}</p>
                   <p>{props.currentWeekEvents[i].description}</p>
-
                 </Col>
               )
             }
@@ -78,6 +79,7 @@ export default function Hour(props) {
               data-value={`${props.time} ${day}`}
               data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
               onClick={(event) => openModal(event)}
+              data-id={null}
             ></Col>
           )
         })}
@@ -99,6 +101,7 @@ export default function Hour(props) {
         keyboard={false}
         targetHour={targetHour}
         targetDate={targetDate}
+        targetId={targetId}
       />
       {columns}
     </section>

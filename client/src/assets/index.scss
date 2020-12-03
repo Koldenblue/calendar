@@ -35,6 +35,10 @@ $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
   background-color: $lighter-color;
 }
 
+.has-event {
+  background-color: rgb(215, 254, 255);
+}
+
 .today-label {
   background-color: $lighter-color;
 }

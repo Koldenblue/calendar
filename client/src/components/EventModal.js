@@ -11,6 +11,20 @@ export default function EventModal(props) {
   const dispatch = useDispatch();
   let currentDate = useSelector(selectCurrentDate);
 
+  useEffect(() => {
+    // Check to see if target already has an event when modal is shown.
+    if (props.show) {
+      if (props.targetId) {
+        console.log('has an event')
+
+        // if showing the modal, and the targetId is not null (i.e. already has an event) then set text fields and delete button
+        Axios.get('/api/fillmodal/' + props.targetId).then(data => {
+          console.log(data)
+        })
+      }
+    }
+  }, [props.show])
+
   /** gets values from the event modal form. Then adds to database. */
   const addEvent = (event) => {
     event.preventDefault();
