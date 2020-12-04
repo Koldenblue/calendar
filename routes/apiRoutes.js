@@ -62,24 +62,6 @@ router.post('/events', (req, res) => {
   res.status(200).end();
 })
 
-// update an existing event
-router.put('/events', (req, res) => {
-  let user = req.user;
-  console.log(req.body)
-  db.User.findById(user._id).then(doc => {
-    const eventDoc = doc.events.id(req.body.targetId);
-    console.log(eventDoc)
-    eventDoc.name = req.body.name;
-    eventDoc.location = req.body.location;
-    eventDoc.description = req.body.description;
-
-    // problem: mongoose does not save subdocs. have to save whole doc.
-    doc.save();
-    // TODO: now update event doc and .save()
-    res.status(200).end();
-  }).catch(err => console.error(err))
-})
-
 router.get('/events', (req, res) => {
   // get all data except username and password. this will be the events data.
   let user = req.user;
@@ -91,6 +73,30 @@ router.get('/events', (req, res) => {
   } else {
     res.json(null)
   }
+})
+// update an existing event
+router.put('/events', (req, res) => {
+  let user = req.user;
+  console.log(req.body)
+  db.User.findById(user._id).then(doc => {
+    const eventDoc = doc.events.id(req.body.targetId);
+    eventDoc.name = req.body.name;
+    eventDoc.location = req.body.location;
+    eventDoc.description = req.body.description;
+    // Mongoose does not save subdocs. Have to save whole doc.
+    doc.save();
+    res.status(200).end();
+  }).catch(err => console.error(err))
+})
+
+router.delete('/events', (req, res) => {
+  console.log(req.query.targetId)
+  let user = req.user;
+  db.User.findById(user._id).then(doc => {
+    doc.events.id(req.query.targetId).remove();
+    doc.save();
+    res.status(200).end();
+  })
 })
 
 // gets data for one event in order to fill out modal fields

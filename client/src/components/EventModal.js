@@ -8,18 +8,23 @@ import { useSelector, useDispatch } from 'react-redux';
 const dayjs = require('dayjs');
 
 export default function EventModal(props) {
+  const [deleteBtn, setDeleteBtn] = useState();
+  const [addBtn, setAddBtn] = useState();
   const dispatch = useDispatch();
   let currentDate = useSelector(selectCurrentDate);
-  const nameRef = React.createRef();
-  const locationRef = React.createRef();
-  const descriptionRef = React.createRef();
+  const nameRef = useRef();
+  const locationRef = useRef();
+  const descriptionRef = useRef();
 
   /** This function takes place when modal is shown. */
   useEffect(() => {
     // Check to see if the chosen calendar date already has a calendar event when modal is shown.
     if (props.show) {
-      nameRef.current.focus()
+      nameRef.current.focus();
       if (props.targetId) {
+        setAddBtn(<button type='submit' className='btn btn-primary'>Update Event</button>);
+        // the regular button automatically submits the form, but the component Button runs the function without submitting the form.
+        setDeleteBtn(<Button onClick={deleteEvent} className='btn btn-danger'>Delete Event</Button>);
         // if showing the modal, and the targetId is not null (i.e. yes there already is an event) then set text fields
         Axios.get('/api/fillmodal/' + props.targetId).then(data => {
           console.log(data.data)
@@ -27,9 +32,11 @@ export default function EventModal(props) {
           nameRef.current.value = data.data.name;
           locationRef.current.value = data.data.location;
           descriptionRef.current.value = data.data.description;
-
-          // TODO: set delete button
         })
+      }
+      else{
+        setAddBtn(<button type='submit' className='btn btn-primary'>Add Event</button>);
+        setDeleteBtn();
       }
     }
   }, [props.show])
@@ -72,6 +79,15 @@ export default function EventModal(props) {
     props.handleClose();
   }
 
+  const deleteEvent = () => {
+    // axios delete requests MUST be sent with 'data' as the key
+    Axios.delete('/api/events', {params: {targetId: props.targetId } }).then(data => {
+      console.log(data)
+      dispatch(setHandlePost());
+      props.handleClose();
+    }).catch(err => console.error(err));
+  }
+
   return (
     <>
       <Modal
@@ -111,7 +127,8 @@ export default function EventModal(props) {
             <Button variant="secondary" onClick={props.handleClose}>
               Close
           </Button>
-            <button type='submit' className='btn btn-primary'>Add Event</button>
+            {deleteBtn}
+            {addBtn}
           </Modal.Footer>
 
         </Form>
