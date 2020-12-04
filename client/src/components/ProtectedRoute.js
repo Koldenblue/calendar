@@ -2,62 +2,45 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-/** Protected Route that redirects to login if user is not logged in.
- * Also displays loading bars while loading user */
-let styles = {
-  loading: {
-    backgroundColor: 'blue',
-    height: '50px',
-    width: '100px',
-    marginTop: '75px',
-    position: 'absolute',
-    boxShadow: '1px 1px 5px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-
-  },
-  loadingBottom: {
-    position: 'relative',
-    backgroundColor: 'white',
-    height: '25px',
-    width: '100px',
-    top: '0',
-    left: '50%',
-    transform: 'translateX(-50%)',
-  },
-  loadingBars: {
-    position: 'relative',
-    top: '-100%',
-    left: '50%',
-    transform: 'translateX(-50%)',
-  }
-}
-
-/** returns loading animation if loading is true (from App.js).
- * returns child route (in App.js) if loading is done and user is logged in.
- * Else redirects to /login. */
+/** Returns loading animation if loading is true (from App.js) and user is still being loaded.
+ * Returns child route (in App.js) if loading is done and user is logged in.
+ * Protected route redirects to /login, rather than child route, if user is not logged in. */
 const ProtectedRoute = ({
   onFailureRedirectToPath = "/login",
   isLoading,
   user,
   ...rest
 }) => {
-  return isLoading ? (
-    // loading animation component
-    <>
-      <div style={styles.loading}>
-        <div style={styles.loadingBottom}>
-          <div style={styles.loadingBars}>
-            <ReactLoading color="red" height={100} width={100} type="bars" />
+    return isLoading ? (
+      // loading animation component
+      <>
+        <div className='loading'>
+          <div className='loading-bottom'>
+            <div className='loading-bars'>
+              <ReactLoading color="rgb(180, 180, 180)" height={200} width={200} type="cubes" />
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  ) : user ? (
-    <Route {...rest} />
-  ) : (
-    <Redirect to={onFailureRedirectToPath} />
-  );
-};
+      </>
+    ) : user ? (
+      <Route {...rest} />
+    ) : (
+      <Redirect to={onFailureRedirectToPath} />
+    );
+  };
+
+  
+  /* For testing the loading screen code, use the code below which will just return loading screen forever. */
+//   return (<>
+//     <div className='loading'>
+//       <div className='loading-bottom'>
+//         <div className='loading-bars'>
+//           <ReactLoading color="rgb(180, 180, 180)" height={200} width={200} type="cubes" />
+//         </div>
+//       </div>
+//     </div>
+//   </>)
+// }
+
 
 export default ProtectedRoute;

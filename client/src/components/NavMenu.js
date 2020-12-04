@@ -17,8 +17,8 @@ export default function NavMenu() {
   }
 
   return (<>
-    <Navbar bg="light">
-      <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
+    <Navbar>
+      <Navbar.Brand href="#home">Calendar</Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>

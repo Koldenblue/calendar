@@ -1,3 +1,32 @@
+.loading {
+  background-color: #ceffce;
+  height: 100px;
+  width: 200px;
+  top: 40%;
+  position: absolute;
+  box-shadow: 1px 1px 5px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.loading-bottom {
+  position: relative;
+  background-color: #cde9f7;
+  height: 50px;
+  width: 200px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loading-bars {
+  position: relative;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== Signup and Login Pages ===== */
 .loginSignupContainer {
   margin-top: 2em;
   position: relative;
@@ -7,6 +36,8 @@
   margin: 2px;
 }
 
+/* ==================================*/
+/* ===== 404 not found page ===== */
 .four-oh-four {
   position: absolute;
   left: 50%;
@@ -14,6 +45,18 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+/* ==================================*/
+/* ===== NavBar ===== */
+.navbar {
+  background-color: #e4e4e4;
+  box-shadow: 0 1px 2px black;
+}
+
+.navbar-text {
+  margin-right: 1em;
+}
+
+/* ==================================*/
 .event-column {
   border: 1px black solid;
   height: 5em;

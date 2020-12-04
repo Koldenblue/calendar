@@ -1,0 +1,32 @@
+// the color and type of the animation itself is located in ProtectedRoute.js
+
+// top half of background
+.loading {
+  background-color: rgb(206, 255, 206);
+  height: 100px;
+  width: 200px;
+  // margin-top: 150px;
+  top: 40%;
+  position: absolute;
+  box-shadow: 1px 1px 5px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+// bottom half of background
+.loading-bottom {
+  position: relative;
+  background-color: rgb(205, 233, 247);
+  height: 50px;
+  width: 200px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loading-bars {
+  position: relative;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

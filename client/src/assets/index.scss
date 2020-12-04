@@ -1,6 +1,8 @@
+@use 'loadingScreen';
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 
+/* ===== Signup and Login Pages ===== */
 .loginSignupContainer {
   margin-top: 2em;
   position: relative;
@@ -9,13 +11,29 @@ $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 .signupLoginBtns {
   margin: 2px;
 }
+/* ==================================*/
 
+
+/* ===== 404 not found page ===== */
 .four-oh-four {
   position: absolute;
   left: 50%;
   top: 40%;
   transform: translateX(-50%) translateY(-50%);
 }
+/* ==================================*/
+
+
+/* ===== NavBar ===== */
+.navbar {
+  background-color: rgb(228, 228, 228);
+  box-shadow: 0 1px 2px black;
+}
+
+.navbar-text {
+  margin-right: 1em;
+}
+/* ==================================*/
 
 .event-column {
   border: 1px black solid;
