@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const axios = require("axios");
 const db = require("../models")
 const passport = require("../config/passport");
 const mongoose = require("mongoose");
@@ -36,14 +35,12 @@ router.post('/users', (req, res) => {
 
 router.get("/userdata", (req, res) => {
   let user = req.user;
-  // console.log(req)
-  // console.log('apiRoutes.js', user)
   if (user) {
     db.User.findById(user._id).then(userData => {
       // separate the password from the rest of the data, and respond with data
       const { password, ...data } = userData._doc;
       return res.json(data).end();
-    }).catch(err=> console.error(err))
+    }).catch(err => console.error(err))
   } else {
     res.json(null)
   }
@@ -51,15 +48,16 @@ router.get("/userdata", (req, res) => {
 
 // post a new event
 router.post('/events', (req, res) => {
-  let user = req.user;
-  // console.log('The user is, api routes: ', user);
-  // console.log(req.body);
-  db.User.findById(user._id).then(userData => {
-    // console.log(userData);
-    userData['events'].push(req.body);
-    userData.save();
-  })
-  res.status(200).end();
+  if (!req.user) {
+    res.status(200).end();
+  } else {
+    let user = req.user;
+    db.User.findById(user._id).then(userData => {
+      userData['events'].push(req.body);
+      userData.save();
+    }).catch(err => console.error(err))
+    res.status(200).end();
+  }
 })
 
 router.get('/events', (req, res) => {
@@ -69,48 +67,62 @@ router.get('/events', (req, res) => {
     db.User.findById(user._id).then(userData => {
       const { _id, username, password, __v, ...data } = userData._doc;
       return res.json(data).end();
-    }).catch(err=> console.error(err))
+    }).catch(err => console.error(err))
   } else {
     res.json(null)
   }
 })
+
 // update an existing event
 router.put('/events', (req, res) => {
-  let user = req.user;
-  console.log(req.body)
-  db.User.findById(user._id).then(doc => {
-    const eventDoc = doc.events.id(req.body.targetId);
-    eventDoc.name = req.body.name;
-    eventDoc.location = req.body.location;
-    eventDoc.description = req.body.description;
-    // Mongoose does not save subdocs. Have to save whole doc.
-    doc.save();
+  if (!req.user) {
     res.status(200).end();
-  }).catch(err => console.error(err))
+  } else {
+    let user = req.user;
+    db.User.findById(user._id).then(doc => {
+      // find the appropriate subdoc in the events array
+      const eventDoc = doc.events.id(req.body.targetId);
+      eventDoc.name = req.body.name;
+      eventDoc.location = req.body.location;
+      eventDoc.description = req.body.description;
+      // Mongoose does not save subdocs. Have to save whole doc.
+      doc.save();
+      res.status(200).end();
+    }).catch(err => console.error(err))
+  }
 })
 
 router.delete('/events', (req, res) => {
-  console.log(req.query.targetId)
-  let user = req.user;
-  db.User.findById(user._id).then(doc => {
-    doc.events.id(req.query.targetId).remove();
-    doc.save();
+  if (!req.user) {
     res.status(200).end();
-  })
+  } else {
+    let user = req.user;
+    db.User.findById(user._id).then(doc => {
+      // req.query contains the object set by the 'params' key in the request
+      // remove() method is for removing subdocuments
+      doc.events.id(req.query.targetId).remove();
+      doc.save();
+      res.status(200).end();
+    }).catch(err => console.error(err))
+  }
 })
 
 // gets data for one event in order to fill out modal fields
 router.get('/fillmodal/:targetid', (req, res) => {
-  let targetId = new mongoose.Types.ObjectId(req.params.targetid);
-  // Alternative: can also use req.user._id to a doc with findById
-  db.User.findOne({ 'events._id': targetId }).then(doc => {
-    // doc.events.isMongooseArray  // returns true
-    // a Mongoose Array is an array of subdocuments, and can use the method below to find an id of a particular array index
-    const eventDoc = doc.events.id(targetId)
-    res.json(eventDoc)
-  }).catch(err => {
-    console.error(err)
-  })
+  if (!req.user) {
+    res.status(200).end();
+  } else {
+    let targetId = new mongoose.Types.ObjectId(req.params.targetid);
+    // Alternative: can also use req.user._id to a doc with findById
+    db.User.findOne({ 'events._id': targetId }).then(doc => {
+      // doc.events.isMongooseArray  // returns true
+      // a Mongoose Array is an array of subdocuments, and can use the method below to find an id of a particular array index
+      const eventDoc = doc.events.id(targetId)
+      res.json(eventDoc)
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 })
 
 

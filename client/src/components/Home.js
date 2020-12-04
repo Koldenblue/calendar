@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './Calendar';
 import NavMenu from './NavMenu';
-import Moment from 'react-moment';
 import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 const dayjs = require('dayjs');
 
+
 export default function Home() {
-  let now = new Date();                 // format ex. Tue Dec 01 2020 23:00:18 GMT-0800 (Pacific Standard Time)
   let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
   let date = dayjs().format('MMMM D');  // format ex. 'Dec 1'
   let hour = dayjs().format('h A');     // format ex. '11 PM'
@@ -28,6 +27,7 @@ export default function Home() {
 
   /** Back button. Sets calendar back 7 days, then re-renders calendar days. */
   const back = () => {
+    // set new week variable to avoid bugs related to async and stale state
     let week = weekCounter - 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
     setWeekCounter(week);
@@ -37,8 +37,7 @@ export default function Home() {
       hour: hour,
       weekCounter: week
     }))
-    console.log(date)
-    console.log(currentDate)
+
   }
 
   /** Forward button. Sets calendar forward 7 days, then re-renders calendar days. */
@@ -65,8 +64,6 @@ export default function Home() {
     }, [currentDate])
 
 
-  // TODO:
-    // make sure events are re-rendered.
   return (
     <>
       <NavMenu />

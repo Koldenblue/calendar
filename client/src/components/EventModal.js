@@ -3,15 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Axios from "axios";
-import { setCurrentDate, selectCurrentDate, setHandlePost } from '../redux/dateSlice';
-import { useSelector, useDispatch } from 'react-redux';
-const dayjs = require('dayjs');
+import { setHandlePost } from '../redux/dateSlice';
+import { useDispatch } from 'react-redux';
 
 export default function EventModal(props) {
   const [deleteBtn, setDeleteBtn] = useState();
   const [addBtn, setAddBtn] = useState();
   const dispatch = useDispatch();
-  let currentDate = useSelector(selectCurrentDate);
   const nameRef = useRef();
   const locationRef = useRef();
   const descriptionRef = useRef();
@@ -23,17 +21,16 @@ export default function EventModal(props) {
       nameRef.current.focus();
       if (props.targetId) {
         setAddBtn(<button type='submit' className='btn btn-primary'>Update Event</button>);
-        // the regular button automatically submits the form, but the component Button runs the function without submitting the form.
+        // the regular button automatically submits the form (and runs addEvent()), but the Bootstrap component Button runs the function without submitting the form.
         setDeleteBtn(<Button onClick={deleteEvent} className='btn btn-danger'>Delete Event</Button>);
-        // if showing the modal, and the targetId is not null (i.e. yes there already is an event) then set text fields
+        // if showing the modal, and the targetId is not null (i.e. yes there already is an event) then set text fields to saved event info
         Axios.get('/api/fillmodal/' + props.targetId).then(data => {
-          console.log(data.data)
-          console.log(nameRef.current.value)
           nameRef.current.value = data.data.name;
           locationRef.current.value = data.data.location;
           descriptionRef.current.value = data.data.description;
         })
       }
+      // if no saved event is present, then there is no delete button and the submit btn will read "add" instead of "update"
       else{
         setAddBtn(<button type='submit' className='btn btn-primary'>Add Event</button>);
         setDeleteBtn();
@@ -56,19 +53,17 @@ export default function EventModal(props) {
       location: eventLocation,
       description: eventDescription
     };
-
-    console.log(calendarEvent)
     // if the target time already has an event and is being updated, then props.targetId will have a value. otherwise it is null
     if (props.targetId) { 
       calendarEvent['targetId'] = props.targetId;
-      console.log('updating event')
+      // update the database using a 'put' call
       Axios.put('/api/events', calendarEvent).then(data => {
-        console.log(data);
         // re-render calendar with new event after posting to database
         dispatch(setHandlePost());
       })
     }
     else {
+      // post new event data to database
       Axios.post('/api/events', calendarEvent).then(data => {
         // re-render calendar with new event after posting to database
         dispatch(setHandlePost());
@@ -80,9 +75,8 @@ export default function EventModal(props) {
   }
 
   const deleteEvent = () => {
-    // axios delete requests MUST be sent with 'data' as the key
+    // axios delete must be sent with 'params' key configured. the params value may then be accessed with req.query on the backend
     Axios.delete('/api/events', {params: {targetId: props.targetId } }).then(data => {
-      console.log(data)
       dispatch(setHandlePost());
       props.handleClose();
     }).catch(err => console.error(err));

@@ -16,7 +16,7 @@ function App() {
 
   // upon route switch, gets user info if already logged in (otherwise redux store state is reset to initial value on page reload)
   useEffect(() => {
-    // get user login info. loading is true until login info is retrieved
+    // get user login info, then set redux state. loading is true until login info is retrieved
     axios.get("/api/userdata").then(({ data }) => {
       if (data) {
         dispatch(setCurrentUser(data));

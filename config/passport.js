@@ -27,8 +27,8 @@ passport.use(
             message: "Incorrect password."
           });
         }
-        console.log("you logged in!")
-        console.log(dbUser)
+        // console.log("you logged in!")
+        // console.log(dbUser)
         // If none of the above, return the user
         return done(null, dbUser);
       });
