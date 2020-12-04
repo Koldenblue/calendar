@@ -78,20 +78,15 @@ router.get('/events', (req, res) => {
 // gets data for one event in order to fill out modal fields
 router.get('/fillmodal/:targetid', (req, res) => {
   let targetId = new mongoose.Types.ObjectId(req.params.targetid);
-  let userId = req.user._id;
-
+  // can also use req.user._id to a doc with findById
   db.User.findOne({ 'events._id': targetId }).then(doc => {
-    console.log('found', doc.events[0])
-    console.log(doc.events.isMongooseArray)
+    // console.log(doc.events.isMongooseArray)  // true
     const eventDoc = doc.events.id(targetId)
     console.log(eventDoc)
-    // doc.events.findById(targetId).then(eventDoc => {
-    //   console.log(eventDoc)
-    // })
+    res.json(eventDoc)
   }).catch(err => {
     console.error(err)
   })
-  res.json('hi')
 })
 
 module.exports = router;

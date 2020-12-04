@@ -14,12 +14,17 @@ export default function EventModal(props) {
   useEffect(() => {
     // Check to see if target already has an event when modal is shown.
     if (props.show) {
+      console.log('showing', props.show)
+      console.log(props)
+      // problem: targetId is now always set in time. see hour.js openModal()
       if (props.targetId) {
         console.log('has an event')
 
         // if showing the modal, and the targetId is not null (i.e. already has an event) then set text fields and delete button
         Axios.get('/api/fillmodal/' + props.targetId).then(data => {
           console.log(data)
+          console.log('axios call')
+          console.log('=============================')
         })
       }
     }

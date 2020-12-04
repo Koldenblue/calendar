@@ -14,7 +14,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         // could possibly have other password requirements here using regexes.
-        validate: [({ length }) => length >= 6, "Password must be at least 6 characters."]
+        validate: [({ length }) => length >= 1, "Password must be at least 6 characters."]
     },
     // events is a Mongoose Array consisting of subdocuments, each with their own _id
     events: [{

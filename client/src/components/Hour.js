@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import EventModal from "./EventModal";
@@ -14,6 +14,33 @@ export default function Hour(props) {
   const [columns, setColumns] = useState();
   const [eventModal, setEventModal] = useState();
   const [show, setShow] = useState(false);
+  const [target, dispatchTarget] = useReducer((state, action) => {
+    if (action.type === 'show') {
+      return ({
+        targetHour: action.targetHour,
+        targetDate: action.targetDate,
+        targetId: action.targetId,
+        show: true
+      })
+    }
+    else if (action.type === 'hide') {
+      return ({
+        targetHour: null,
+        targetDate: null,
+        targetId: null,
+        show: false
+      })
+    }
+    else {
+      throw new Error('reducer failed?')
+    }
+  }, {
+    targetHour: null,
+    targetDate: null,
+    targetId: null,
+    show: false
+  })
+
   const [targetHour, setTargetHour] = useState();
   const [targetDate, setTargetDate] = useState();
   const [targetId, setTargetId] = useState();
@@ -21,17 +48,19 @@ export default function Hour(props) {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let currentDate = useSelector(selectCurrentDate);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => dispatchTarget({type: 'hide'});
+  // const handleShow = () => setShow(true);
 
   /** When an Hour.js box is clicked, show the modal. 
    * The modal will be passed info to identify which box was clicked. */
   const openModal = (event) => {
     // show modal to get user input
-    setTargetDate(event.target.dataset.date);
-    setTargetHour(event.target.dataset.value);
-    setTargetId(event.target.dataset.id)
-    handleShow();
+    // setTargetDate(event.target.dataset.date);
+    // setTargetHour(event.target.dataset.value);
+    // setTargetId(event.target.dataset.id);
+    // handleShow();
+    console.log(event.currentTarget)
+    dispatchTarget({type: 'show', targetHour: event.currentTarget.dataset.value, targetDate: event.currentTarget.dataset.date, targetId: event.currentTarget.dataset.id})
   }
 
   // console.log(props.currentWeekEvents);
@@ -95,13 +124,13 @@ export default function Hour(props) {
   return (
     <section>
       <EventModal
-        show={show}
         handleClose={handleClose}
         backdrop="static"
         keyboard={false}
-        targetHour={targetHour}
-        targetDate={targetDate}
-        targetId={targetId}
+        targetHour={target.targetHour}
+        targetDate={target.targetDate}
+        targetId={target.targetId}
+        show={target.show}
       />
       {columns}
     </section>
