@@ -62,9 +62,9 @@ export default function Hour(props) {
   useEffect(() => {
     let calendarDateIndex = 0;
     setColumns(
-      <Row>
+      <tr>
         {/* First column contains the time label, ex. 12 AM */}
-        <Col className='time-col' md={2}>{props.time}</Col>
+        <td className='calendar-col time-col'>{props.time}</td>
         {/* Remaining 7 columns correspond to each day. */}
         {days.map(day => {
           if (calendarDateIndex > 7) {
@@ -78,8 +78,8 @@ export default function Hour(props) {
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
               return (
-                <Col
-                  className={`event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
+                <td
+                  className={`calendar-col event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
@@ -87,28 +87,27 @@ export default function Hour(props) {
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
-                  <p>{props.currentWeekEvents[i].name}</p>
-                  <p>{props.currentWeekEvents[i].location}</p>
-                  <p>{props.currentWeekEvents[i].description}</p>
-                </Col>
+                  <p className='event-summary'>{props.currentWeekEvents[i].name}</p>
+                  <p className='event-summary'>{props.currentWeekEvents[i].location}</p>
+                  <p className='event-summary'>{props.currentWeekEvents[i].description}</p>
+                </td>
               )
             }
           }
           // if no event is found, return a blank column.
           return (
-            <Col
-              className={`event-column ${props.currentHour ? 'current-hour' : ''}`}
+            <td
+              className={`calendar-col event-column ${props.currentHour ? 'current-hour' : ''}`}
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
               data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
               onClick={(event) => openModal(event)}
               data-id={null}
-            ></Col>
+            ></td>
           )
         })}
-        <Col md={3} />
-      </Row>
+      </tr>
     )
     // this useEffect must be triggered in order, after the useEffect function in Calendar.js
     // so redux state changeHours is dispatch to trigger this useEffect and the re-render

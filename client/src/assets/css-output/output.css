@@ -57,9 +57,30 @@
 }
 
 /* ==================================*/
+.calendar-col, .time-col {
+  min-height: 5em;
+  max-height: 5em;
+}
+
+.calendar-col {
+  min-width: 10em;
+  max-width: 10em;
+}
+
+.time-col {
+  min-width: 5em;
+  max-width: 5em;
+}
+
+.event-summary {
+  margin: 0 0.125em 0.25em 0.125em;
+  font-size: small;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
 .event-column {
   border: 1px black solid;
-  height: 5em;
 }
 
 .event-column:hover {
