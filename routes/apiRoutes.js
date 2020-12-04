@@ -59,7 +59,25 @@ router.post('/events', (req, res) => {
     userData['events'].push(req.body);
     userData.save();
   })
-  res.json();
+  res.status(200).end();
+})
+
+// update an existing event
+router.put('/events', (req, res) => {
+  let user = req.user;
+  console.log(req.body)
+  db.User.findById(user._id).then(doc => {
+    const eventDoc = doc.events.id(req.body.targetId);
+    console.log(eventDoc)
+    eventDoc.name = req.body.name;
+    eventDoc.location = req.body.location;
+    eventDoc.description = req.body.description;
+
+    // problem: mongoose does not save subdocs. have to save whole doc.
+    doc.save();
+    // TODO: now update event doc and .save()
+    res.status(200).end();
+  }).catch(err => console.error(err))
 })
 
 router.get('/events', (req, res) => {
@@ -78,15 +96,16 @@ router.get('/events', (req, res) => {
 // gets data for one event in order to fill out modal fields
 router.get('/fillmodal/:targetid', (req, res) => {
   let targetId = new mongoose.Types.ObjectId(req.params.targetid);
-  // can also use req.user._id to a doc with findById
+  // Alternative: can also use req.user._id to a doc with findById
   db.User.findOne({ 'events._id': targetId }).then(doc => {
-    // console.log(doc.events.isMongooseArray)  // true
+    // doc.events.isMongooseArray  // returns true
+    // a Mongoose Array is an array of subdocuments, and can use the method below to find an id of a particular array index
     const eventDoc = doc.events.id(targetId)
-    console.log(eventDoc)
     res.json(eventDoc)
   }).catch(err => {
     console.error(err)
   })
 })
+
 
 module.exports = router;

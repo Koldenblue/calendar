@@ -4,8 +4,8 @@ export const dateSlice = createSlice({
   name: 'date',
   initialState: {
     currentDate: {},        // currentDate is set in Home.js
-    changeHours: true,      // changeHours triggers a re-render of Hour.js columns
-    handlePost: 0           // triggers a re-render after an event is posted to calendar
+    changeHours: true,      // arbitrary value that triggers a re-render of Hour.js columns
+    handlePost: 0           // arbitrary value that triggers a re-render of Calendar.js after an event is posted to calendar
   },
   reducers: {
     setCurrentDate: (state, action) => {

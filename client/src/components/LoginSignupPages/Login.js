@@ -73,7 +73,6 @@ function Login() {
           dispatch(setCurrentUser(data))
         }
       }).then(() => {
-        console.log('logging in')
         setRedirect(<Redirect to='/'></Redirect>)
       })
     }).catch((err) => {

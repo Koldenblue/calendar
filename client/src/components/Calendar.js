@@ -27,7 +27,7 @@ export default function Calendar(props) {
         let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + currentDate.weekCounter)))
         calendarDays.push(calendarDay)
       })
-      console.log(calendarDays)
+      // console.log(calendarDays)
       resolve(calendarDays);
     })
   }
@@ -80,7 +80,7 @@ export default function Calendar(props) {
         let formattedCalendarDays = calendarDays.map(day => {
           return dayjs(day).format('MMMM D YYYY')
         })
-        console.log(formattedCalendarDays)
+        // console.log(formattedCalendarDays)
         // Next go through the events from the database, and match them to the current week.
         eventArr.forEach(event => {
           let eventDay = dayjs(event.date).format('MMMM D YYYY');
@@ -88,7 +88,7 @@ export default function Calendar(props) {
             currentWeekEvents.push(event);
           }
         })
-        console.log(currentWeekEvents)
+        // console.log(currentWeekEvents)
 
         // Next, check to see if current week is shown. If so, the current hour is displayed somewhere.
         // if current week:
@@ -130,7 +130,7 @@ export default function Calendar(props) {
         setHours();
       }
     })
-    console.log('handling post')
+    // console.log('handling post')
   }, [currentDate.weekCounter, handlePost])
 
 

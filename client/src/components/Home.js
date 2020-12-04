@@ -56,7 +56,6 @@ export default function Home() {
 
     // upon getting the date (changeable by forward and back buttons) re-render the calendar
     useEffect(() => {
-      console.log('current date changing')
       if (currentDate.day) {
         setCalendar(<Calendar />)
       }

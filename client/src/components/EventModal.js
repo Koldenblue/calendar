@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,27 +10,32 @@ const dayjs = require('dayjs');
 export default function EventModal(props) {
   const dispatch = useDispatch();
   let currentDate = useSelector(selectCurrentDate);
+  const nameRef = React.createRef();
+  const locationRef = React.createRef();
+  const descriptionRef = React.createRef();
 
+  /** This function takes place when modal is shown. */
   useEffect(() => {
-    // Check to see if target already has an event when modal is shown.
+    // Check to see if the chosen calendar date already has a calendar event when modal is shown.
     if (props.show) {
-      console.log('showing', props.show)
-      console.log(props)
-      // problem: targetId is now always set in time. see hour.js openModal()
+      nameRef.current.focus()
       if (props.targetId) {
-        console.log('has an event')
-
-        // if showing the modal, and the targetId is not null (i.e. already has an event) then set text fields and delete button
+        // if showing the modal, and the targetId is not null (i.e. yes there already is an event) then set text fields
         Axios.get('/api/fillmodal/' + props.targetId).then(data => {
-          console.log(data)
-          console.log('axios call')
-          console.log('=============================')
+          console.log(data.data)
+          console.log(nameRef.current.value)
+          nameRef.current.value = data.data.name;
+          locationRef.current.value = data.data.location;
+          descriptionRef.current.value = data.data.description;
+
+          // TODO: set delete button
         })
       }
     }
   }, [props.show])
 
-  /** gets values from the event modal form. Then adds to database. */
+  /** Function that runs when modal is submitted.
+   * First gets values from the modal form. Then updates database. */
   const addEvent = (event) => {
     event.preventDefault();
     // get values from form.
@@ -46,20 +51,27 @@ export default function EventModal(props) {
     };
 
     console.log(calendarEvent)
-    // get date
-    // TODO
-    
-    Axios.post('/api/events', calendarEvent).then(data => {
-      console.log(data);
-      // re-render calendar with new event after posting to database
-      dispatch(setHandlePost())
-    })
+    // if the target time already has an event and is being updated, then props.targetId will have a value. otherwise it is null
+    if (props.targetId) { 
+      calendarEvent['targetId'] = props.targetId;
+      console.log('updating event')
+      Axios.put('/api/events', calendarEvent).then(data => {
+        console.log(data);
+        // re-render calendar with new event after posting to database
+        dispatch(setHandlePost());
+      })
+    }
+    else {
+      Axios.post('/api/events', calendarEvent).then(data => {
+        // re-render calendar with new event after posting to database
+        dispatch(setHandlePost());
+      })
+    }
+
+    // Finally, close the modal.
     props.handleClose();
   }
 
-  //TODO:
-  // Also add update option if event is already filled
-  // add delete option
   return (
     <>
       <Modal
@@ -72,7 +84,7 @@ export default function EventModal(props) {
 
           <Modal.Header closeButton>
             <Modal.Title>
-              Set event for: {props.targetHour}, 
+              Set event for: {props.targetHour},
               <br />
               {props.targetDate}
             </Modal.Title>
@@ -81,17 +93,17 @@ export default function EventModal(props) {
           <Modal.Body>
             <Form.Group controlId="event-name">
               <Form.Label>Event Name</Form.Label>
-              <Form.Control required type="text" placeholder="" />
+              <Form.Control required type="text" placeholder="" ref={nameRef} />
             </Form.Group>
 
             <Form.Group controlId="event-location">
               <Form.Label>Event Location</Form.Label>
-              <Form.Control type="text" placeholder="" />
+              <Form.Control type="text" placeholder="" ref={locationRef} />
             </Form.Group>
 
             <Form.Group controlId="event-description">
               <Form.Label>Event Description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control as="textarea" rows={3} ref={descriptionRef} />
             </Form.Group>
           </Modal.Body>
 

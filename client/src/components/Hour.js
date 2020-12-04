@@ -32,7 +32,7 @@ export default function Hour(props) {
       })
     }
     else {
-      throw new Error('reducer failed?')
+      throw new Error('reducer failed? programmer error')
     }
   }, {
     targetHour: null,
@@ -59,7 +59,7 @@ export default function Hour(props) {
     // setTargetHour(event.target.dataset.value);
     // setTargetId(event.target.dataset.id);
     // handleShow();
-    console.log(event.currentTarget)
+    // console.log(event.currentTarget)
     dispatchTarget({type: 'show', targetHour: event.currentTarget.dataset.value, targetDate: event.currentTarget.dataset.date, targetId: event.currentTarget.dataset.id})
   }
 
