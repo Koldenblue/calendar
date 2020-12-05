@@ -59,8 +59,8 @@ export default function Calendar() {
               let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
               return (
                 <td key={day} className={`calendar-col ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>
-                  <p>{day}</p>
-                  <p>{dateLabel}</p>
+                  <p className='header-label'>{day}</p>
+                  <p className='header-label'>{dateLabel}</p>
                 </td>
               )
             })}
