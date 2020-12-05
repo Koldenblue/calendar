@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
+import { useHistory } from "react-router-dom";
+
 
 export default function Calendar() {
   const [hours, setHours] = useState();
@@ -15,6 +17,7 @@ export default function Calendar() {
   let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
   let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // map out calendar days. This array consists of the days of the week, ex. 'November 29' thru 'Dec 5'
   const makeDaysArray = () => {
@@ -113,6 +116,10 @@ export default function Calendar() {
           );
           dispatch(setChangeHours())
         }
+      }).catch(err => {
+        // an axios error will occur if the login session has been lost (i.e. during development)
+        console.error(err);
+        history.push('/login')
       })
 
       // on dismount remove components. probably unnecessary.
