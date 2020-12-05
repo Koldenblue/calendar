@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useReducer } from "react";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import EventModal from "./EventModal";
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
@@ -109,7 +107,7 @@ export default function Hour(props) {
         })}
       </tr>
     )
-    // this useEffect must be triggered in order, after the useEffect function in Calendar.js
+    // this useEffect is triggered in order, after the useEffect function in Calendar.js
     // so redux state changeHours is dispatch to trigger this useEffect and the re-render
   }, [changeHours])
 

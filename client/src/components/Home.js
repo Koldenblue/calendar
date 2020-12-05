@@ -67,8 +67,11 @@ export default function Home() {
   return (
     <>
       <NavMenu />
-      <button onClick={back}>Back</button>
-      <button onClick={forward}>Forward</button>
+      <div className='btn-container'>
+        <button className='btn btn-success' id='back-btn' onClick={back}>Back</button>
+        <div id='empty-btn-div'></div>
+        <button className='btn btn-success' id='forward-btn' onClick={forward}>Forward</button>
+      </div>
       {calendar}
     </>
   )

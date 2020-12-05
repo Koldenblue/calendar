@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Hour from './Hour';
 import dayjs from 'dayjs';
 import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/dateSlice';
@@ -9,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 
 export default function Calendar() {
-  const [width, setWidth] = useState(window.innerWidth);
   const [hours, setHours] = useState();
   const [dayLabels, setDayLabels] = useState();
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -18,20 +15,6 @@ export default function Calendar() {
   let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
   let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
   const dispatch = useDispatch();
-
-  let allowResize = true;
-  useEffect(() => {
-    function handleResize() {
-      if (allowResize) {
-        allowResize = false;
-        setTimeout(() => {
-          setWidth(window.innerWidth)
-          allowResize = true;
-        }, 500)
-      }
-    }
-    window.addEventListener('resize', handleResize);
-  }, [])
 
   // map out calendar days. This array consists of the days of the week, ex. 'November 29' thru 'Dec 5'
   const makeDaysArray = () => {
@@ -54,13 +37,14 @@ export default function Calendar() {
       setDayLabels(
         <section>
           <tr>
-            <td className='time-col'></td>
+            <td className='time-col' id='empty-col'></td>
             {days.map(day => {
               let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
               return (
-                <td key={day} className={`calendar-col ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>
-                  <p className='header-label'>{day}</p>
-                  <p className='header-label'>{dateLabel}</p>
+                <td key={day} className={`calendar-col`}>
+                  <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
+                  <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}/>
+                  <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
                 </td>
               )
             })}

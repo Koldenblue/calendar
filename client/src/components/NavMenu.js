@@ -18,7 +18,20 @@ export default function NavMenu() {
 
   return (<>
     <Navbar>
-      <Navbar.Brand href="#home">Calendar</Navbar.Brand>
+      <Navbar.Brand href="#home">
+        {/* Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=308837">
+        Clker-Free-Vector-Images</a> 
+        from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=308837">Pixabay</a> */}
+        <img
+          alt=""
+          src={require('../assets/images/calendar-2.png')}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />
+        {' '}
+        Calendar
+      </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
