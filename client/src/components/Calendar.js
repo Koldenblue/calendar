@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 
 export default function Calendar() {
+  const [width, setWidth] = useState(window.innerWidth);
   const [hours, setHours] = useState();
   const [dayLabels, setDayLabels] = useState();
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -17,6 +18,20 @@ export default function Calendar() {
   let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
   let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
   const dispatch = useDispatch();
+
+  let allowResize = true;
+  useEffect(() => {
+    function handleResize() {
+      if (allowResize) {
+        allowResize = false;
+        setTimeout(() => {
+          setWidth(window.innerWidth)
+          allowResize = true;
+        }, 500)
+      }
+    }
+    window.addEventListener('resize', handleResize);
+  }, [])
 
   // map out calendar days. This array consists of the days of the week, ex. 'November 29' thru 'Dec 5'
   const makeDaysArray = () => {
@@ -36,19 +51,22 @@ export default function Calendar() {
   useEffect(() => {
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
-      setDayLabels(<>
-        <Col md={2} ></Col>
-        {days.map(day => {
-          let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
-          return (
-            <Col md={1} key={day} className={`${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>
-              <p>{day}</p>
-              <p>{dateLabel}</p>
-            </Col>
-          )
-        })}
-        <Col md={3} ></Col>
-      </>)
+      setDayLabels(
+        <section>
+          <tr>
+            <td className='time-col'></td>
+            {days.map(day => {
+              let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
+              return (
+                <td key={day} className={`calendar-col ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>
+                  <p className='header-label'>{day}</p>
+                  <p className='header-label'>{dateLabel}</p>
+                </td>
+              )
+            })}
+          </tr>
+        </section>
+      )
 
       // Next Map out hours, starting from 12 AM. Each hour is a row of 8 columns, handled with Hour.js.
       // first create a size 24 array containing strings '12 AM' thru '11 PM'
@@ -125,10 +143,10 @@ export default function Calendar() {
   return (
     <main>
       <Container fluid>
-        <Row className='day-label-row'>
+        <table>
           {dayLabels}
-        </Row>
-        {hours}
+          {hours}
+        </table>
       </Container>
     </main>
   )
