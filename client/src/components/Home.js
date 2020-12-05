@@ -29,7 +29,7 @@ export default function Home() {
   const back = () => {
     // set new week variable to avoid bugs related to async and stale state
     let week = weekCounter - 7;
-    date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
+    date = dayjs(new Date(new Date().setDate(new Date().getDate() + week))).format('MMMM D');
     setWeekCounter(week);
     dispatch(setCurrentDate({
       day: day,
@@ -43,7 +43,7 @@ export default function Home() {
   /** Forward button. Sets calendar forward 7 days, then re-renders calendar days. */
   const forward = () => {
     let week = weekCounter + 7;
-    date = dayjs(new Date(new Date().setDate(new Date().getDate() + week) )).format('MMMM D');
+    date = dayjs(new Date(new Date().setDate(new Date().getDate() + week))).format('MMMM D');
     setWeekCounter(week);
     dispatch(setCurrentDate({
       day: day,
@@ -53,20 +53,43 @@ export default function Home() {
     }))
   }
 
-    // upon getting the date (changeable by forward and back buttons) re-render the calendar
-    useEffect(() => {
-      if (currentDate.day) {
-        setCalendar(<Calendar />)
+  const goToToday = () => {
+    dispatch(setCurrentDate({
+      day: day,
+      date: date,
+      hour: hour,
+      weekCounter: 0
+    }))
+    setTimeout(() => {
+      try {
+        document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth'})
+      } catch (TypeError) {
+        setTimeout(() => {
+          try {
+            document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth'})
+          } catch (TypeError) {
+            console.error(TypeError)
+          }
+        }, 700)
       }
-      return () => {
-        setCalendar()
-      }
-    }, [currentDate])
+    }, 300)
+  }
+
+  // upon getting the date (changeable by forward and back buttons) re-render the calendar
+  useEffect(() => {
+    if (currentDate.day) {
+      setCalendar(<Calendar />)
+    }
+    return () => {
+      setCalendar()
+    }
+  }, [currentDate])
+
 
 
   return (
     <>
-      <NavMenu />
+      <NavMenu goToToday={goToToday} />
       <div className='btn-container'>
         <button className='btn btn-success' id='back-btn' onClick={back}>Back</button>
         <div id='empty-btn-div'></div>

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
 import Axios from 'axios';
 
-export default function NavMenu() {
+export default function NavMenu(props) {
   const dispatch = useDispatch();
   let currentUser = useSelector(selectCurrentUser);
 
@@ -32,6 +32,7 @@ export default function NavMenu() {
         {' '}
         Calendar
       </Navbar.Brand>
+      <Button className='btn btn-outline-info' onClick={props.goToToday}>Today</Button>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
