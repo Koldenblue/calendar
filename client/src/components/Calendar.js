@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Hour from './Hour';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-import Moment from 'react-moment';
+
 
 export default function Calendar() {
   const [hours, setHours] = useState();
@@ -15,7 +15,7 @@ export default function Calendar() {
   let currentDate = useSelector(selectCurrentDate);
   let handlePost = useSelector(selectHandlePost);
   let currentDayIndex = days.indexOf(currentDate.day)  // the index of today. Ex. "Wednesday" is index 3.
-  let currentDay = moment().format('MMMM D') // ex. 'December 1'
+  let currentDay = dayjs().format('MMMM D') // ex. 'December 1'
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -24,7 +24,7 @@ export default function Calendar() {
     return new Promise(function (resolve, reject) {
       let calendarDays = [];
       days.forEach(day => {
-        let calendarDay = moment(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + currentDate.weekCounter)))
+        let calendarDay = dayjs(new Date(new Date().setDate(new Date().getDate() + days.indexOf(day) - currentDayIndex + currentDate.weekCounter)))
         calendarDays.push(calendarDay)
       })
       resolve(calendarDays);
@@ -41,7 +41,7 @@ export default function Calendar() {
         <tr>
           <td className='time-col' id='empty-col'></td>
           {days.map(day => {
-            let dateLabel = moment(calendarDays[calendarIndex++]).format('MMMM D')
+            let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
             return (
               <td key={day} className={`calendar-col`}>
                 <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
@@ -75,11 +75,11 @@ export default function Calendar() {
         let currentWeekEvents = [];
         // first create a new array consisting of days in the current week, formatted as ex. 'December 1 2020'
         let formattedCalendarDays = calendarDays.map(day => {
-          return moment(day).format('MMMM D YYYY')
+          return dayjs(day).format('MMMM D YYYY')
         })
         // Next go through the events from the database, and match them to the current week.
         eventArr.forEach(event => {
-          let eventDay = moment(event.date).format('MMMM D YYYY');
+          let eventDay = dayjs(event.date).format('MMMM D YYYY');
           if (formattedCalendarDays.includes(eventDay)) {
             event['date'] = eventDay
             currentWeekEvents.push(event);
