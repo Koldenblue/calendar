@@ -54,7 +54,6 @@ export default function EventModal(props) {
       location: eventLocation,
       description: eventDescription
     };
-    console.log(calendarEvent)
     // if the target time already has an event and is being updated, then props.targetId will have a value. otherwise it is null
     if (props.targetId) { 
       calendarEvent['targetId'] = props.targetId;

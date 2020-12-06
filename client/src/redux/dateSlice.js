@@ -12,11 +12,9 @@ export const dateSlice = createSlice({
       state.currentDate = action.payload;
     },
     setChangeHours: (state) => {
-      console.log('hours changing')
       state.changeHours = ++state.changeHours;
     },
     setHandlePost: (state) => {
-      console.log('handling post', state.handlePost)
       state.handlePost = ++state.handlePost;
     }
   }
