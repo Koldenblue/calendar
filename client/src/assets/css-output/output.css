@@ -26,7 +26,7 @@
   transform: translateX(-50%);
 }
 
-/* ===== Signup and Login Pages ===== */
+/* ===== Login and Signup pages ===== */
 .loginSignupContainer {
   margin-top: 2em;
   position: relative;
@@ -36,7 +36,6 @@
   margin: 2px;
 }
 
-/* ==================================*/
 /* ===== 404 not found page ===== */
 .four-oh-four {
   position: absolute;
@@ -45,7 +44,6 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-/* ==================================*/
 /* ===== NavBar ===== */
 .navbar {
   background-color: #e4e4e4;
@@ -57,13 +55,23 @@
   margin-left: 1em;
 }
 
+.empty-div-before {
+  flex-grow: 2.2;
+}
+
+.empty-div-after {
+  flex-grow: 1;
+}
+
+.clock {
+  margin-left: 1em;
+}
+
 /* ==================================*/
 /* ===== Home.js ===== */
 .btn-container {
   display: flex;
   align-items: center;
-  position: sticky;
-  top: 0;
 }
 
 #back-btn, #forward-btn {

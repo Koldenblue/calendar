@@ -29,8 +29,8 @@ const ProtectedRoute = ({
     );
   };
 
-  
-  /* For testing the loading screen code, use the code below which will just return loading screen forever. */
+
+  /* For testing the loading screen code, return the code below instead, which will just return loading screen forever. */
 //   return (<>
 //     <div className='loading'>
 //       <div className='loading-bottom'>

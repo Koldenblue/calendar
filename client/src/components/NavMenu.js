@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
 import Axios from 'axios';
+import Clock from './Clock';
 
 export default function NavMenu(props) {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ export default function NavMenu(props) {
       </Navbar.Brand>
       <Button className='btn btn-outline-info' onClick={props.goToToday}>Today</Button>
       <Navbar.Toggle />
+      <div className='empty-div-before'></div>
+      <Clock />
+      <div className='empty-div-after'></div>
+
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
           Signed in as: {currentUser.username}

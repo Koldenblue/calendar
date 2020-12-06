@@ -62,11 +62,11 @@ export default function Home() {
     }))
     setTimeout(() => {
       try {
-        document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth'})
+        document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth', block: 'center'})
       } catch (TypeError) {
         setTimeout(() => {
           try {
-            document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth'})
+            document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth', block: 'center'})
           } catch (TypeError) {
             console.error(TypeError)
           }

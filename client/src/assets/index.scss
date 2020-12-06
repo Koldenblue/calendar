@@ -1,4 +1,6 @@
 @use 'loadingScreen';
+@use 'loginSignup';
+@use 'fourOhFour';
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 
@@ -18,27 +20,6 @@ $maxWidths: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   }
 }
 
-/* ===== Signup and Login Pages ===== */
-.loginSignupContainer {
-  margin-top: 2em;
-  position: relative;
-}
-
-.signupLoginBtns {
-  margin: 2px;
-}
-/* ==================================*/
-
-
-/* ===== 404 not found page ===== */
-.four-oh-four {
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translateX(-50%) translateY(-50%);
-}
-/* ==================================*/
-
 
 /* ===== NavBar ===== */
 .navbar {
@@ -50,6 +31,19 @@ $maxWidths: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   margin-right: 1em;
   margin-left: 1em;
 }
+
+.empty-div-before {
+  flex-grow: 2.2;
+}
+.empty-div-after {
+  flex-grow: 1;
+}
+
+.clock {
+  margin-left: 1em;
+  // flex-grow: 1;
+}
+
 /* ==================================*/
 
 
@@ -57,13 +51,10 @@ $maxWidths: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 .btn-container {
   display: flex;
   align-items: center;
-  position: sticky;
-  top: 0;
 }
 
 #back-btn, #forward-btn {
   margin: 1em 1em 0 1em;
-
 }
 #empty-btn-div {
 flex-grow: 1;
