@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
 import EventModal from "./EventModal";
-import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { selectChangeHours } from '../redux/dateSlice';
 
@@ -38,7 +37,6 @@ export default function Hour(props) {
     show: false
   })
   let changeHours = useSelector(selectChangeHours);    // this triggers the useEffect upon change
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
   /** Causes the modal to be hidden. */
@@ -58,6 +56,7 @@ export default function Hour(props) {
   // Each column also has dataset.value formatted as '12 AM Monday'
   // Finally, each column has dataset.date formatted as 'December 1'
   useEffect(() => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let calendarDateIndex = 0;
     setColumns(
       <tr>
@@ -76,7 +75,7 @@ export default function Hour(props) {
           // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
-          // bug avoidance: unformatted date should be stored in data-date and sent to database, and only formatted once used
+          // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
               return (
                 <td
                   className={`calendar-col event-column has-event ${props.currentHour ? 'current-hour' : ''}`}

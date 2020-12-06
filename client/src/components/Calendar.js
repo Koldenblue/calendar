@@ -112,7 +112,6 @@ export default function Calendar() {
         else {
           setHours(
             timeArr.map((time) => {
-              console.log('returning')
               return (<Hour currentWeekEvents={currentWeekEvents} calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
             })
           );

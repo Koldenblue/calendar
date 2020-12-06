@@ -25,6 +25,8 @@ function App() {
     }).catch(err => {
       console.error(err);
     })
+    // according to redux docs, dispatch function identity is stable and therefore doesn't need to be included in dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -33,10 +35,10 @@ function App() {
       <Router>
         <Switch>
 
-        {/* Home component only reachable if user is logged in. */}
-        <ProtectedRoute exact path="/" user={currentUser} isLoading={loading} onFailureRedirectToPath="/login">
-          <Home />
-        </ProtectedRoute>
+          {/* Home component only reachable if user is logged in. */}
+          <ProtectedRoute exact path="/" user={currentUser} isLoading={loading} onFailureRedirectToPath="/login">
+            <Home />
+          </ProtectedRoute>
 
           <Route exact path='/login'>
             <Login />
