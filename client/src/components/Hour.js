@@ -58,9 +58,9 @@ export default function Hour(props) {
   // Each column also has dataset.value formatted as '12 AM Monday'
   // Finally, each column has dataset.date formatted as 'December 1'
   useEffect(() => {
-    console.log('using change hours effect')
+    // console.log('using change hours effect')
     let calendarDateIndex = 0;
-    console.log('props.time', props.time)
+    props.time === '12 AM Saturday' ? console.log('props.time', props.time) : null
     setColumns(
       <tr>
         {/* First column contains the time label, ex. 12 AM */}
@@ -73,12 +73,14 @@ export default function Hour(props) {
 
           let formattedToday = (props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
           let formattedTime = `${props.time} ${day}`;
-          console.log('formattedToday', formattedToday)
-          console.log('formattedTime', formattedTime)
-          console.log('cur week events', props.currentWeekEvents)
+          props.time === '12 AM Saturday' ? console.log('formattedToday', formattedToday) : null;
+          props.time === '12 AM Saturday' ? console.log('formattedTime', formattedTime) : null;
+          props.time === '12 AM Saturday' ? console.log('cur week events', props.currentWeekEvents) : null;
+          
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
           // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
+            props.time === '12 AM Saturday' ? console.log(dayjs(props.currentWeekEvents[i]).format('MMMM D YYYY')) : null;
             if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
               console.log('found')
               return (
