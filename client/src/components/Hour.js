@@ -42,14 +42,14 @@ export default function Hour(props) {
 
 
   /** Causes the modal to be hidden. */
-  const handleClose = () => dispatchTarget({type: 'hide'});
+  const handleClose = () => dispatchTarget({ type: 'hide' });
 
 
   /** When an Hour.js box is clicked, show the modal.
    * The modal is passed info, thru event.currentTarget that identifies which box was clicked. */
   const openModal = (event) => {
     // note: event.target.dataset contains the same data as event.currentTarget.dataset, but (due to bug?) event.target.dataset is sometimes undefined.
-    dispatchTarget({type: 'show', targetHour: event.currentTarget.dataset.value, targetDate: event.currentTarget.dataset.date, targetId: event.currentTarget.dataset.id})
+    dispatchTarget({ type: 'show', targetHour: event.currentTarget.dataset.value, targetDate: event.currentTarget.dataset.date, targetId: event.currentTarget.dataset.id })
   }
 
 
@@ -112,18 +112,16 @@ export default function Hour(props) {
   }, [changeHours])
 
 
-  return (
-    <section>
-      <EventModal
-        handleClose={handleClose}
-        backdrop="static"
-        keyboard={false}
-        targetHour={target.targetHour}
-        targetDate={target.targetDate}
-        targetId={target.targetId}
-        show={target.show}
-      />
-      {columns}
-    </section>
-  )
+  return (<>
+    <EventModal
+      handleClose={handleClose}
+      backdrop="static"
+      keyboard={false}
+      targetHour={target.targetHour}
+      targetDate={target.targetDate}
+      targetId={target.targetId}
+      show={target.show}
+    />
+    {columns}
+  </>)
 }

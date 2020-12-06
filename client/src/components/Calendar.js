@@ -38,21 +38,19 @@ export default function Calendar() {
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
       setDayLabels(
-        <section>
-          <tr>
-            <td className='time-col' id='empty-col'></td>
-            {days.map(day => {
-              let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
-              return (
-                <td key={day} className={`calendar-col`}>
-                  <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
-                  <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}/>
-                  <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
-                </td>
-              )
-            })}
-          </tr>
-        </section>
+        <tr>
+          <td className='time-col' id='empty-col'></td>
+          {days.map(day => {
+            let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
+            return (
+              <td key={day} className={`calendar-col`}>
+                <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
+                <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`} />
+                <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
+              </td>
+            )
+          })}
+        </tr>
       )
 
       // Next Map out hours, starting from 12 AM. Each hour is a row of 8 columns, handled with Hour.js.
@@ -121,12 +119,6 @@ export default function Calendar() {
         console.error(err);
         history.push('/login')
       })
-
-      // on dismount remove components. probably unnecessary.
-      return () => {
-        setDayLabels();
-        setHours();
-      }
     })
   }, [currentDate.weekCounter, handlePost])
 

@@ -15,8 +15,8 @@ export default function Clock() {
   }, [])
 
   return (
-    <div className='clock'>
+    <h5 className='clock'>
       {time.date}
-    </div>
+    </h5>
   )
 }
