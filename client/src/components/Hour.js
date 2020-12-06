@@ -82,14 +82,15 @@ export default function Hour(props) {
           // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedTime === '12 AM Saturday') {
-              console.log(formattedToday)
-              console.log(dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
-              console.log(formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
-              console.log(formattedTime)
-              console.log(props.currentWeekEvents[i].time)
-              console.log(formattedTime === props.currentWeekEvents[i].time)
+              // console.log(formattedToday)
+              // PROBLEM : FOR SOME REASON THIS SHOWS UP AS ONE DAY BEHIND
+              console.log((props.currentWeekEvents[i].date))
+              // console.log(formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
+              // console.log(formattedTime)
+              // console.log(props.currentWeekEvents[i].time)
+              // console.log(formattedTime === props.currentWeekEvents[i].time)
             }
-            if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
+            if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
               console.log('found')
               return (
                 <td

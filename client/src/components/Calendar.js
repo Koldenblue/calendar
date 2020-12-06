@@ -81,6 +81,7 @@ export default function Calendar() {
         eventArr.forEach(event => {
           let eventDay = dayjs(event.date).format('MMMM D YYYY');
           if (formattedCalendarDays.includes(eventDay)) {
+            event['date'] = eventDay
             currentWeekEvents.push(event);
           }
         })
