@@ -60,7 +60,8 @@ export default function Hour(props) {
   useEffect(() => {
     // console.log('using change hours effect')
     let calendarDateIndex = 0;
-    props.time === '12 AM Saturday' ? console.log('props.time', props.time) : null
+    console.log(props.time)
+    // if (props.time === '12 AM') {console.log('props.time', props.time)}
     setColumns(
       <tr>
         {/* First column contains the time label, ex. 12 AM */}
@@ -73,14 +74,21 @@ export default function Hour(props) {
 
           let formattedToday = (props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
           let formattedTime = `${props.time} ${day}`;
-          props.time === '12 AM Saturday' ? console.log('formattedToday', formattedToday) : null;
-          props.time === '12 AM Saturday' ? console.log('formattedTime', formattedTime) : null;
-          props.time === '12 AM Saturday' ? console.log('cur week events', props.currentWeekEvents) : null;
+          if (formattedTime === '12 AM Saturday') {console.log('formattedToday', formattedToday) }
+          if (formattedTime === '12 AM Saturday') {console.log('formattedTime', formattedTime) }
+          if (formattedTime === '12 AM Saturday') {console.log('cur week events', props.currentWeekEvents) }
           
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
           // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
-            props.time === '12 AM Saturday' ? console.log(dayjs(props.currentWeekEvents[i]).format('MMMM D YYYY')) : null;
+            if (formattedTime === '12 AM Saturday') {
+              console.log(formattedToday)
+              console.log(dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
+              console.log(formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
+              console.log(formattedTime)
+              console.log(props.currentWeekEvents[i].time)
+              console.log(formattedTime === props.currentWeekEvents[i].time)
+            }
             if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
               console.log('found')
               return (
