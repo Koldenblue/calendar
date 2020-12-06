@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import EventModal from "./EventModal";
-import dayjs from 'dayjs';
+import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { selectChangeHours } from '../redux/dateSlice';
 
@@ -85,7 +85,7 @@ export default function Hour(props) {
               // console.log(formattedToday)
               // PROBLEM : FOR SOME REASON THIS SHOWS UP AS ONE DAY BEHIND
               console.log((props.currentWeekEvents[i].date))
-              // console.log(formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
+              // console.log(formattedToday === moment(props.currentWeekEvents[i].date).format('MMMM D YYYY'))
               // console.log(formattedTime)
               // console.log(props.currentWeekEvents[i].time)
               // console.log(formattedTime === props.currentWeekEvents[i].time)
@@ -98,7 +98,7 @@ export default function Hour(props) {
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
-                  data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+                  data-date={`${moment(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
@@ -116,7 +116,7 @@ export default function Hour(props) {
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
-              data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+              data-date={`${moment(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
               onClick={(event) => openModal(event)}
               data-id={null}
             ></td>
