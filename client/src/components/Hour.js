@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
 import EventModal from "./EventModal";
-import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { selectChangeHours } from '../redux/dateSlice';
 
@@ -38,7 +37,6 @@ export default function Hour(props) {
     show: false
   })
   let changeHours = useSelector(selectChangeHours);    // this triggers the useEffect upon change
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
   /** Causes the modal to be hidden. */
@@ -58,6 +56,7 @@ export default function Hour(props) {
   // Each column also has dataset.value formatted as '12 AM Monday'
   // Finally, each column has dataset.date formatted as 'December 1'
   useEffect(() => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let calendarDateIndex = 0;
     setColumns(
       <tr>
@@ -71,17 +70,19 @@ export default function Hour(props) {
 
           let formattedToday = (props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
           let formattedTime = `${props.time} ${day}`;
+          
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
           // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
-            if (formattedToday === dayjs(props.currentWeekEvents[i].date).format('MMMM D YYYY') && formattedTime === props.currentWeekEvents[i].time) {
+            if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
+          // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
               return (
                 <td
                   className={`calendar-col event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
-                  data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+                  data-date={props.calendarDays[calendarDateIndex++]}
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
@@ -99,7 +100,7 @@ export default function Hour(props) {
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
-              data-date={`${dayjs(props.calendarDays[calendarDateIndex++]).format('MMMM D YYYY')}`}
+              data-date={props.calendarDays[calendarDateIndex++]}
               onClick={(event) => openModal(event)}
               data-id={null}
             ></td>
@@ -122,6 +123,8 @@ export default function Hour(props) {
       targetId={target.targetId}
       show={target.show}
     />
+    <tbody>
     {columns}
+    </tbody>
   </>)
 }

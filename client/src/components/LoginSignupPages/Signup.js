@@ -53,6 +53,8 @@ function Signup({ loading, user }) {
     if (message !== "") {
       setMessage("");
     }
+    // dependency should not include message, otherwise it would always be set to blank
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, password])
 
   return ((user && !loading) ? <Redirect to="/home" /> :

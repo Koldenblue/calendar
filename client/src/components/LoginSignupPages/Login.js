@@ -7,8 +7,8 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import WatercolorBackground from "./WatercolorBackground";
-import { setCurrentUser, selectCurrentUser } from '../../redux/userSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentUser } from '../../redux/userSlice';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 function Login() {
@@ -18,7 +18,6 @@ function Login() {
   const [redirect, setRedirect] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
-  let currentUser = useSelector(selectCurrentUser);
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -62,6 +61,8 @@ function Login() {
     if (message !== "") {
       setMessage("");
     }
+    // dependency should not include message, otherwise it would always be set to blank
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, password])
 
   // button to log in with preset username and pass

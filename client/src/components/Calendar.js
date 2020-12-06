@@ -38,19 +38,21 @@ export default function Calendar() {
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
       setDayLabels(
-        <tr>
-          <td className='time-col' id='empty-col'></td>
-          {days.map(day => {
-            let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
-            return (
-              <td key={day} className={`calendar-col`}>
-                <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
-                <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`} />
-                <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
-              </td>
-            )
-          })}
-        </tr>
+        <thead>
+          <tr>
+            <td className='time-col' id='empty-col'></td>
+            {days.map(day => {
+              let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
+              return (
+                <td key={day} className={`calendar-col`}>
+                  <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
+                  <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`} />
+                  <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
+                </td>
+              )
+            })}
+          </tr>
+        </thead>
       )
 
       // Next Map out hours, starting from 12 AM. Each hour is a row of 8 columns, handled with Hour.js.
@@ -79,8 +81,10 @@ export default function Calendar() {
         })
         // Next go through the events from the database, and match them to the current week.
         eventArr.forEach(event => {
+          // bug avoidance: unformatted date should be sent to database, and formatted once returned.
           let eventDay = dayjs(event.date).format('MMMM D YYYY');
           if (formattedCalendarDays.includes(eventDay)) {
+            event['date'] = eventDay;
             currentWeekEvents.push(event);
           }
         })
@@ -108,7 +112,6 @@ export default function Calendar() {
         else {
           setHours(
             timeArr.map((time) => {
-              console.log('returning')
               return (<Hour currentWeekEvents={currentWeekEvents} calendarDays={calendarDays} time={time} key={time} currentHour={false}></Hour>)
             })
           );

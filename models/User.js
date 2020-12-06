@@ -19,6 +19,7 @@ const userSchema = new Schema({
     // events is a Mongoose Array consisting of subdocuments, each with their own _id
     events: [{
         date: {
+            // bug avoidance: must be a date and not a string!
             type: Date
         },
         time: {
