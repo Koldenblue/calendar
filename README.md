@@ -14,21 +14,23 @@ The deployed app may be viewed on <a href='https://weekly-event-calendar.herokua
 ![image](https://user-images.githubusercontent.com/64618290/101298984-43d4f380-37e5-11eb-9a8f-8e71543111e7.png)
 
 
+![image](https://user-images.githubusercontent.com/64618290/101299718-032aa980-37e8-11eb-90c9-75b03859411d.png)
+
 
 <h3 id='installation'>Installation</h3>
 <p>The deployed website may be visited on <a href='https://weekly-event-calendar.herokuapp.com/'>Heroku servers</a>.</p> 
 
-<p>The website may be run on a local host by cloning this repository, navigating to the project directory in a terminal, and using the command 'npm install'. The Node.js environment and Node Package Manager must be installed prior. Sass should also be installed. If not already installed, Sass may quickly be installed locally in the project directory with the command 'npm install sass'. However, be sure to check out the <a href='https://sass-lang.com/'>Sass website</a> for more detailed installation instructions. Once installed, the website may be run on a local host using the command 'npm run start' in the project directory. The webpage will be hosted locally on port 3000 by default, and may be accessed at localhost:3000 in a browser.</p>
+<p>The website may be run on a local host by cloning this repository, navigating to the project directory in a terminal, and using the command 'npm install'. Node.js and Node Package Manager must be installed prior. Sass should also be installed. If not already installed, Sass may quickly be installed locally in the project directory with the command 'npm install sass'. However, be sure to check out the <a href='https://sass-lang.com/'>Sass website</a> for detailed installation instructions. Once installed, the website may be run on a local host using the command 'npm run start' in the project directory. The webpage will be hosted locally on port 3000 by default, and may be accessed at localhost:3000 in a browser.</p>
 
- <p>If scss files are to be edited, the script 'npm run watch-sass', found in package.json, may be used to automatically update the CSS files. However, the watch-sass script may have to be edited depending on the local machine and sass installation - again, check out the Sass website for details on using the 'sass --watch' command.</p>
+ <p>If scss files are to be edited, the script 'npm run watch-sass', found in package.json, may be used to automatically watch SCSS files and update the CSS as needed. However, the watch-sass script may have to be edited depending on the local machine and sass installation - again, check out the Sass website for details on using the 'sass --watch' command.</p>
 
 <h3 id='usage'>Usage</h3>
-Click on calendar spaces to add, update, or delete events. Navigate through weeks by pressing the 'back' and 'forward' buttons. Quickly navigate back to the current week by pressing the 'today' button.
+Click on calendar spaces to add, update, or delete events. Navigate through weeks by pressing the 'back' and 'forward' buttons. Quickly navigate to the current week and time by pressing the 'today' button.
 
 <h3 id='code'>Code Discussion</h3>
 <p>This project was created using the MERN technology stack - MongoDB, Express.js, React, and Node.js. The project was started using my own template, located at <a href=https://github.com/Koldenblue/mern-redux-auth-template>this GitHub repository</a>. Redux is used as a companion to React, in order to keep track of certain global states. The dayjs library is used for date formatting and functionality. Sass was helpful for doing CSS calculations and generating media queries. Other useful libraries are listed in the two package.json files, and include Bootstrap, bcrypt, axios, passport, and the mongoose ORM.</p>
- <p>The main React components are located in '/client/src/components'. Here, several components make up the main logic for displaying the calendar and user interface. The highest-order component is index.js. The App.js component is the second component in the hierarchy, and is where user functionality and routing begins.</p>
- <p> Backend routing for the Mongo database may be viewed in the 'routes' folder. These routes take care of any needed database interactions.</p> 
+ <p>The main frontend React components are located in '/client/src/components'. Here, several components make up the main logic for displaying the calendar and UI. The App.js component is the second highest-order component, just under index.js, and is where user functionality and routing begins. App.js is a good place to start for anyone reading through the code.</p>
+ <p> Backend routing for the Mongo database may be viewed in the 'routes' folder. These routes take care of any needed database interactions, such as login interactions and calendar event storage.</p> 
 
 <h3 id='contributions'>Contributions</h3>
 Contact the author through GitHub.
