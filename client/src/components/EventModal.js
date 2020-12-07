@@ -95,9 +95,9 @@ export default function EventModal(props) {
 
           <Modal.Header closeButton>
             <Modal.Title>
-              Set event for: {props.targetHour},
+              Set event for: {props.targetHour}
               <br />
-              {dayjs(props.targetDate).format('MMMM D')}
+              {/* {(props.targetFormattedDate)} */}
             </Modal.Title>
           </Modal.Header>
 
