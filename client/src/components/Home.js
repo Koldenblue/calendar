@@ -11,11 +11,12 @@ export default function Home() {
   let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
   let date = dayjs().format('MMMM D');  // format ex. 'Dec 1'
   let hour = dayjs().format('h A');     // format ex. '11 PM'
-  const [calendar, setCalendar] = useState();
+  const [calendar, setCalendar] = useState();   // renders the Calendar.js component
   const [weekCounter, setWeekCounter] = useState(0); // keeps track of the days of the week, in increments of 7
   const dispatch = useDispatch();
   let currentDate = useSelector(selectCurrentDate);
 
+  /** Set the current date upon first render. */
   useEffect(() => {
     dispatch(setCurrentDate({
       day: day,
@@ -27,7 +28,7 @@ export default function Home() {
 
   /** Back button. Sets calendar back 7 days, then re-renders calendar days. */
   const back = () => {
-    // set new week variable to avoid bugs related to async and stale state
+    // Note: set new week variable to avoid bugs related to async and stale state
     let week = weekCounter - 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week))).format('MMMM D');
     setWeekCounter(week);
@@ -37,7 +38,6 @@ export default function Home() {
       hour: hour,
       weekCounter: week
     }))
-
   }
 
   /** Forward button. Sets calendar forward 7 days, then re-renders calendar days. */
@@ -53,6 +53,7 @@ export default function Home() {
     }))
   }
 
+  /** Goes to the current week, and scrolls the current time into view. */
   const goToToday = () => {
     dispatch(setCurrentDate({
       day: day,

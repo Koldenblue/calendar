@@ -54,19 +54,17 @@ export default function EventModal(props) {
       location: eventLocation,
       description: eventDescription
     };
-    // if the target time already has an event and is being updated, then props.targetId will have a value. otherwise it is null
+    // if the target time already has an event and is being updated, then props.targetId will have a value, and use put. Else use post call.
     if (props.targetId) { 
       calendarEvent['targetId'] = props.targetId;
-      // update the database using a 'put' call
       Axios.put('/api/events', calendarEvent).then(data => {
-        // re-render calendar with new event after posting to database
+        // re-render calendar with new event by dispatching
         dispatch(setHandlePost());
       })
     }
     else {
-      // post new event data to database
       Axios.post('/api/events', calendarEvent).then(data => {
-        // re-render calendar with new event after posting to database
+        // re-render calendar with new event
         dispatch(setHandlePost());
       })
     }

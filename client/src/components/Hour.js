@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 /** An hour consisting of 8 columns. First column is the time label.
  * The remaining 7 columns correspond to days of the week. */
 export default function Hour(props) {
-  const [columns, setColumns] = useState();
+  const [columns, setColumns] = useState();     // contains jsx for the calendar columns
   // all values in this reducer state need to be managed as a single object
   const [target, dispatchTarget] = useReducer((state, action) => {
     if (action.type === 'show') {
@@ -86,7 +86,6 @@ export default function Hour(props) {
           let formattedTime = `${props.time} ${day}`;
 
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
-          // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
               // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
@@ -124,8 +123,8 @@ export default function Hour(props) {
         })}
       </tr>
     )
-    // this useEffect is triggered in order, after the useEffect function in Calendar.js
-    // so redux state changeHours is dispatch to trigger this useEffect and the re-render
+    // this useEffect is triggered in sequence, after the useEffect function in Calendar.js
+    // so redux state changeHours is dispatched to trigger this useEffect and the re-render
   }, [changeHours])
 
 
