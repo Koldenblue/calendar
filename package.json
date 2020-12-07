@@ -15,6 +15,7 @@
     "build": "cd client && npm run build",
     "install": "cd client && npm install",
     "heroku-postbuild": "npm run build",
+    "aws-build": "cd client && npm run build && npm run heroku-postbuild",
     "sass": "cd client/src/assets && sass.bat index.scss ./css-output/output.css && cd ../../..",
     "watch-sass": "sass.bat --watch client/src/assets/index.scss client/src/assets/css-output/output.css"
   },
