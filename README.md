@@ -9,10 +9,14 @@
 5. <a href="#contributions">Contributions</a>
 6. <a href="#questions">Issues and Questions</a>
 <hr><h3 id='description'>Description</h3>
-The deployed app may be viewed at __________. This app is a calendar that shows the days of a week, and lets users keep track of hourly events - namely, their times, names, locations, and descriptions. Events may be deleted and updated as well. The app shows the current time, and lets users move forward or back calendar weeks.
+The deployed app may be viewed on <a href='https://weekly-event-calendar.herokuapp.com/'>Heroku servers</a> (Heroku provides free hosting, and may take a minute to spin up the app if the server has been idle). The test username 'calendar' and password 'weekly' may be used in lieu of signing up. This app is a calendar that shows the days of a week, and lets users keep track of hourly events - namely, their times, names, locations, and descriptions. Events may be deleted and updated as well. The app shows the current time, and lets users move forward or back calendar weeks.
+
+![image](https://user-images.githubusercontent.com/64618290/101298984-43d4f380-37e5-11eb-9a8f-8e71543111e7.png)
+
+
 
 <h3 id='installation'>Installation</h3>
-<p>The deployed website may be visited at _________.</p> 
+<p>The deployed website may be visited on <a href='https://weekly-event-calendar.herokuapp.com/'>Heroku servers</a>.</p> 
 
 <p>The website may be run on a local host by cloning this repository, navigating to the project directory in a terminal, and using the command 'npm install'. The Node.js environment and Node Package Manager must be installed prior. Sass should also be installed. If not already installed, Sass may quickly be installed locally in the project directory with the command 'npm install sass'. However, be sure to check out the <a href='https://sass-lang.com/'>Sass website</a> for more detailed installation instructions. Once installed, the website may be run on a local host using the command 'npm run start' in the project directory. The webpage will be hosted locally on port 3000 by default, and may be accessed at localhost:3000 in a browser.</p>
 
