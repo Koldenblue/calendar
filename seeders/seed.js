@@ -10,7 +10,8 @@ mongoose.connect("mongodb://localhost/calendar", {
 let seeder = 
 {
   "username" : "1",
-  "password" : "$2b$10$krPrXpq6wZZ5LF2hp6yjhewdJ.Uv9f5QtG5FIz97PzFQp2RViehxm",
+  "password" : "$2b$10$u/6wwHmHTj7Q5q48De1/FO.UT2FQ7DvvO2ptjUx8/NYWyHUlAbhSq",
+  "events" : [],
 }
 
 // delete all user data then insert username and password above.
