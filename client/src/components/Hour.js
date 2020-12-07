@@ -61,7 +61,11 @@ export default function Hour(props) {
     setColumns(
       <tr>
         {/* First column contains the time label, ex. 12 AM */}
-        <td className='calendar-col time-col'>{props.time}</td>
+        <td className='calendar-col time-col'>
+          <div className='time-col-label'>
+            {props.time}
+          </div>
+        </td>
         {/* Remaining 7 columns correspond to each day. */}
         {days.map(day => {
           if (calendarDateIndex > 7) {

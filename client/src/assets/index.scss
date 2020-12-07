@@ -113,6 +113,23 @@ flex-grow: 1;
   margin-right: .5em;
 }
 
+.time-col-label {
+  top: -0.5em;
+  right: 0.5em;
+  position: relative;
+}
+
+.time-col-label::after {
+  content: '';
+  display: inline;
+  width: 0.5em;
+  border-top: black solid 1px;
+  position: absolute;
+  top: 0.4em;
+  right: -1.1em;
+  z-index: -1;
+}
+
 .current-hour {
   background-color: $lighter-color;
 }
