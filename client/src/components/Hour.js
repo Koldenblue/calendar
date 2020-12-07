@@ -86,7 +86,7 @@ export default function Hour(props) {
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
-                  data-date={props.calendarDays[calendarDateIndex++]}
+                  data-date={props.calendarDays[calendarDateIndex++].format('MMMM D YYYY')}
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
@@ -104,7 +104,7 @@ export default function Hour(props) {
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
-              data-date={props.calendarDays[calendarDateIndex++]}
+              data-date={props.calendarDays[calendarDateIndex++].format('MMMM D YYYY')}
               onClick={(event) => openModal(event)}
               data-id={null}
             ></td>

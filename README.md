@@ -9,7 +9,8 @@
 5. <a href="#contributions">Contributions</a>
 6. <a href="#questions">Issues and Questions</a>
 <hr><h3 id='description'>Description</h3>
-The deployed app may be viewed on <a href='https://weekly-event-calendar.herokuapp.com/'>Heroku servers</a> The website is also deployed on <a href='https://master.d1a0x7ipyb8p96.amplifyapp.com/'>AWS servers</a>. These websites are hosted for free, and may take a minute to spin up if the server has been idle. The test username 'calendar' and password 'weekly' may be used in lieu of signing up. This app is a calendar that shows the days of a week, and lets users keep track of hourly events - namely, their times, names, locations, and descriptions. Events may be deleted and updated as well. The app shows the current time, and lets users move forward or back calendar weeks.
+
+The deployed app may be viewed on <a href='https://weekly-event-calendar.herokuapp.com/'>Heroku servers</a> (Heroku provides free hosting, and may take a minute to spin up the app if the server has been idle). The test username 'calendar' and password 'weekly' may be used in lieu of signing up. This app is a calendar that shows the days of a week, and lets users keep track of hourly events - namely, their times, names, locations, and descriptions. Events may be deleted and updated as well. The app shows the current time, and lets users move forward or back calendar weeks.
 
 ![image](https://user-images.githubusercontent.com/64618290/101298984-43d4f380-37e5-11eb-9a8f-8e71543111e7.png)
 
