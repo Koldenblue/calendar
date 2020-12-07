@@ -10,6 +10,7 @@ import WatercolorBackground from "./WatercolorBackground";
 import { setCurrentUser } from '../../redux/userSlice';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import LoginJumbotron from './LoginJumbotron';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -32,7 +33,7 @@ function Login() {
       // attempt to log in with username and password
       axios.post(`/api/login`, user).then((data) => {
         // if successful, get all related user data
-        axios.get("/api/userdata").then(({data}) => {
+        axios.get("/api/userdata").then(({ data }) => {
           // set the user data in the redux store
           if (data) {
             dispatch(setCurrentUser(data))
@@ -68,7 +69,7 @@ function Login() {
   // button to log in with preset username and pass
   const devLogin = () => {
     axios.post(`/api/login`, { username: "1", password: "1" }).then(data => {
-      axios.get("/api/userdata").then(({data}) => {
+      axios.get("/api/userdata").then(({ data }) => {
         // set the user data in the redux store
         if (data) {
           dispatch(setCurrentUser(data))
@@ -87,6 +88,7 @@ function Login() {
 
   return (<>
     {redirect}
+    <LoginJumbotron />
     <WatercolorBackground />
     <Container className='loginSignupContainer'>
       <Form>
@@ -142,7 +144,6 @@ function Login() {
         </Form.Row>
 
         <Form.Row>
-
           <Col></Col>
           <Col>
             <AlertBox
@@ -150,7 +151,6 @@ function Login() {
             />
           </Col>
           <Col></Col>
-
         </Form.Row>
 
         <Button onClick={devLogin}>

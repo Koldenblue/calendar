@@ -6,4 +6,48 @@
 
 .signupLoginBtns {
   margin: 2px;
+  
+}
+
+.login-title {
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 4em;
+  background-color: rgba(217, 224, 230, 0.5);
+  padding: 0.25em;
+  border-radius: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
+}
+
+.login-jumbotron {
+  border-bottom: 1px solid black;
+}
+
+.jumbotron {
+  padding: 2.5rem 0rem;
+  background-color: #edf2f6;
+  // max-width: 772px !important;
+  overflow: hidden;
+  background-size: 100%;
+  min-width: 660px;
+  background-image: url(../images/bonsai-1920.jpg) ;
+  background-repeat: no-repeat;
+  text-align: right;
+  background-position: 0% 10%;
+}
+
+@media screen and (max-width: 716px) {
+  .login-title {
+    font-size: 3em;
+  }
+  .jumbotron {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .login-title {
+    font-size: 2em;
+  }
 }

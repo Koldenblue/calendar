@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import WatercolorBackground from "./WatercolorBackground";
+import LoginJumbotron from './LoginJumbotron';
 
 function Signup({ loading, user }) {
   const [username, setUsername] = useState("");
@@ -59,6 +60,7 @@ function Signup({ loading, user }) {
 
   return ((user && !loading) ? <Redirect to="/home" /> :
     <>
+      <LoginJumbotron />
       <WatercolorBackground />
       <Container className='loginSignupContainer'>
 
@@ -110,19 +112,22 @@ function Signup({ loading, user }) {
             <Col></Col>
             <Col>
               <Button className='signupLoginBtns' onClick={goToLogin} variant="primary" type="submit">
-                Go to Log In Form
+                Log In Form
         </Button>
             </Col>
             <Col></Col>
           </Form.Row>
 
-          <Col></Col>
-          <Col>
-            <AlertBox
-              message={message}
-            />
-          </Col>
-          <Col></Col>
+          <Form.Row>
+            <Col></Col>
+            <Col>
+              <AlertBox
+                message={message}
+              />
+            </Col>
+            <Col></Col>
+          </Form.Row>
+
         </Form>
       </Container>
     </>

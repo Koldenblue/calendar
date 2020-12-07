@@ -36,6 +36,47 @@
   margin: 2px;
 }
 
+.login-title {
+  font-family: "Julius Sans One", sans-serif;
+  font-size: 4em;
+  background-color: rgba(217, 224, 230, 0.5);
+  padding: 0.25em;
+  border-radius: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
+}
+
+.login-jumbotron {
+  border-bottom: 1px solid black;
+}
+
+.jumbotron {
+  padding: 2.5rem 0rem;
+  background-color: #edf2f6;
+  overflow: hidden;
+  background-size: 100%;
+  min-width: 660px;
+  background-image: url(../images/bonsai-1920.jpg);
+  background-repeat: no-repeat;
+  text-align: right;
+  background-position: 0% 10%;
+}
+
+@media screen and (max-width: 716px) {
+  .login-title {
+    font-size: 3em;
+  }
+
+  .jumbotron {
+    text-align: left;
+  }
+}
+@media screen and (max-width: 450px) {
+  .login-title {
+    font-size: 2em;
+  }
+}
 /* ===== 404 not found page ===== */
 .four-oh-four {
   position: absolute;
@@ -379,6 +420,23 @@
   justify-content: flex-end;
   display: flex;
   margin-right: 0.5em;
+}
+
+.time-col-label {
+  top: -0.5em;
+  right: 0.5em;
+  position: relative;
+}
+
+.time-col-label::after {
+  content: "";
+  display: inline;
+  width: 0.5em;
+  border-top: black solid 1px;
+  position: absolute;
+  top: 0.4em;
+  right: -1.1em;
+  z-index: -1;
 }
 
 .current-hour {
