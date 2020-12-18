@@ -50,7 +50,6 @@ export default function Hour(props) {
   /** When an Hour.js box is clicked, show the modal.
    * The modal is passed info, thru event.currentTarget that identifies which box was clicked. */
   const openModal = (event) => {
-    console.log('current target', event.currentTarget.dataset)
     // note: event.target.dataset contains the same data as event.currentTarget.dataset, but (due to bug?) event.target.dataset is sometimes undefined.
     // note: event.target.dataset does not support any capital letters (i.e. dataset.formattedDate will become dataset.formatteddate)
     dispatchTarget({ 
@@ -86,13 +85,12 @@ export default function Hour(props) {
 
           let formattedToday = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
           let formattedTime = `${props.time} ${day}`;
-          // console.log('formatted', dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D'))
-          console.log(props.calendarDays[calendarDateIndex])
 
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
               // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
+              // bug avoidance: have dayjs format the date in a variable, rather than the prop itself
               let formattedDate = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')
               return (
                 <td
@@ -113,6 +111,8 @@ export default function Hour(props) {
             }
           }
           // if no event is found, return a blank column.
+          // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
+          // bug avoidance: have dayjs format the date in a variable, rather than the prop itself
           let formattedDate = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')
           return (
             <td
