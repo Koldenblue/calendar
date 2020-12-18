@@ -80,7 +80,6 @@ export default function EventModal(props) {
       props.handleClose();
     }).catch(err => console.error(err));
   }
-
   return (
     <>
       <Modal
@@ -95,7 +94,7 @@ export default function EventModal(props) {
             <Modal.Title>
               Set event for: {props.targetHour}
               <br />
-              {/* {(props.targetFormattedDate)} */}
+              {(props.targetFormattedDate)}
             </Modal.Title>
           </Modal.Header>
 

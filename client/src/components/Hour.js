@@ -51,11 +51,12 @@ export default function Hour(props) {
    * The modal is passed info, thru event.currentTarget that identifies which box was clicked. */
   const openModal = (event) => {
     // note: event.target.dataset contains the same data as event.currentTarget.dataset, but (due to bug?) event.target.dataset is sometimes undefined.
+    // note: event.target.dataset does not support any capital letters (i.e. dataset.formattedDate will become dataset.formatteddate)
     dispatchTarget({ 
       type: 'show', 
       targetHour: event.currentTarget.dataset.value,
       targetDate: event.currentTarget.dataset.date,
-      targetFormattedDate: event.currentTarget.dataset.formattedDate,
+      targetFormattedDate: event.currentTarget.dataset.formatted,
       targetId: event.currentTarget.dataset.id
     })
   }
@@ -89,6 +90,8 @@ export default function Hour(props) {
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
               // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
+              // bug avoidance: have dayjs format the date in a variable, rather than the prop itself
+              let formattedDate = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')
               return (
                 <td
                   className={`calendar-col event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
@@ -96,7 +99,7 @@ export default function Hour(props) {
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
                   data-date={props.calendarDays[calendarDateIndex++]}
-                  // data-formattedDate={dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')}
+                  data-formatted={formattedDate}
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
@@ -108,6 +111,9 @@ export default function Hour(props) {
             }
           }
           // if no event is found, return a blank column.
+          // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
+          // bug avoidance: have dayjs format the date in a variable, rather than the prop itself
+          let formattedDate = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')
           return (
             <td
               className={`calendar-col event-column ${props.currentHour ? 'current-hour' : ''}`}
@@ -115,7 +121,7 @@ export default function Hour(props) {
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
               data-date={props.calendarDays[calendarDateIndex++]}
-              // data-formattedDate={dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')}
+              data-formatted={formattedDate}
               onClick={(event) => openModal(event)}
               data-id={null}
             ></td>
@@ -134,6 +140,7 @@ export default function Hour(props) {
       backdrop="static"
       keyboard={false}
       targetHour={target.targetHour}
+      targetFormattedDate={target.targetFormattedDate}
       targetDate={target.targetDate}
       targetId={target.targetId}
       show={target.show}
