@@ -9,8 +9,8 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Calendar() {
-  const [hours, setHours] = useState();
-  const [dayLabels, setDayLabels] = useState();
+  const [hours, setHours] = useState();         // jsx for Hour.js components
+  const [dayLabels, setDayLabels] = useState(); // jsx for labels at the top of the calendar
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let currentDate = useSelector(selectCurrentDate);
   let handlePost = useSelector(selectHandlePost);
@@ -31,12 +31,11 @@ export default function Calendar() {
     })
   }
 
-  // This Effect will be run every time currentDate changes (user presses back or forward)
-  // Set the top row labels, Sunday thru Sat. Add in dates as well, ex. Dec. 1
-  // Today's day (ex. "Wednesday") will have the class .today-label (if on the current week)
+  // This effect will be run every time currentDate changes (user presses back or forward)
   useEffect(() => {
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
+      // Sets the top row labels, Sunday thru Sat.
       setDayLabels(
         <thead>
           <tr>
@@ -45,6 +44,7 @@ export default function Calendar() {
               let dateLabel = dayjs(calendarDays[calendarIndex++]).format('MMMM D')
               return (
                 <td key={day} className={`calendar-col`}>
+                  {/* If the current day is today, give it a class so it can be highlighted. */}
                   <p className={`header-label top-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{day}</p>
                   <hr className={`label-hr ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`} />
                   <p className={`header-label bottom-label ${day === currentDate.day && currentDate.date === currentDay ? 'today-label' : ''}`}>{dateLabel}</p>
@@ -90,7 +90,6 @@ export default function Calendar() {
         })
 
         // Next, check to see if current week is shown. If so, the current hour is displayed and highlighted somewhere.
-        // if current week:
         if (currentDate.date === currentDay) {
           setHours(
             // create an Hour.js component for each string in the array. Each hour is a row in the day.

@@ -2,18 +2,20 @@ import React, { useState, useEffect, useReducer } from "react";
 import EventModal from "./EventModal";
 import { useSelector } from 'react-redux';
 import { selectChangeHours } from '../redux/dateSlice';
+import dayjs from 'dayjs';
 
 
 /** An hour consisting of 8 columns. First column is the time label.
  * The remaining 7 columns correspond to days of the week. */
 export default function Hour(props) {
-  const [columns, setColumns] = useState();
+  const [columns, setColumns] = useState();     // contains jsx for the calendar columns
   // all values in this reducer state need to be managed as a single object
   const [target, dispatchTarget] = useReducer((state, action) => {
     if (action.type === 'show') {
       return ({
         targetHour: action.targetHour,
         targetDate: action.targetDate,
+        targetFormattedDate: action.targetFormattedDate,
         targetId: action.targetId,
         show: true
       })
@@ -22,6 +24,7 @@ export default function Hour(props) {
       return ({
         targetHour: null,
         targetDate: null,
+        targetFormattedDate: null,
         targetId: null,
         show: false
       })
@@ -33,6 +36,7 @@ export default function Hour(props) {
     // initial reducer state:
     targetHour: null,
     targetDate: null,
+    targetFormattedDate: null,
     targetId: null,
     show: false
   })
@@ -47,7 +51,13 @@ export default function Hour(props) {
    * The modal is passed info, thru event.currentTarget that identifies which box was clicked. */
   const openModal = (event) => {
     // note: event.target.dataset contains the same data as event.currentTarget.dataset, but (due to bug?) event.target.dataset is sometimes undefined.
-    dispatchTarget({ type: 'show', targetHour: event.currentTarget.dataset.value, targetDate: event.currentTarget.dataset.date, targetId: event.currentTarget.dataset.id })
+    dispatchTarget({ 
+      type: 'show', 
+      targetHour: event.currentTarget.dataset.value,
+      targetDate: event.currentTarget.dataset.date,
+      targetFormattedDate: event.currentTarget.dataset.formattedDate,
+      targetId: event.currentTarget.dataset.id
+    })
   }
 
 
@@ -72,21 +82,21 @@ export default function Hour(props) {
             calendarDateIndex = 0;
           }
 
-          let formattedToday = (props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
+          let formattedToday = dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D YYYY');
           let formattedTime = `${props.time} ${day}`;
-          
+
           // Iterate through the current week's events, retrieved from the database. If an event is found, display its info.
-          // Could possibly make this more efficient by making deep copy of the currentWeekEvents array, then removing events as they are found.
           for (let i = 0, j = props.currentWeekEvents.length; i < j; i++) {
             if (formattedToday === props.currentWeekEvents[i].date && formattedTime === props.currentWeekEvents[i].time) {
-          // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
+              // bug avoidance: unformatted date should be stored in data-date as a date object and sent to database, and only formatted once used
               return (
                 <td
                   className={`calendar-col event-column has-event ${props.currentHour ? 'current-hour' : ''}`}
                   id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
                   data-value={`${props.time} ${day}`}
-                  data-date={props.calendarDays[calendarDateIndex++].format('MMMM D YYYY')}
+                  data-date={props.calendarDays[calendarDateIndex++]}
+                  // data-formattedDate={dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')}
                   data-id={props.currentWeekEvents[i]._id}
                   onClick={(event) => openModal(event)}
                 >
@@ -104,7 +114,8 @@ export default function Hour(props) {
               id={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               key={`${props.time.split(' ').join('').toLowerCase()}-${day.toLowerCase()}`}
               data-value={`${props.time} ${day}`}
-              data-date={props.calendarDays[calendarDateIndex++].format('MMMM D YYYY')}
+              data-date={props.calendarDays[calendarDateIndex++]}
+              // data-formattedDate={dayjs(props.calendarDays[calendarDateIndex]).format('MMMM D')}
               onClick={(event) => openModal(event)}
               data-id={null}
             ></td>
@@ -112,8 +123,8 @@ export default function Hour(props) {
         })}
       </tr>
     )
-    // this useEffect is triggered in order, after the useEffect function in Calendar.js
-    // so redux state changeHours is dispatch to trigger this useEffect and the re-render
+    // this useEffect is triggered in sequence, after the useEffect function in Calendar.js
+    // so redux state changeHours is dispatched to trigger this useEffect and the re-render
   }, [changeHours])
 
 
@@ -128,7 +139,7 @@ export default function Hour(props) {
       show={target.show}
     />
     <tbody>
-    {columns}
+      {columns}
     </tbody>
   </>)
 }
