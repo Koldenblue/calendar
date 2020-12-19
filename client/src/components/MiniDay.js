@@ -4,6 +4,7 @@ import { selectChangeHours } from '../redux/dateSlice';
 import dayjs from 'dayjs';
 
 export default function MiniDay(props) {
+  console.log(props.dateNum)
   // if already past the first week, no need for starting with blank spaces
   if (!props.firstWeek) {
     return (<>

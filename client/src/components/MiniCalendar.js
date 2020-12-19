@@ -37,15 +37,18 @@ export default function MiniCalendar() {
     // get number of days in the current month
     let daysInMonth = dayjs(`${dayjs().year()}-${dayjs().month() + 1}-01`).daysInMonth()
 
-    let numDaysArr = new Array(daysInMonth).fill(0)
-    console.log(numDaysArr)
+    let numWeeksArr = new Array(Math.ceil((daysInMonth + dayIndex) / 7)).fill(0)
+    console.log(numWeeksArr)
     let firstWeek = true;
-    let col = -1;
-    let newRow = true;
+    let secondWeek = true;
+    // use dateNum to keep track of date on miniCalendar
+    let dateNum = 1;
     setMiniDays(
       <table>
-        {numDaysArr.map(a => {
+        {numWeeksArr.map(a => {
           if (firstWeek) {
+            // now dateNum is the first day of the second week, ex. Dec. 6
+            dateNum += (7 - dayIndex)
             firstWeek = false;
             return(
               <MiniDay
@@ -56,10 +59,17 @@ export default function MiniCalendar() {
             )
           }
           else {
+            if (secondWeek) {
+              secondWeek = false;
+            }
+            else {
+              dateNum += 7;
+            }
             return (
               <MiniDay
                 daysInMonth={daysInMonth}
                 firstWeek={false}
+                dateNum={dateNum}
               >
               </MiniDay>
             )
