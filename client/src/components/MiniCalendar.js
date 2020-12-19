@@ -6,36 +6,35 @@ import MiniDay from './MiniDay';
 
 export default function MiniCalendar() {
   let currentDate = useSelector(selectCurrentDate);
-  let currentMonth = dayjs().format('MMMM');      // format example 'December'
-  let currentYear = dayjs().format('YYYY');         // format ex. '2020'
+  const [currentMonth, setCurrentMonth] = useState(dayjs().format('MMMM'));      // format example 'December'
+  const [currentYear, setCurrentYear] = useState(dayjs().format('YYYY'));         // format ex. '2020'
+  const [monthChange, setMonthChange] = useState(0);    // the offset from the current month
   const [miniDays, setMiniDays] = useState();
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
   useEffect(() => {
-    console.log(currentMonth);
-    console.log(currentYear);
+    // in order to change the month, we most change both month and year
     console.log(currentDate);
-    // create a string of the first day of the current month, ex. "December 1 2020"
-    let firstDate = currentMonth + ' 1 ' + currentYear;
-    console.log(firstDate)
-    // convert the string to ISO format
-    firstDate = dayjs(firstDate)
-    console.log(firstDate)
+    console.log(currentMonth);
 
+    // logs the 1st day of the month plus offset
+    console.log(dayjs().month(dayjs().month() + monthChange).date(1))
+    console.log(currentYear);
+    console.log(dayjs().year())
+
+    // get the dayjs() object of the first day of the current month, ex. "December 1 2020". Modify by the monthChange offset.
+    let firstDate = dayjs().month(dayjs().month() + monthChange).date(1)
     // finally, get the day the the first day of the month was on, ex "Tuesday"
     let firstDay = dayjs(firstDate).format('dddd')
-    console.log(firstDay)
 
     // With the day of the month, now we can properly chart out the mini calendar starting from the proper column
     let dayIndex = days.indexOf(firstDay);
-    console.log(dayIndex)
 
-    // next can map out how many days are in the current month
-    console.log(dayjs().month())
-    console.log(dayjs([2020, 2, 31]))
     // get number of days in the current month
-    let daysInMonth = dayjs(`${dayjs().year()}-${dayjs().month() + 1}-01`).daysInMonth()
+    // the below is equiv to ex. dayjs("2020-12-01").daysInMonth() 
+    let daysInMonth = firstDate.daysInMonth()
+    console.log(daysInMonth)
 
     // calculate the number of weeks in a month. Then make a new array of that length.
     let numWeeksArr = new Array(Math.ceil((daysInMonth + dayIndex) / 7)).fill(0)
@@ -79,10 +78,21 @@ export default function MiniCalendar() {
         })}
       </table>)
     console.log(miniDays)
-  }, [])
+  }, [monthChange])
 
+  const backMonth = () => {
+    console.log('back clicked')
+    setMonthChange(monthChange - 1)
+  }
+  
+  const forwardMonth = () => {
+    console.log('forward')
+    setMonthChange(monthChange + 1)
+  }
 
   return (<>
+  <button className='btn btn-secondary' onClick={backMonth}>back month</button>
     {miniDays}
+  <button className='btn btn-secondary' onClick={forwardMonth}>forward month</button>
   </>)
 }
