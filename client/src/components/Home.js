@@ -4,12 +4,13 @@ import Calendar from './Calendar';
 import NavMenu from './NavMenu';
 import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import MiniCalendar from './MiniCalendar';
 const dayjs = require('dayjs');
 
 
 export default function Home() {
   let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
-  let date = dayjs().format('MMMM D');  // format ex. 'Dec 1'
+  let date = dayjs().format('MMMM D');  // format ex. 'December 1'
   let hour = dayjs().format('h A');     // format ex. '11 PM'
   const [calendar, setCalendar] = useState();   // renders the Calendar.js component
   const [weekCounter, setWeekCounter] = useState(0); // keeps track of the days of the week, in increments of 7
@@ -97,6 +98,7 @@ export default function Home() {
         <button className='btn btn-success' id='forward-btn' onClick={forward}>Forward</button>
       </div>
       {calendar}
+      <MiniCalendar />
     </>
   )
 }
