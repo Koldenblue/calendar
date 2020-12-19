@@ -37,7 +37,9 @@ export default function MiniCalendar() {
     // get number of days in the current month
     let daysInMonth = dayjs(`${dayjs().year()}-${dayjs().month() + 1}-01`).daysInMonth()
 
+    // calculate the number of weeks in a month. Then make a new array of that length.
     let numWeeksArr = new Array(Math.ceil((daysInMonth + dayIndex) / 7)).fill(0)
+    console.log()
     console.log(numWeeksArr)
     let firstWeek = true;
     let secondWeek = true;

@@ -7,9 +7,16 @@ export default function MiniDay(props) {
   console.log(props.dateNum)
   // if already past the first week, no need for starting with blank spaces
   if (!props.firstWeek) {
+    let weekArr = new Array(7)
+    let dateNum = props.dateNum;
+    for (let i = 0; i < 7; i++) {
+      dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push('B')
+    }
     return (<>
       <tr>
-        <td></td>
+        {weekArr.map((date) => {
+          return (<td>{date}</td>)
+        })}
       </tr>
     </>)
   }
