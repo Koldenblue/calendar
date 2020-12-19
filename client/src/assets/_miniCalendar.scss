@@ -1,0 +1,18 @@
+$main-color: rgb(77, 156, 77); 
+$lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
+
+.mini-row td {
+  text-align: center;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: gray;
+}
+
+.mini-table {
+  text-align: center;
+  margin: 2em;
+}
+
+.current-mini-date {
+  background-color: $lighter-color;
+}

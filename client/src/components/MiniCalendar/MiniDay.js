@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { useSelector } from 'react-redux';
-import { selectChangeHours } from '../redux/dateSlice';
 import dayjs from 'dayjs';
+import { setCurrentDate, selectCurrentDate } from '../../redux/dateSlice';
 
 export default function MiniDay(props) {
+  let currentDate = dayjs().date();
+  console.log(currentDate)
+
   console.log(props.dateNum)
   // if already past the first week, no need for starting with blank spaces
   if (!props.firstWeek) {
@@ -13,9 +16,14 @@ export default function MiniDay(props) {
       dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push('B')
     }
     return (<>
-      <tr>
+      <tr className='mini-row'>
         {weekArr.map((date) => {
-          return (<td>{date}</td>)
+          return (
+            // class given in order to highlight today's date
+            <td className={props.monthChange === 0 && date === currentDate ? 'current-mini-date' : ''}>
+              {date}
+            </td>
+          )
         })}
       </tr>
     </>)
@@ -38,11 +46,15 @@ export default function MiniDay(props) {
     // weekArr should have the first few spaces blank until day 1 is reached
     console.log('weekArr', weekArr)
     let dateNum = 0;
-    return(<tr>
+    return(<tr className='mini-row'>
       {weekArr.map((hasDay) => {
         if (hasDay) {
           dateNum++;
-          return (<td>{dateNum}</td>)
+          return (
+            <td className={props.monthChange === 0 && dateNum === currentDate ? 'current-mini-date' : ''}>
+              {dateNum}
+            </td>
+          )
         }
         else {
           return (<td>B</td>)

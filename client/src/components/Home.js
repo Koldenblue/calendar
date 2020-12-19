@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import NavMenu from './NavMenu';
 import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import MiniCalendar from './MiniCalendar';
+import MiniCalendar from './MiniCalendar/MiniCalendar';
 const dayjs = require('dayjs');
 
 
@@ -12,8 +12,8 @@ export default function Home() {
   let day = dayjs().format('dddd');     // the name of today, ex. "Tuesday"
   let date = dayjs().format('MMMM D');  // format ex. 'December 1'
   let hour = dayjs().format('h A');     // format ex. '11 PM'
-  const [calendar, setCalendar] = useState();   // renders the Calendar.js component
-  const [weekCounter, setWeekCounter] = useState(0); // keeps track of the days of the week, in increments of 7
+  const [calendar, setCalendar] = useState();         // renders the Calendar.js component
+  const [weekCounter, setWeekCounter] = useState(0);  // keeps track of the days of the week, in increments of 7
   const dispatch = useDispatch();
   let currentDate = useSelector(selectCurrentDate);
 
@@ -62,6 +62,7 @@ export default function Home() {
       hour: hour,
       weekCounter: 0
     }))
+    // the calendar needs to update to the current week before it can be scrolled into view.
     setTimeout(() => {
       try {
         document.getElementsByClassName('current-hour')[0].scrollIntoView({behavior: 'smooth', block: 'center'})

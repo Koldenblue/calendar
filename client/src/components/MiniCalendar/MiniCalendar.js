@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/dateSlice';
-import { useSelector, useDispatch } from 'react-redux';
 import MiniDay from './MiniDay';
 
 export default function MiniCalendar() {
-  let currentDate = useSelector(selectCurrentDate);
   const [currentMonth, setCurrentMonth] = useState(dayjs().format('MMMM'));      // format example 'December'
   const [currentYear, setCurrentYear] = useState(dayjs().format('YYYY'));         // format ex. '2020'
   const [monthChange, setMonthChange] = useState(0);    // the offset from the current month
   const [miniDays, setMiniDays] = useState();
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
 
   useEffect(() => {
     // get the dayjs() object of the first day of the current month, ex. "December 1 2020". Modify by the monthChange offset.
@@ -36,7 +32,7 @@ export default function MiniCalendar() {
     let dateNum = 1;
     // map out the rows of weeks. Each MiniDay.js component is a table row, consisting of a week.
     setMiniDays(
-      <table>
+      <table className='mini-table'>
         <tbody>
         {numWeeksArr.map(a => {
           if (firstWeek) {
@@ -48,6 +44,7 @@ export default function MiniCalendar() {
                 key={dateNum}
                 firstWeek={true}
                 dayIndex={dayIndex}
+                monthChange={monthChange}
               >
               </MiniDay>
             )
@@ -66,6 +63,7 @@ export default function MiniCalendar() {
                 daysInMonth={daysInMonth}
                 firstWeek={false}
                 dateNum={dateNum}
+                monthChange={monthChange}
               >
               </MiniDay>
             )
@@ -79,7 +77,7 @@ export default function MiniCalendar() {
   const backMonth = () => {
     setMonthChange(monthChange - 1)
   }
-  
+
   const forwardMonth = () => {
     setMonthChange(monthChange + 1)
   }

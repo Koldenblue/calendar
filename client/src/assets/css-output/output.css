@@ -85,6 +85,22 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+.mini-row td {
+  text-align: center;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: gray;
+}
+
+.mini-table {
+  text-align: center;
+  margin: 2em;
+}
+
+.current-mini-date {
+  background-color: #b1ffb1;
+}
+
 /* ===== NavBar ===== */
 .navbar {
   background-color: #e4e4e4;
