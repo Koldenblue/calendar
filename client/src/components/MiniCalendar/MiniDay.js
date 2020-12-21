@@ -31,14 +31,17 @@ export default function MiniDay(props) {
     // finally, dispatch the week for current date in order to change the calendar week
     let today = props.days.indexOf(dayjs().format('dddd'))
     console.log('index of today', today)
-    // must normalize to multiples of 7
 
+    // must normalize to multiples of 7, taking into account that week should start with sunday (so add todayIndex to diff)
+    // ex. 1 week from now is 7, two weeks from now is 14, etc.
     let week = Math.floor((dayDiff + today) / 7) * 7
 
     console.log('week', week)
+    let date = dayjs(new Date(new Date().setDate(new Date().getDate() + week))).format('MMMM D');
+    // problem: currentdate.date
     dispatch(setCurrentDate({
       day: currentDate.day,
-      date: currentDate.date,
+      date: date,
       hour: currentDate.hour,
       weekCounter: week
     }))
@@ -50,26 +53,32 @@ export default function MiniDay(props) {
     let weekArr = new Array(7)
     let dateNum = props.dateNum;
     for (let i = 0; i < 7; i++) {
-      dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push(' ')
+      dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push(false)
     }
     // colNum is the column that the date appears in, columns 0 thru 6
     let colNum = 0;
     return (<>
       <tr className='mini-row'>
         {weekArr.map((date) => {
-          let col = colNum;
-          colNum++;
-          if (colNum > 6) {
-            colNum = 0;
+          if (date) {
+            let col = colNum;
+            colNum++;
+            if (colNum > 6) {
+              colNum = 0;
+            }
+            return (
+              // class given in order to highlight today's date
+              <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date' : ''}
+                onClick={() => goToWeek(date, props.monthChange, col)}
+              >
+                {date}
+              </td>
+            )
           }
-          return (
-            // class given in order to highlight today's date
-            <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date' : ''}
-              onClick={() => goToWeek(date, props.monthChange, col)}
-            >
-              {date}
-            </td>
-          )
+          // if no date, return an empty table square
+          else {
+            return (<td> </td>)
+          }
         })}
       </tr>
     </>)

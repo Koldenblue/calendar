@@ -1,7 +1,7 @@
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 $arrow-size: 5px;
-$arrow-color: rgb(180, 95, 46);
+$arrow-color: rgb(46, 180, 173);
 $arrow-btn-color: rgb(210, 210, 210);
 $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue: -25);
 
@@ -10,6 +10,10 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
   border-width: 1px;
   border-style: dotted;
   border-color: gray;
+}
+
+.mini-row td:hover {
+  border-style: solid;
 }
 
 .mini-table {
@@ -23,6 +27,7 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
 .mini-month {
   margin: 0.1em;
 }
+
 .mini-container {
   margin: auto;
   text-align: center;

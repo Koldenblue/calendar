@@ -33,6 +33,7 @@ export default function Calendar() {
 
   // This effect will be run every time currentDate changes (user presses back or forward)
   useEffect(() => {
+    console.log('running')
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
       // Sets the top row labels, Sunday thru Sat.
@@ -105,6 +106,7 @@ export default function Calendar() {
             })
           );
           // changeHours is used by the useEffect function of Hours.js to signal a change
+          console.log('dispatching')
           dispatch(setChangeHours())
         }
         // else, if week is not current, return Hour.js components, and currentHour is always false (so no hour is highlighted).

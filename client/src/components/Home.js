@@ -45,6 +45,7 @@ export default function Home() {
   const forward = () => {
     let week = weekCounter + 7;
     date = dayjs(new Date(new Date().setDate(new Date().getDate() + week))).format('MMMM D');
+    console.log(date)
     setWeekCounter(week);
     dispatch(setCurrentDate({
       day: day,
