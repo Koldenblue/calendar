@@ -34,41 +34,41 @@ export default function MiniCalendar() {
     setMiniDays(
       <table className='mini-table'>
         <tbody>
-        {numWeeksArr.map(a => {
-          if (firstWeek) {
-            // now dateNum is the first day of the second week, ex. Dec. 6
-            dateNum += (7 - dayIndex)
-            firstWeek = false;
-            return(
-              <MiniDay
-                key={dateNum}
-                firstWeek={true}
-                dayIndex={dayIndex}
-                monthChange={monthChange}
-              >
-              </MiniDay>
-            )
-          }
-          else {
-            if (secondWeek) {
-              secondWeek = false;
+          {numWeeksArr.map(a => {
+            if (firstWeek) {
+              // now dateNum is the first day of the second week, ex. Dec. 6
+              dateNum += (7 - dayIndex)
+              firstWeek = false;
+              return (
+                <MiniDay
+                  key={dateNum}
+                  firstWeek={true}
+                  dayIndex={dayIndex}
+                  monthChange={monthChange}
+                >
+                </MiniDay>
+              )
             }
             else {
-              // increase the date number by 7 every week after the second
-              dateNum += 7;
+              if (secondWeek) {
+                secondWeek = false;
+              }
+              else {
+                // increase the date number by 7 every week after the second
+                dateNum += 7;
+              }
+              return (
+                <MiniDay
+                  key={dateNum + 1}
+                  daysInMonth={daysInMonth}
+                  firstWeek={false}
+                  dateNum={dateNum}
+                  monthChange={monthChange}
+                >
+                </MiniDay>
+              )
             }
-            return (
-              <MiniDay
-                key={dateNum + 1}
-                daysInMonth={daysInMonth}
-                firstWeek={false}
-                dateNum={dateNum}
-                monthChange={monthChange}
-              >
-              </MiniDay>
-            )
-          }
-        })}
+          })}
         </tbody>
       </table>)
     console.log(miniDays)
@@ -83,9 +83,15 @@ export default function MiniCalendar() {
   }
 
   return (<>
-  <button className='btn btn-secondary' onClick={backMonth}>back month</button>
-  <p>{currentMonth}, {currentYear}</p>
-    {miniDays}
-  <button className='btn btn-secondary' onClick={forwardMonth}>forward month</button>
+    <div className='mini-container'>
+      <button className='btn btn-outline-primary mini-btn' onClick={backMonth}>
+        <div className='back-arrow'></div>
+      </button>
+      <p className='mini-month'>{currentMonth}, {currentYear}</p>
+      <button className='btn btn-outline-primary mini-btn' onClick={forwardMonth}>
+        <div className='forward-arrow'></div>
+      </button>
+      {miniDays}
+    </div>
   </>)
 }

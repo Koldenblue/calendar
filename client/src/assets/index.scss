@@ -2,6 +2,7 @@
 @use 'loginSignup';
 @use 'fourOhFour';
 @use 'miniCalendar';
+
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// this component should be reachable through the route '/allevents'
 export default function AllEvents() {
   // should return: 
   // Navbar, with a way to get back to the calendar

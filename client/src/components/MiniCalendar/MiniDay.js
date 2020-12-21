@@ -4,23 +4,33 @@ import dayjs from 'dayjs';
 import { setCurrentDate, selectCurrentDate } from '../../redux/dateSlice';
 
 export default function MiniDay(props) {
-  let currentDate = dayjs().date();
-  console.log(currentDate)
+  let currentDate = useSelector(selectCurrentDate);
+  let todayDate = dayjs().date();   // the number of today's date, ex "19" for december 19
 
-  console.log(props.dateNum)
+  /** dayClicked is the date clicked, ex '19'. monthChange is the offset from the current month. */
+  const goToWeek = (dayClicked, monthChange) => {
+    // set currentDate week Counter when a day on the mini calendar is clicked,
+    // so that the main calendar jumps to the date clicked
+    // accomplish this by using dayjs diff between todayDate and date clicked
+    console.log(dayClicked)
+    console.log(monthChange)
+  }
+
   // if already past the first week, no need for starting with blank spaces
   if (!props.firstWeek) {
     let weekArr = new Array(7)
     let dateNum = props.dateNum;
     for (let i = 0; i < 7; i++) {
-      dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push('B')
+      dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push(' ')
     }
     return (<>
       <tr className='mini-row'>
         {weekArr.map((date) => {
           return (
             // class given in order to highlight today's date
-            <td className={props.monthChange === 0 && date === currentDate ? 'current-mini-date' : ''}>
+            <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date' : ''}
+              onClick={() => goToWeek(date, props.monthChange)}
+            >
               {date}
             </td>
           )
@@ -51,13 +61,15 @@ export default function MiniDay(props) {
         if (hasDay) {
           dateNum++;
           return (
-            <td className={props.monthChange === 0 && dateNum === currentDate ? 'current-mini-date' : ''}>
+            <td className={props.monthChange === 0 && dateNum === todayDate ? 'current-mini-date' : ''}
+              onClick={() => goToWeek(dateNum, props.monthChange)}
+            >
               {dateNum}
             </td>
           )
         }
         else {
-          return (<td>B</td>)
+          return (<td> </td>)
         }
 
       })}

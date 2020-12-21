@@ -99,7 +99,7 @@ export default function Home() {
         <button className='btn btn-success' id='forward-btn' onClick={forward}>Forward</button>
       </div>
       {calendar}
-      <MiniCalendar />
+        <MiniCalendar />
     </>
   )
 }
