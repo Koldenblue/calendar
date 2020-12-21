@@ -45,6 +45,7 @@ export default function MiniCalendar() {
                   firstWeek={true}
                   dayIndex={dayIndex}
                   monthChange={monthChange}
+                  days={days}
                 >
                 </MiniDay>
               )
@@ -64,6 +65,7 @@ export default function MiniCalendar() {
                   firstWeek={false}
                   dateNum={dateNum}
                   monthChange={monthChange}
+                  days={days}
                 >
                 </MiniDay>
               )

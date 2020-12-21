@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import { setCurrentDate, selectCurrentDate } from '../../redux/dateSlice';
 
 export default function MiniDay(props) {
   let currentDate = useSelector(selectCurrentDate);
   let todayDate = dayjs().date();   // the number of today's date, ex "19" for december 19
+  const dispatch = useDispatch();
+
 
   /** dayClicked is the date clicked, ex '19'. monthChange is the offset from the current month. */
-  const goToWeek = (dayClicked, monthChange) => {
+  const goToWeek = (dayClicked, monthChange, col) => {
     // set currentDate week Counter when a day on the mini calendar is clicked,
     // so that the main calendar jumps to the date clicked
     // accomplish this by using dayjs diff between todayDate and date clicked
     console.log(dayClicked)
     console.log(monthChange)
+    console.log('col', col)
 
     // log the dayjs object of the clicked date
     let daysFromToday = dayjs().month(dayjs().month() + monthChange).date(dayClicked)
@@ -23,8 +26,24 @@ export default function MiniDay(props) {
     let dayDiff = daysFromToday.diff(dayjs(), 'hour')
     // rounding errors will result from getting the difference in days, so get them in hours, convert to days, and round down
     dayDiff = Math.ceil(dayDiff / 24)
-    console.log(dayDiff)
+    console.log('daydiff', dayDiff)
+
+    // finally, dispatch the week for current date in order to change the calendar week
+    let today = props.days.indexOf(dayjs().format('dddd'))
+    console.log('index of today', today)
+    // must normalize to multiples of 7
+
+    let week = Math.floor((dayDiff + today) / 7) * 7
+
+    console.log('week', week)
+    dispatch(setCurrentDate({
+      day: currentDate.day,
+      date: currentDate.date,
+      hour: currentDate.hour,
+      weekCounter: week
+    }))
   }
+
 
   // if already past the first week, no need for starting with blank spaces
   if (!props.firstWeek) {
@@ -33,13 +52,20 @@ export default function MiniDay(props) {
     for (let i = 0; i < 7; i++) {
       dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push(' ')
     }
+    // colNum is the column that the date appears in, columns 0 thru 6
+    let colNum = 0;
     return (<>
       <tr className='mini-row'>
         {weekArr.map((date) => {
+          let col = colNum;
+          colNum++;
+          if (colNum > 6) {
+            colNum = 0;
+          }
           return (
             // class given in order to highlight today's date
             <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date' : ''}
-              onClick={() => goToWeek(date, props.monthChange)}
+              onClick={() => goToWeek(date, props.monthChange, col)}
             >
               {date}
             </td>
@@ -68,15 +94,18 @@ export default function MiniDay(props) {
     // weekArr should have the first few spaces blank until day 1 is reached
     console.log('weekArr', weekArr)
     let dateNum = 0;
+    let colNum = 0;
     return(<tr className='mini-row'>
       {weekArr.map((hasDay) => {
+        let col = colNum;
+        colNum++;
         if (hasDay) {
           dateNum++;
           // need a second variable for clicked num, or else dateNum clicked will always be the same for each day
           let clickedNum = dateNum;
           return (
             <td className={props.monthChange === 0 && dateNum === todayDate ? 'current-mini-date' : ''}
-              onClick={() => goToWeek(clickedNum, props.monthChange)}
+              onClick={() => goToWeek(clickedNum, props.monthChange, col)}
             >
               {dateNum}
             </td>
