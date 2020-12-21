@@ -33,6 +33,7 @@ export default function Calendar() {
 
   // This effect will be run every time currentDate changes (user presses back or forward)
   useEffect(() => {
+    console.log('running')
     makeDaysArray().then(calendarDays => {
       let calendarIndex = 0;
       // Sets the top row labels, Sunday thru Sat.

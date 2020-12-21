@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Axios from "axios";
 import { setHandlePost } from '../redux/dateSlice';
 import { useDispatch } from 'react-redux';
-import dayjs from 'dayjs';
 
 export default function EventModal(props) {
   const [deleteBtn, setDeleteBtn] = useState();

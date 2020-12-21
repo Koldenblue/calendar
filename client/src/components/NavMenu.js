@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '../redux/userSlice';
 import Axios from 'axios';
 import Clock from './Clock';
+import MiniCalendar from './MiniCalendar/MiniCalendar';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export default function NavMenu(props) {
   const dispatch = useDispatch();
@@ -40,6 +42,13 @@ export default function NavMenu(props) {
       <div className='empty-div-after'></div>
 
       <Navbar.Collapse className="justify-content-end">
+      <DropdownButton
+        id={`mini-cal-dropdown`}
+        variant={'info'}
+        title={'View Monthly Calendar'}
+      >
+        <MiniCalendar />
+      </DropdownButton>
         <Navbar.Text>
           Signed in as: {currentUser.username}
         </Navbar.Text>

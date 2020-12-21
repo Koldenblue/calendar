@@ -1,6 +1,8 @@
 @use 'loadingScreen';
 @use 'loginSignup';
 @use 'fourOhFour';
+@use 'miniCalendar';
+
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 
@@ -25,6 +27,12 @@ $maxWidths: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 .navbar {
   background-color: rgb(228, 228, 228);
   box-shadow: 0 1px 2px black;
+}
+
+@media screen and (max-width: 680px) {
+  .navbar {
+    flex-direction: column;
+  }
 }
 
 .navbar-text {

@@ -1,0 +1,87 @@
+$main-color: rgb(77, 156, 77); 
+$lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
+$arrow-size: 5px;
+$arrow-color: rgb(46, 180, 173);
+$arrow-btn-color: rgb(210, 210, 210);
+$darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue: -25);
+
+.mini-row td {
+  text-align: center;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: gray;
+}
+
+.mini-row td:hover {
+  border-style: solid;
+}
+
+.mini-table {
+  text-align: center;
+}
+
+.current-mini-date {
+  background-color: $lighter-color;
+}
+
+.mini-month {
+  margin: 0.1em;
+}
+
+.mini-container {
+  margin: auto;
+  text-align: center;
+}
+
+.mini-container table {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 0.5em;
+}
+
+.mini-btn, .mini-month {
+  display: inline;
+  padding: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+.mini-btn {
+  color: $arrow-btn-color !important;
+  background-color: $arrow-btn-color;
+  border-color: $arrow-btn-color;
+}
+
+.mini-btn:hover, .mini-btn:active, .mini-btn:focus {
+  color: $darker-arrow-btn !important;
+  background-color: $darker-arrow-btn !important;
+  border-color: $darker-arrow-btn;
+  box-shadow: 0 0 0 .2rem rgba(180,180,180,.5) !important; 
+}
+
+.mini-btn:active {
+  border-color: $darker-arrow-btn !important;
+}
+
+.back-arrow {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border-top: $arrow-size solid transparent;
+  border-right: ($arrow-size * 2) solid $arrow-color;
+  border-bottom: $arrow-size solid transparent;
+}
+
+.forward-arrow {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border-top: $arrow-size solid transparent;
+  border-left: ($arrow-size * 2) solid $arrow-color;
+  border-bottom: $arrow-size solid transparent;
+}
+
+.dropdown-menu.show {
+  padding: 0.5em;
+}
