@@ -172,6 +172,11 @@
   box-shadow: 0 1px 2px black;
 }
 
+@media screen and (max-width: 680px) {
+  .navbar {
+    flex-direction: column;
+  }
+}
 .navbar-text {
   margin-right: 1em;
   margin-left: 1em;
