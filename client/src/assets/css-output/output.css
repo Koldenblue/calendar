@@ -162,6 +162,10 @@
   border-bottom: 5px solid transparent;
 }
 
+.dropdown-menu.show {
+  padding: 0.5em;
+}
+
 /* ===== NavBar ===== */
 .navbar {
   background-color: #e4e4e4;

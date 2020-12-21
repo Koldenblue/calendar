@@ -94,7 +94,6 @@ export default function Home() {
   return (
     <>
       <NavMenu goToToday={goToToday} />
-      <MiniCalendar />
       <div className='btn-container'>
         <button className='btn btn-success' id='back-btn' onClick={back}>Back</button>
         <div id='empty-btn-div'></div>

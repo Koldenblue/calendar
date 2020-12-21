@@ -81,3 +81,7 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
   border-left: ($arrow-size * 2) solid $arrow-color;
   border-bottom: $arrow-size solid transparent;
 }
+
+.dropdown-menu.show {
+  padding: 0.5em;
+}
