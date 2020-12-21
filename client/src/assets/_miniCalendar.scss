@@ -1,9 +1,9 @@
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
 $arrow-size: 5px;
-$arrow-color: brown;
-$arrow-btn-color: rgb(180, 180, 180);
-$darker-arrow-btn: adjust-color($arrow-btn-color, $red: -30, $green: -30, $blue: -30);
+$arrow-color: rgb(180, 95, 46);
+$arrow-btn-color: rgb(210, 210, 210);
+$darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue: -25);
 
 .mini-row td {
   text-align: center;
@@ -37,6 +37,7 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -30, $green: -30, $blue:
 .mini-btn, .mini-month {
   display: inline;
   padding: 0.3em;
+  margin-bottom: 0.5em;
 }
 
 .mini-btn {

@@ -118,23 +118,24 @@
 .mini-btn, .mini-month {
   display: inline;
   padding: 0.3em;
+  margin-bottom: 0.5em;
 }
 
 .mini-btn {
-  color: #b4b4b4 !important;
-  background-color: #b4b4b4;
-  border-color: #b4b4b4;
+  color: #d2d2d2 !important;
+  background-color: #d2d2d2;
+  border-color: #d2d2d2;
 }
 
 .mini-btn:hover, .mini-btn:active, .mini-btn:focus {
-  color: #969696 !important;
-  background-color: #969696 !important;
-  border-color: #969696;
+  color: #b9b9b9 !important;
+  background-color: #b9b9b9 !important;
+  border-color: #b9b9b9;
   box-shadow: 0 0 0 0.2rem rgba(180, 180, 180, 0.5) !important;
 }
 
 .mini-btn:active {
-  border-color: #969696 !important;
+  border-color: #b9b9b9 !important;
 }
 
 .back-arrow {
@@ -143,7 +144,7 @@
   margin: 0;
   padding: 0;
   border-top: 5px solid transparent;
-  border-right: 10px solid brown;
+  border-right: 10px solid #b45f2e;
   border-bottom: 5px solid transparent;
 }
 
@@ -153,7 +154,7 @@
   margin: 0;
   padding: 0;
   border-top: 5px solid transparent;
-  border-left: 10px solid brown;
+  border-left: 10px solid #b45f2e;
   border-bottom: 5px solid transparent;
 }
 
