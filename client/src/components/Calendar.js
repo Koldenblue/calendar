@@ -106,7 +106,6 @@ export default function Calendar() {
             })
           );
           // changeHours is used by the useEffect function of Hours.js to signal a change
-          console.log('dispatching')
           dispatch(setChangeHours())
         }
         // else, if week is not current, return Hour.js components, and currentHour is always false (so no hour is highlighted).
