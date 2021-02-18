@@ -55,7 +55,7 @@ export default function MiniDay(props) {
           if (date) {
             return (
               // class given in order to highlight today's date
-              <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date' : ''}
+              <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date mini-date' : 'mini-date'}
                 onClick={() => goToWeek(date, props.monthChange)}
               >
                 {date}

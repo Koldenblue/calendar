@@ -10,6 +10,10 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
   border-width: 1px;
   border-style: dotted;
   border-color: gray;
+  min-width: 1.75em;
+  min-height: 1.75em;
+  max-width: 1.75em;
+  max-height: 1.75em;
 }
 
 .mini-row td:hover {
@@ -22,6 +26,7 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
 
 .current-mini-date {
   background-color: $lighter-color;
+  border-radius: 50px;
 }
 
 .mini-month {
@@ -84,4 +89,8 @@ $darker-arrow-btn: adjust-color($arrow-btn-color, $red: -25, $green: -25, $blue:
 
 .dropdown-menu.show {
   padding: 0.5em;
+}
+
+.mini-date {
+  cursor: pointer;
 }

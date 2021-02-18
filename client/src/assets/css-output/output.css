@@ -90,6 +90,10 @@
   border-width: 1px;
   border-style: dotted;
   border-color: gray;
+  min-width: 1.75em;
+  min-height: 1.75em;
+  max-width: 1.75em;
+  max-height: 1.75em;
 }
 
 .mini-row td:hover {
@@ -102,6 +106,7 @@
 
 .current-mini-date {
   background-color: #b1ffb1;
+  border-radius: 50px;
 }
 
 .mini-month {
@@ -166,6 +171,10 @@
   padding: 0.5em;
 }
 
+.mini-date {
+  cursor: pointer;
+}
+
 /* ===== NavBar ===== */
 .navbar {
   background-color: #e4e4e4;
@@ -212,8 +221,23 @@
 /* ==================================*/
 /* ===== Calendar ===== */
 .calendar-col, .time-col {
-  min-height: 5em;
-  max-height: 5em;
+  min-height: 6em;
+  max-height: 6em;
+}
+
+.weekly-calendar-table-scroller {
+  height: 75vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overflow-x: hidden;
+}
+
+.weekly-calendar-table {
+  margin-right: 2em;
+}
+
+.table-head {
+  display: block;
 }
 
 @media screen and (min-width: 384px) {
@@ -489,8 +513,12 @@
 .event-summary {
   margin: 0 0.125em 0.25em 0.125em;
   font-size: small;
-  overflow-x: hidden;
+  overflow-x: scroll;
+  scrollbar-width: thin;
   white-space: nowrap;
+  padding: 0 5px 0 5px;
+  background-color: #a2e4f0;
+  border-radius: 10px;
 }
 
 .event-column {

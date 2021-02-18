@@ -72,10 +72,23 @@ flex-grow: 1;
 
 /* ===== Calendar ===== */
 .calendar-col, .time-col {
-  min-height: 5em;
-  max-height: 5em;
+  min-height: 6em;
+  max-height: 6em;
 }
 
+.weekly-calendar-table-scroller {
+  height: 75vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overflow-x: hidden
+}
+.weekly-calendar-table {
+  margin-right: 2em;
+}
+
+.table-head {
+  display: block;
+}
 // make calendar boxes mobile-responsive:
 @each $maxWidth in $maxWidths {
   @include boxWidth($maxWidth);
@@ -102,8 +115,12 @@ flex-grow: 1;
 .event-summary {
   margin: 0 0.125em .25em 0.125em;
   font-size: small;
-  overflow-x: hidden;
+  overflow-x: scroll;
+  scrollbar-width: thin;
   white-space: nowrap;
+  padding: 0 5px 0 5px;
+  background-color: #a2e4f0;
+  border-radius: 10px;
 }
 
 .event-column {

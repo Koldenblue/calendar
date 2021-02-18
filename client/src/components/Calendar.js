@@ -38,7 +38,7 @@ export default function Calendar() {
       let calendarIndex = 0;
       // Sets the top row labels, Sunday thru Sat.
       setDayLabels(
-        <thead>
+        <thead className='table-head'>
           <tr>
             <td className='time-col' id='empty-col'></td>
             {days.map(day => {
@@ -128,10 +128,14 @@ export default function Calendar() {
 
   return (
     <main>
-      <Container fluid>
-        <table>
+      <Container fluid >
+        <table >
           {dayLabels}
-          {hours}
+          <div className='weekly-calendar-table-scroller' >
+            <div className='weekly-calendar-table'>
+            {hours}
+            </div>
+          </div>
         </table>
       </Container>
     </main>

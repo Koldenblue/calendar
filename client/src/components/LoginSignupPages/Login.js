@@ -153,9 +153,9 @@ function Login() {
           <Col></Col>
         </Form.Row>
 
-        {/* <Button onClick={devLogin}>
+        <Button onClick={devLogin}>
           DEV LOGIN
-        </Button> */}
+        </Button>
       </Form>
     </Container>
   </>)
