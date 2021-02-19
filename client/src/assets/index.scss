@@ -80,8 +80,13 @@ flex-grow: 1;
   height: 75vh;
   overflow-y: auto;
   scrollbar-width: thin;
-  overflow-x: hidden
+  overflow-x: hidden;
 }
+
+.calendar-main {
+  border-bottom: 1px dotted black;
+}
+
 .weekly-calendar-table {
   margin-right: 2em;
 }

@@ -6,6 +6,7 @@ import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/da
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import {useSpring, animated} from 'react-spring';
 
 
 export default function Calendar() {
@@ -30,6 +31,12 @@ export default function Calendar() {
       resolve(calendarDays);
     })
   }
+
+  let mainAnim = useSpring({
+    opacity: '1',
+    from: {opacity: '0'},
+    config: {friction: 100}
+  })
 
   // This effect will be run every time currentDate changes (user presses back or forward)
   useEffect(() => {
@@ -127,7 +134,7 @@ export default function Calendar() {
 
 
   return (
-    <main>
+    <animated.main style={mainAnim} className='calendar-main'>
       <Container fluid >
         <table >
           {dayLabels}
@@ -138,6 +145,6 @@ export default function Calendar() {
           </div>
         </table>
       </Container>
-    </main>
+    </animated.main>
   )
 }

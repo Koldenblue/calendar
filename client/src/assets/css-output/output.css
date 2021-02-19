@@ -232,6 +232,10 @@
   overflow-x: hidden;
 }
 
+.calendar-main {
+  border-bottom: 1px dotted black;
+}
+
 .weekly-calendar-table {
   margin-right: 2em;
 }
