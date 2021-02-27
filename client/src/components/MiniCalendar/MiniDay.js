@@ -97,7 +97,7 @@ export default function MiniDay(props) {
           // need a second variable for clicked num, or else dateNum clicked will always be the same for each day
           let clickedNum = dateNum;
           return (
-            <td className={props.monthChange === 0 && dateNum === todayDate ? 'current-mini-date' : ''}
+            <td className={props.monthChange === 0 && dateNum === todayDate ? 'current-mini-date mini-date' : 'mini-date'}
               onClick={() => goToWeek(clickedNum, props.monthChange)}
             >
               {dateNum}
