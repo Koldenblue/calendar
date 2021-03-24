@@ -68,7 +68,7 @@ function Login() {
 
   // button to log in with preset username and pass
   const devLogin = () => {
-    axios.post(`/api/login`, { username: "1", password: "1" }).then(data => {
+    axios.post(`/api/login`, { username: "1", password: "111111" }).then(data => {
       axios.get("/api/userdata").then(({ data }) => {
         // set the user data in the redux store
         if (data) {

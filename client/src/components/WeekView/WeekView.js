@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Hour from './Hour';
 import dayjs from 'dayjs';
-import { selectCurrentDate, setChangeHours, selectHandlePost } from '../redux/dateSlice';
+import { selectCurrentDate, setChangeHours, selectHandlePost } from '../../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import {useSpring, animated} from 'react-spring';
 
 
-export default function Calendar() {
+export default function WeekView() {
   const [hours, setHours] = useState();         // jsx for Hour.js components
   const [dayLabels, setDayLabels] = useState(); // jsx for labels at the top of the calendar
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

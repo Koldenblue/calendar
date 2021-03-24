@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
-import EventModal from "./EventModal";
+import EventModal from "../EventModal";
 import { useSelector } from 'react-redux';
-import { selectChangeHours } from '../redux/dateSlice';
+import { selectChangeHours } from '../../redux/dateSlice';
 import dayjs from 'dayjs';
 
 
