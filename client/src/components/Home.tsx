@@ -112,8 +112,8 @@ export default function Home() {
         <button className='btn btn-success' id='back-btn' onClick={back}>Back</button>
         <button className='btn btn-success' id='forward-btn' onClick={forward}>Forward</button>
         <div id='empty-btn-div'></div>
-        <button className='btn btn-secondary btn' id='weekly-view' onClick={weeklyViewSwitch}>Week</button>
-        <button className='btn btn-secondary btn' id='monthly-view' onClick={monthlyViewSwitch}>Month</button>
+        <button className='btn btn-secondary' id='weekly-view-btn' onClick={weeklyViewSwitch}>Week</button>
+        <button className='btn btn-secondary' id='monthly-view-btn' onClick={monthlyViewSwitch}>Month</button>
       </div>
       {calendar}
     </>

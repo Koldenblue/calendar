@@ -175,6 +175,155 @@
   cursor: pointer;
 }
 
+@media screen and (min-width: 384px) {
+  .month-view-component td {
+    min-width: 3em;
+    max-width: 3em;
+  }
+}
+@media screen and (min-width: 512px) {
+  .month-view-component td {
+    min-width: 4em;
+    max-width: 4em;
+  }
+}
+@media screen and (min-width: 640px) {
+  .month-view-component td {
+    min-width: 5em;
+    max-width: 5em;
+  }
+}
+@media screen and (min-width: 768px) {
+  .month-view-component td {
+    min-width: 6em;
+    max-width: 6em;
+  }
+}
+@media screen and (min-width: 896px) {
+  .month-view-component td {
+    min-width: 7em;
+    max-width: 7em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .month-view-component td {
+    min-width: 8em;
+    max-width: 8em;
+  }
+}
+@media screen and (min-width: 1152px) {
+  .month-view-component td {
+    min-width: 9em;
+    max-width: 9em;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .month-view-component td {
+    min-width: 10em;
+    max-width: 10em;
+  }
+}
+@media screen and (min-width: 1408px) {
+  .month-view-component td {
+    min-width: 11em;
+    max-width: 11em;
+  }
+}
+@media screen and (min-width: 1536px) {
+  .month-view-component td {
+    min-width: 12em;
+    max-width: 12em;
+  }
+}
+@media screen and (min-width: 1664px) {
+  .month-view-component td {
+    min-width: 13em;
+    max-width: 13em;
+  }
+}
+@media screen and (min-width: 1792px) {
+  .month-view-component td {
+    min-width: 14em;
+    max-width: 14em;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .month-view-component td {
+    min-width: 15em;
+    max-width: 15em;
+  }
+}
+@media screen and (min-width: 2048px) {
+  .month-view-component td {
+    min-width: 16em;
+    max-width: 16em;
+  }
+}
+@media screen and (min-width: 2176px) {
+  .month-view-component td {
+    min-width: 17em;
+    max-width: 17em;
+  }
+}
+@media screen and (min-width: 2304px) {
+  .month-view-component td {
+    min-width: 18em;
+    max-width: 18em;
+  }
+}
+@media screen and (min-width: 2432px) {
+  .month-view-component td {
+    min-width: 19em;
+    max-width: 19em;
+  }
+}
+@media screen and (min-width: 2560px) {
+  .month-view-component td {
+    min-width: 20em;
+    max-width: 20em;
+  }
+}
+@media screen and (min-width: 2688px) {
+  .month-view-component td {
+    min-width: 21em;
+    max-width: 21em;
+  }
+}
+@media screen and (min-width: 2816px) {
+  .month-view-component td {
+    min-width: 22em;
+    max-width: 22em;
+  }
+}
+@media screen and (min-width: 2944px) {
+  .month-view-component td {
+    min-width: 23em;
+    max-width: 23em;
+  }
+}
+@media screen and (min-width: 3072px) {
+  .month-view-component td {
+    min-width: 24em;
+    max-width: 24em;
+  }
+}
+@media screen and (min-width: 3200px) {
+  .month-view-component td {
+    min-width: 25em;
+    max-width: 25em;
+  }
+}
+.month-view-component td {
+  border: black solid 1px;
+  border-collapse: collapse;
+  min-height: 12em;
+  max-height: 12em;
+  height: 12em;
+}
+.month-view-component .empty-date {
+  background-color: lightgray;
+}
+
 /* ===== NavBar ===== */
 .navbar {
   background-color: #e4e4e4;
@@ -210,8 +359,8 @@
   align-items: center;
 }
 
-#back-btn, #forward-btn {
-  margin: 1em 1em 0 1em;
+#back-btn, #forward-btn, #weekly-view-btn, #monthly-view-btn {
+  margin: 1em 0.25em 0 0.25em;
 }
 
 #empty-btn-div {

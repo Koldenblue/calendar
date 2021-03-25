@@ -103,7 +103,7 @@ export default function Home() {
             React.createElement("button", { className: 'btn btn-success', id: 'back-btn', onClick: back }, "Back"),
             React.createElement("button", { className: 'btn btn-success', id: 'forward-btn', onClick: forward }, "Forward"),
             React.createElement("div", { id: 'empty-btn-div' }),
-            React.createElement("button", { className: 'btn btn-secondary btn', id: 'weekly-view', onClick: weeklyViewSwitch }, "Week"),
-            React.createElement("button", { className: 'btn btn-secondary btn', id: 'monthly-view', onClick: monthlyViewSwitch }, "Month")),
+            React.createElement("button", { className: 'btn btn-secondary', id: 'weekly-view-btn', onClick: weeklyViewSwitch }, "Week"),
+            React.createElement("button", { className: 'btn btn-secondary', id: 'monthly-view-btn', onClick: monthlyViewSwitch }, "Month")),
         calendar));
 }
