@@ -314,7 +314,7 @@
   }
 }
 .month-view-component td {
-  border: black solid 1px;
+  border: black dotted 1px;
   border-collapse: collapse;
   min-height: 12em;
   max-height: 12em;
@@ -324,346 +324,324 @@
   background-color: lightgray;
 }
 
-/* ===== NavBar ===== */
-.navbar {
-  background-color: #e4e4e4;
-  box-shadow: 0 1px 2px black;
-}
-
-@media screen and (max-width: 680px) {
-  .navbar {
-    flex-direction: column;
-  }
-}
-.navbar-text {
-  margin-right: 1em;
-  margin-left: 1em;
-}
-
-.empty-div-before {
-  flex-grow: 2.2;
-}
-
-.empty-div-after {
-  flex-grow: 1;
-}
-
-.clock {
-  margin-left: 1em;
-}
-
-/* ==================================*/
-/* ===== Home.js ===== */
-.btn-container {
-  display: flex;
-  align-items: center;
-}
-
-#back-btn, #forward-btn, #weekly-view-btn, #monthly-view-btn {
-  margin: 1em 0.25em 0 0.25em;
-}
-
-#empty-btn-div {
-  flex-grow: 1;
-}
-
-/* ==================================*/
-/* ===== Calendar ===== */
-.calendar-col, .time-col {
-  min-height: 6em;
-  max-height: 6em;
-}
-
-.weekly-calendar-table-scroller {
+.calendar-table-scroller {
   height: 75vh;
   overflow-y: auto;
   scrollbar-width: thin;
   overflow-x: hidden;
 }
 
-.calendar-main {
+.calendar-table {
+  margin-right: 2em;
+  padding-top: 0.5em;
+}
+
+/* ===== NavBar ===== */
+.calendar-component {
+  /* ==================================*/
+  /* ===== Home.js ===== */
+  /* ==================================*/
+  /* ===== Calendar ===== */
+  /* ==================================*/
+}
+.calendar-component .navbar {
+  background-color: #e4e4e4;
+  box-shadow: 0 1px 2px black;
+}
+@media screen and (max-width: 680px) {
+  .calendar-component .navbar {
+    flex-direction: column;
+  }
+}
+.calendar-component .navbar-text {
+  margin-right: 1em;
+  margin-left: 1em;
+}
+.calendar-component .empty-div-before {
+  flex-grow: 2.2;
+}
+.calendar-component .empty-div-after {
+  flex-grow: 1;
+}
+.calendar-component .clock {
+  margin-left: 1em;
+}
+.calendar-component .btn-container {
+  display: flex;
+  align-items: center;
+}
+.calendar-component #back-btn, .calendar-component #forward-btn, .calendar-component #weekly-view-btn, .calendar-component #monthly-view-btn {
+  margin: 1em 0.25em 0 0.25em;
+}
+.calendar-component #empty-btn-div {
+  flex-grow: 1;
+}
+.calendar-component .calendar-col, .calendar-component .time-col {
+  min-height: 6em;
+  max-height: 6em;
+}
+.calendar-component .weekly-calendar-table-scroller {
+  height: 75vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overflow-x: hidden;
+}
+.calendar-component .calendar-main {
   border-bottom: 1px dotted black;
 }
-
-.weekly-calendar-table {
+.calendar-component .weekly-calendar-table {
   margin-right: 2em;
 }
-
-.table-head {
+.calendar-component .table-head {
   display: block;
 }
-
 @media screen and (min-width: 384px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 3em;
     max-width: 3em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 1.5em;
     max-width: 1.5em;
   }
 }
 @media screen and (min-width: 512px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 4em;
     max-width: 4em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 2em;
     max-width: 2em;
   }
 }
 @media screen and (min-width: 640px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 5em;
     max-width: 5em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 2.5em;
     max-width: 2.5em;
   }
 }
 @media screen and (min-width: 768px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 6em;
     max-width: 6em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 3em;
     max-width: 3em;
   }
 }
 @media screen and (min-width: 896px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 7em;
     max-width: 7em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 3.5em;
     max-width: 3.5em;
   }
 }
 @media screen and (min-width: 1024px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 8em;
     max-width: 8em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 4em;
     max-width: 4em;
   }
 }
 @media screen and (min-width: 1152px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 9em;
     max-width: 9em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 4.5em;
     max-width: 4.5em;
   }
 }
 @media screen and (min-width: 1280px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 10em;
     max-width: 10em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 5em;
     max-width: 5em;
   }
 }
 @media screen and (min-width: 1408px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 11em;
     max-width: 11em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 5.5em;
     max-width: 5.5em;
   }
 }
 @media screen and (min-width: 1536px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 12em;
     max-width: 12em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 6em;
     max-width: 6em;
   }
 }
 @media screen and (min-width: 1664px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 13em;
     max-width: 13em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 6.5em;
     max-width: 6.5em;
   }
 }
 @media screen and (min-width: 1792px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 14em;
     max-width: 14em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 7em;
     max-width: 7em;
   }
 }
 @media screen and (min-width: 1920px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 15em;
     max-width: 15em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 7.5em;
     max-width: 7.5em;
   }
 }
 @media screen and (min-width: 2048px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 16em;
     max-width: 16em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 8em;
     max-width: 8em;
   }
 }
 @media screen and (min-width: 2176px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 17em;
     max-width: 17em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 8.5em;
     max-width: 8.5em;
   }
 }
 @media screen and (min-width: 2304px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 18em;
     max-width: 18em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 9em;
     max-width: 9em;
   }
 }
 @media screen and (min-width: 2432px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 19em;
     max-width: 19em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 9.5em;
     max-width: 9.5em;
   }
 }
 @media screen and (min-width: 2560px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 20em;
     max-width: 20em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 10em;
     max-width: 10em;
   }
 }
 @media screen and (min-width: 2688px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 21em;
     max-width: 21em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 10.5em;
     max-width: 10.5em;
   }
 }
 @media screen and (min-width: 2816px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 22em;
     max-width: 22em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 11em;
     max-width: 11em;
   }
 }
 @media screen and (min-width: 2944px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 23em;
     max-width: 23em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 11.5em;
     max-width: 11.5em;
   }
 }
 @media screen and (min-width: 3072px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 24em;
     max-width: 24em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 12em;
     max-width: 12em;
   }
 }
 @media screen and (min-width: 3200px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 25em;
     max-width: 25em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 12.5em;
     max-width: 12.5em;
   }
 }
 @media screen and (max-width: 640px) {
-  .header-label {
+  .calendar-component .header-label {
     font-size: smaller;
     overflow: hidden;
   }
 }
 @media screen and (max-width: 383px) {
-  .calendar-col {
+  .calendar-component .calendar-col {
     min-width: 3em;
     max-width: 3em;
   }
-
-  .time-col {
+  .calendar-component .time-col {
     min-width: 1.5em;
     max-width: 1.5em;
   }
 }
-.event-summary {
+.calendar-component .event-summary {
   margin: 0 0.125em 0.25em 0.125em;
   font-size: small;
   overflow-x: scroll;
@@ -673,29 +651,25 @@
   background-color: #a2e4f0;
   border-radius: 10px;
 }
-
-.event-column {
-  border: 1px black solid;
+.calendar-component .event-column {
+  border: 1px black dotted;
 }
-
-.event-column:hover {
+.calendar-component .event-column:hover {
   box-shadow: 0px 4px 4px #4d9c4d, 4px 0px 4px #4d9c4d, 0px -4px 4px #4d9c4d, -4px 0px 4px #4d9c4d;
+  cursor: pointer;
   position: relative;
 }
-
-.time-col {
+.calendar-component .time-col {
   justify-content: flex-end;
   display: flex;
   margin-right: 0.5em;
 }
-
-.time-col-label {
+.calendar-component .time-col-label {
   top: -0.5em;
   right: 0.5em;
   position: relative;
 }
-
-.time-col-label::after {
+.calendar-component .time-col-label::after {
   content: "";
   display: inline;
   width: 0.5em;
@@ -705,46 +679,38 @@
   right: -1.1em;
   z-index: -1;
 }
-
-.current-hour {
+.calendar-component .current-hour {
   background-color: #b1ffb1;
 }
-
-.has-event {
+.calendar-component .has-event {
   background-color: #d7feff;
 }
-
-.today-label {
+.calendar-component .today-label {
   background-color: #b1ffb1;
 }
-
-#empty-col {
+.calendar-component #empty-col {
   min-height: 0;
   max-height: 0;
 }
-
-.header-label {
+.calendar-component .header-label {
   text-align: center;
   margin: 0.5em;
 }
-
-.top-label {
+.calendar-component .top-label {
   border-top: dotted 1px black;
   border-radius: 8px 8px 0 0;
 }
-
-.label-hr {
+.calendar-component .label-hr {
   margin: -0.25em;
 }
-
-.bottom-label {
+.calendar-component .bottom-label {
   margin-bottom: -1px;
 }
-
-main {
+.calendar-component main {
   margin-bottom: 2em;
 }
-
-/* ==================================*/
+.calendar-component .calendar-main {
+  border-bottom: 1px dotted black;
+}
 
 /*# sourceMappingURL=output.css.map */

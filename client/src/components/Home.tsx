@@ -5,6 +5,7 @@ import NavMenu from './NavMenu';
 import { setCurrentDate, selectCurrentDate } from '../redux/dateSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import MonthView from './MonthView/MonthView';
+import { useSpring, animated } from 'react-spring';
 const dayjs = require('dayjs');
 
 
@@ -105,8 +106,14 @@ export default function Home() {
     setDislayingWeek(false);
   }
 
+  let mainAnim = useSpring({
+    opacity: '1',
+    from: { opacity: '0' },
+    config: { friction: 100 }
+  })
+
   return (
-    <>
+    <div className="calendar-component">
       <NavMenu goToToday={goToToday} />
       <div className='btn-container'>
         <button className='btn btn-success' id='back-btn' onClick={back}>Back</button>
@@ -115,7 +122,9 @@ export default function Home() {
         <button className='btn btn-secondary' id='weekly-view-btn' onClick={weeklyViewSwitch}>Week</button>
         <button className='btn btn-secondary' id='monthly-view-btn' onClick={monthlyViewSwitch}>Month</button>
       </div>
-      {calendar}
-    </>
+      <animated.main style={mainAnim} className='calendar-main'>
+        {calendar}
+      </animated.main>
+    </div>
   )
 }

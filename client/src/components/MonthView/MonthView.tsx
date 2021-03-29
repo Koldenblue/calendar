@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import Day from './Day';
+import Container from 'react-bootstrap/Container';
 
 export default function MonthView() {
   const [currentMonth, setCurrentMonth] = useState<string>(dayjs().format('MMMM'));      // format example 'December'
@@ -87,15 +88,15 @@ export default function MonthView() {
   }
 
   return (
-    <div className='month-view-component'>
+    <Container fluid className='month-view-component'>
       <table>
+        <p className='month'>{currentMonth}, {currentYear}</p>
         <div className='calendar-table-scroller' >
           <div className='calendar-table'>
-            <p className='month'>{currentMonth}, {currentYear}</p>
             {days}
           </div>
         </div>
       </table>
-    </div>
+    </Container>
   )
 }

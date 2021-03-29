@@ -1,0 +1,10 @@
+.calendar-table-scroller {
+  height: 75vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overflow-x: hidden
+}
+.calendar-table {
+  margin-right: 2em;
+  padding-top: 0.5em;
+}

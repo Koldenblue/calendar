@@ -3,6 +3,7 @@
 @use 'fourOhFour';
 @use 'miniCalendar';
 @use 'monthView';
+@use 'weekView';
 
 $main-color: rgb(77, 156, 77); 
 $lighter-color: adjust-color($main-color, $red: 100, $green: 100, $blue: 100);
@@ -25,177 +26,185 @@ $maxWidths: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 
 
 /* ===== NavBar ===== */
-.navbar {
-  background-color: rgb(228, 228, 228);
-  box-shadow: 0 1px 2px black;
-}
+.calendar-component {
 
-@media screen and (max-width: 680px) {
   .navbar {
-    flex-direction: column;
+    background-color: rgb(228, 228, 228);
+    box-shadow: 0 1px 2px black;
   }
-}
 
-.navbar-text {
-  margin-right: 1em;
-  margin-left: 1em;
-}
+  @media screen and (max-width: 680px) {
+    .navbar {
+      flex-direction: column;
+    }
+  }
 
-.empty-div-before {
-  flex-grow: 2.2;
-}
-.empty-div-after {
+  .navbar-text {
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+
+  .empty-div-before {
+    flex-grow: 2.2;
+  }
+  .empty-div-after {
+    flex-grow: 1;
+  }
+
+  .clock {
+    margin-left: 1em;
+    // flex-grow: 1;
+  }
+
+  /* ==================================*/
+
+
+  /* ===== Home.js ===== */
+  .btn-container {
+    display: flex;
+    align-items: center;
+  }
+
+  #back-btn, #forward-btn, #weekly-view-btn, #monthly-view-btn {
+    margin: 1em 0.25em 0 0.25em;
+  }
+  #empty-btn-div {
   flex-grow: 1;
-}
-
-.clock {
-  margin-left: 1em;
-  // flex-grow: 1;
-}
-
-/* ==================================*/
-
-
-/* ===== Home.js ===== */
-.btn-container {
-  display: flex;
-  align-items: center;
-}
-
-#back-btn, #forward-btn, #weekly-view-btn, #monthly-view-btn {
-  margin: 1em 0.25em 0 0.25em;
-}
-#empty-btn-div {
-flex-grow: 1;
-}
-/* ==================================*/
-
-
-/* ===== Calendar ===== */
-.calendar-col, .time-col {
-  min-height: 6em;
-  max-height: 6em;
-}
-
-.weekly-calendar-table-scroller {
-  height: 75vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  overflow-x: hidden;
-}
-
-.calendar-main {
-  border-bottom: 1px dotted black;
-}
-
-.weekly-calendar-table {
-  margin-right: 2em;
-}
-
-.table-head {
-  display: block;
-}
-// make calendar boxes mobile-responsive:
-@each $maxWidth in $maxWidths {
-  @include boxWidth($maxWidth);
-}
-@media screen and (max-width: 640px) {
-  .header-label {
-    font-size: smaller;
-    overflow: hidden;
   }
-}
-// columns stop getting smaller past this point:
-@media screen and (max-width: 383px) {
-  .calendar-col {
-    min-width: 3 * 1em;
-    max-width: 3 * 1em;
+  /* ==================================*/
+
+
+  /* ===== Calendar ===== */
+  .calendar-col, .time-col {
+    min-height: 6em;
+    max-height: 6em;
   }
+
+  .weekly-calendar-table-scroller {
+    height: 75vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overflow-x: hidden;
+  }
+
+  .calendar-main {
+    border-bottom: 1px dotted black;
+  }
+
+  .weekly-calendar-table {
+    margin-right: 2em;
+  }
+
+  .table-head {
+    display: block;
+  }
+  // make calendar boxes mobile-responsive:
+  @each $maxWidth in $maxWidths {
+    @include boxWidth($maxWidth);
+  }
+  @media screen and (max-width: 640px) {
+    .header-label {
+      font-size: smaller;
+      overflow: hidden;
+    }
+  }
+  // columns stop getting smaller past this point:
+  @media screen and (max-width: 383px) {
+    .calendar-col {
+      min-width: 3 * 1em;
+      max-width: 3 * 1em;
+    }
+    .time-col {
+      min-width: 3 * 1em / 2;
+      max-width: 3 * 1em / 2;
+    }
+  }
+
+  // text inside calendar boxes
+  .event-summary {
+    margin: 0 0.125em .25em 0.125em;
+    font-size: small;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    white-space: nowrap;
+    padding: 0 5px 0 5px;
+    background-color: #a2e4f0;
+    border-radius: 10px;
+  }
+
+  .event-column {
+    border: 1px black dotted;
+  }
+
+  .event-column:hover {
+    box-shadow: 0px 4px 4px $main-color, 4px 0px 4px $main-color, 0px -4px 4px $main-color, -4px 0px 4px $main-color;
+      cursor: pointer;
+      position: relative;
+  }
+
   .time-col {
-    min-width: 3 * 1em / 2;
-    max-width: 3 * 1em / 2;
+    justify-content: flex-end;
+    display: flex;
+    margin-right: .5em;
   }
-}
 
-// text inside calendar boxes
-.event-summary {
-  margin: 0 0.125em .25em 0.125em;
-  font-size: small;
-  overflow-x: scroll;
-  scrollbar-width: thin;
-  white-space: nowrap;
-  padding: 0 5px 0 5px;
-  background-color: #a2e4f0;
-  border-radius: 10px;
-}
+  .time-col-label {
+    top: -0.5em;
+    right: 0.5em;
+    position: relative;
+  }
 
-.event-column {
-  border: 1px black solid;
-}
+  .time-col-label::after {
+    content: '';
+    display: inline;
+    width: 0.5em;
+    border-top: black solid 1px;
+    position: absolute;
+    top: 0.4em;
+    right: -1.1em;
+    z-index: -1;
+  }
 
-.event-column:hover {
-  box-shadow: 0px 4px 4px $main-color, 4px 0px 4px $main-color, 0px -4px 4px $main-color, -4px 0px 4px $main-color;
-  position: relative;
-}
+  .current-hour {
+    background-color: $lighter-color;
+  }
 
-.time-col {
-  justify-content: flex-end;
-  display: flex;
-  margin-right: .5em;
-}
+  .has-event {
+    background-color: rgb(215, 254, 255);
+  }
 
-.time-col-label {
-  top: -0.5em;
-  right: 0.5em;
-  position: relative;
-}
+  .today-label {
+    background-color: $lighter-color;
+  }
 
-.time-col-label::after {
-  content: '';
-  display: inline;
-  width: 0.5em;
-  border-top: black solid 1px;
-  position: absolute;
-  top: 0.4em;
-  right: -1.1em;
-  z-index: -1;
-}
+  #empty-col {
+    min-height: 0;
+    max-height: 0;
+  }
+  .header-label {
+    text-align: center;
+    margin: 0.5em;
+  }
 
-.current-hour {
-  background-color: $lighter-color;
-}
+  .top-label {
+    border-top: dotted 1px black;
+    border-radius: 8px 8px 0 0;
+  }
 
-.has-event {
-  background-color: rgb(215, 254, 255);
-}
+  .label-hr {
+    margin: -.25em;
+  }
 
-.today-label {
-  background-color: $lighter-color;
-}
+  .bottom-label {
+    margin-bottom: -1px;
+  }
 
-#empty-col {
-  min-height: 0;
-  max-height: 0;
-}
-.header-label {
-  text-align: center;
-  margin: 0.5em;
-}
+  main {
+    margin-bottom: 2em;
+  }
 
-.top-label {
-  border-top: dotted 1px black;
-  border-radius: 8px 8px 0 0;
+  .calendar-main {
+    border-bottom: 1px dotted black;
+  }
+  /* ==================================*/
 }
-
-.label-hr {
-  margin: -.25em;
-}
-
-.bottom-label {
-  margin-bottom: -1px;
-}
-
-main {
-  margin-bottom: 2em;
-}
-/* ==================================*/

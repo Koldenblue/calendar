@@ -32,11 +32,6 @@ export default function WeekView() {
     })
   }
 
-  let mainAnim = useSpring({
-    opacity: '1',
-    from: {opacity: '0'},
-    config: {friction: 100}
-  })
 
   // This effect will be run every time currentDate changes (user presses back or forward)
   useEffect(() => {
@@ -134,17 +129,15 @@ export default function WeekView() {
 
 
   return (
-    <animated.main style={mainAnim} className='calendar-main'>
       <Container fluid >
         <table >
           {dayLabels}
-          <div className='weekly-calendar-table-scroller' >
-            <div className='weekly-calendar-table'>
+          <div className='weekly-calendar-table-scroller calendar-table-scroller' >
+            <div className='weekly-calendar-table calendar-table'>
             {hours}
             </div>
           </div>
         </table>
       </Container>
-    </animated.main>
   )
 }
