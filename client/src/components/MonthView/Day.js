@@ -49,26 +49,28 @@ export default function Day(props) {
       dateNum <= props.daysInMonth ? weekArr.push(dateNum++) : weekArr.push(false)
     }
     // colNum is the column that the date appears in, columns 0 thru 6
-    return (<>
-      <tr className='mini-row'>
-        {weekArr.map((date) => {
-          if (date) {
-            return (
-              // class given in order to highlight today's date
-              <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date mini-date' : 'mini-date'}
-                onClick={() => goToWeek(date, props.monthChange)}
-              >
-                {date}
-              </td>
-            )
-          }
-          // if no date, return an empty table square
-          else {
-            return (<td className='empty-date'> </td>)
-          }
-        })}
-      </tr>
-    </>)
+    return (
+      <>
+        <tr className='mini-row'>
+          {weekArr.map((date) => {
+            if (date) {
+              return (
+                // class given in order to highlight today's date
+                <td className={props.monthChange === 0 && date === todayDate ? 'current-mini-date mini-date' : 'mini-date'}
+                  onClick={() => goToWeek(date, props.monthChange)}
+                >
+                  {date}
+                </td>
+              )
+            }
+            // if no date, return an empty table square
+            else {
+              return (<td className='empty-date'> </td>)
+            }
+          })}
+        </tr>
+      </>
+    )
   }
   // if on the first week of the calendar, the first few spaces may be blank
   else {
@@ -90,7 +92,7 @@ export default function Day(props) {
     // weekArr should have the first few spaces blank until day 1 is reached
     console.log('weekArr', weekArr)
     let dateNum = 0;
-    return(<tr className='mini-row'>
+    return (<tr className='mini-row'>
       {weekArr.map((hasDay) => {
         if (hasDay) {
           dateNum++;
@@ -110,6 +112,6 @@ export default function Day(props) {
 
       })}
     </tr>)
-  
+
   }
 }
